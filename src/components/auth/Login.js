@@ -6,7 +6,7 @@ export const Login = ({ setToken, setStaff }) => {
   const username = useRef()
   const password = useRef()
   const navigate = useNavigate()
-  const [isUnsuccessful, setisUnsuccessful] = useState(false)
+  const [isUnsuccessful, setIsUnsuccessful] = useState(false)
 
   const handleLogin = (e) => {
     e.preventDefault()
@@ -23,24 +23,24 @@ export const Login = ({ setToken, setStaff }) => {
         navigate("/")
       }
       else {
-        setisUnsuccessful(true)
+        setIsUnsuccessful(true)
       }
     })
   }
   /*--------------------------------------------------------------------*/
-  // Autofill Username/Password by default streamline devolopment process 
-   useEffect(
+  // Autofill Username/Password by default streamline development process 
+  useEffect(
     () => {
-      username.current.value = "jonathanislame@aol.com"
-      password.current.value = "lemmon"
+      username.current.value = "belle_gen_z_queen"
+      password.current.value = "shutterbug"
     },
     []
-  ) 
+  )
   /*--------------------------------------------------------------------*/
   return (
     <section className="columns is-centered">
       <form className="column is-two-thirds" onSubmit={handleLogin}>
-        <h1 className="title">Rare Publishing</h1>
+        <h1 className="title">Shutterbug</h1>
         <p className="subtitle">Please sign in</p>
 
         <div className="field">

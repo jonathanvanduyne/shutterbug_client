@@ -1,4 +1,4 @@
-import { useRef } from "react"
+import { useRef, useState } from "react"
 import { Link } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
 import { registerUser } from "../../managers/AuthManager"
@@ -9,10 +9,9 @@ export const Register = ({ setToken, setStaff }) => {
   const email = useRef()
   const username = useRef()
   const bio = useRef()
-  const profileImageUrl = useRef()
   const password = useRef()
   const verifyPassword = useRef()
-  const passwordDialog = useRef()
+  const [showPasswordDialog, setShowDialog] = useState(false)
   const navigate = useNavigate()
 
   const handleRegister = (e) => {
@@ -26,7 +25,7 @@ export const Register = ({ setToken, setStaff }) => {
         email: email.current.value,
         password: password.current.value,
         bio: bio.current.value,
-        profile_image_url: profileImageUrl.current.value
+        profile_image_url: ""
       }
 
       registerUser(newUser)
@@ -38,7 +37,7 @@ export const Register = ({ setToken, setStaff }) => {
           }
         })
     } else {
-      passwordDialog.current.showModal()
+      setShowDialog(true)
     }
   }
 
@@ -92,12 +91,12 @@ export const Register = ({ setToken, setStaff }) => {
           </div>
         </div>
 
-        <div className="field">
-          <label className="label">Profile Image</label>
-          <div className="control">
-            <input className="input" placeholder="Add a link to an image for your profile" ref={profileImageUrl}/>
+        {
+          showPasswordDialog &&
+          <div className="has-text-danger">
+            Password fields must be matching
           </div>
-        </div>
+        }
 
         <div className="field">
           <label className="label">Bio</label>
@@ -105,7 +104,6 @@ export const Register = ({ setToken, setStaff }) => {
             <textarea className="textarea" placeholder="Tell us about yourself..." ref={bio}></textarea>
           </div>
         </div>
-
 
         <div className="field is-grouped">
           <div className="control">
