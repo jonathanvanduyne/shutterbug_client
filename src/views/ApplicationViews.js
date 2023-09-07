@@ -3,7 +3,7 @@ import { Login } from "../components/auth/Login"
 import { Register } from "../components/auth/Register"
 import { Authorized } from "./Authorized"
 import { StaffViews } from "./StaffViews.js"
-import { AuthorViews } from "./AuthorViews.js"
+import { UserViews } from "./UserViews.js"
 
 export const ApplicationViews = ({ token, setToken, staff, setStaff }) => {
   return (
@@ -14,7 +14,7 @@ export const ApplicationViews = ({ token, setToken, staff, setStaff }) => {
         {staff === true ? (
           <Route path="*" element={<StaffViews />} />
         ) : (
-          <Route path="*" element={<AuthorViews />} />
+          <Route path="*" element={<UserViews />} />
         )}
       </Route>
     </Routes>

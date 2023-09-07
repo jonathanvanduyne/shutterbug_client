@@ -15,7 +15,7 @@ import { EditComment } from "../components/comments/CommentEdit.js"
 import { ManagePostTags } from "../components/posts/ManagePostTags"
 
 
-export const AuthorViews = ({ token, setToken}) => {
+export const UserViews = ({ token, setToken}) => {
   return <>
     <Routes>
         <Route path="/" element={<PostList/>}  />
