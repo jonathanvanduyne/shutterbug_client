@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import { getPosts, getPostsByCategory, getPostsByTitle, getPostsByUser, getPostsByTag} from "../../managers/posts";
 import { getUsers } from "../../managers/users";
 import { getCategories } from "../../managers/categories";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getTags } from "../../managers/TagManager";
+import { PostForm } from "./PostForm.js";
 
 export const PostList = () => {
   const [posts, setPosts] = useState([]);
@@ -18,6 +19,7 @@ export const PostList = () => {
     tagId: 0
   });
   const [titleInput, setTitleInput] = useState(""); // New state to track the input field value
+  const navigate = useNavigate()
 
   useEffect(() => {
     getPosts().then((postsData) => setPosts(postsData));
@@ -87,6 +89,7 @@ export const PostList = () => {
       <h1 className="title">Posts</h1>
       <div className="form-group">
         <label htmlFor="category" className="subtitle">Category: </label>
+        
         <select name="category" className="form-control select" onChange={handleCategoryChange}>
           <option value={0}>Select a category</option>
           {categories.map((category) => (
@@ -105,7 +108,8 @@ export const PostList = () => {
             </option>
           ))}
         </select>
-        
+
+        <button link="/postform" className="button is-link">Add New Post</button>
 
         <div>
           <input type="text" value={titleInput} onChange={handleTitleChange} />
@@ -133,9 +137,11 @@ export const PostList = () => {
                 Post Title: <Link to={`/posts/${post.id}`}>{post.title}</Link>
               </div>
               <div>
-                Author: <Link to={`/users/${post?.user?.id}`}>{post?.user?.full_name}</Link>
+                Author: <Link to={`/users/${post?.shutterbug_user?.id}`}>{post?.user_full_name}</Link>
               </div>
-              <div>Category: {post?.category?.label}</div>
+              <img src={post.image_url} alt={post.title} />
+              <div>"{post?.content}"</div>
+              <div>{post?.published_on}</div>
             </section>
           );
         })}

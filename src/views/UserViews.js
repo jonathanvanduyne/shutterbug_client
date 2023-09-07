@@ -8,26 +8,21 @@ import { PostEdit } from "../components/posts/PostEdit"
 import { UserDetail } from "../components/users/StaffUsers/UserDetail"
 import { PostComments } from "../components/comments/PostComments"
 import { CommentForm } from "../components/comments/CommentForm"
-import { ReactionList } from "../components/reactions/reactionList.js"
-import { AuthorTagList } from "../components/tag/AuthorTag/AuthorTagList.js"
-import { AuthorCategoryList } from "../components/Categories/AuthorCategories/AuthorCategoryList.js"
 import { EditComment } from "../components/comments/CommentEdit.js"
 import { ManagePostTags } from "../components/posts/ManagePostTags"
+import { LandingPageGreeting } from "../components/landingPage/LandingPage.js"
 
 
 export const UserViews = ({ token, setToken}) => {
   return <>
     <Routes>
-        <Route path="/" element={<PostList/>}  />
+        <Route path="/" element={<LandingPageGreeting/>}  />
 
-        <Route path="/tags" element={<AuthorTagList />}  />
         <Route path="/tags/:postId" element={<ManagePostTags />}  />
         <Route path="/posts" element={<PostList />}  />
         <Route path="/my-posts" element={<UserPost token={token}/>}  />
         <Route path="/posts/:postId" element={<PostDetails />}  />
-        <Route path="/categories" element={<AuthorCategoryList />}  />
         <Route path="/comments/:postId" element={<PostComments token={token}/>}  />
-        <Route path="/reactions" element={<ReactionList token={token}/>}  />
         <Route path="/commentform/:postId" element={<CommentForm token={token}/>}  />
         
         <Route path="/users"> 

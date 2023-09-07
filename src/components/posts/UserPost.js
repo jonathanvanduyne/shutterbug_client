@@ -17,10 +17,6 @@ export const UserPost = () => {
     viewUserPost({ token }).then((postsData) => setUserPosts(postsData)); // Pass token as an object
   }, []);
 
-
-  
-  
-
   const deleteButton = (postId) => {
     const handleDelete = () => {
       const shouldDelete = window.confirm("Are you sure you want to delete this post?");
