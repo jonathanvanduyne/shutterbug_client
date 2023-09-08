@@ -4,39 +4,35 @@ import { getCategories } from "../../managers/categories";
 import { getTags, postTagRelationships } from "../../managers/TagManager";
 import { getUserByToken } from "../../managers/tokens";
 import { getCurrentUser } from "../../managers/users.js";
+import { UploadPhotoWidget } from "./UploadPhotoWidget.js";
+import { upload } from "@testing-library/user-event/dist/upload.js";
 
 
 export const PostForm = () => {
 
     const [categories, setCategories] = useState([]);
+    const [tagList, setTagList] = useState([])
     const [formError, setFormError] = useState(false);
     const [token, setTokenState] = useState(localStorage.getItem('auth_token'))
+
     const [currentUser, setCurrentUser] = useState()
-
-
-    // Default state for all tags to list on form
-    const [tagList, setTagList] = useState([])
-    // Track state for tags being added to post
-    const [tagsOnPost, updateTagsOnPost] = useState([])
-
-
+    const [createNewTag, setCreateNewTag] = useState(false)
     const [post, update] = useState({
-        user: 0,
         title: "",
         image_url: "",
         content: "",
-        published_on: new Date().toISOString().split('T')[0],
         category: 0,
     });
+
+    // Track state for tags being added to post
+    const [tagsOnPost, updateTagsOnPost] = useState([])
 
     useEffect(() => {
         getCategories()
             .then((categoryList) => {
                 setCategories(categoryList);
-        getTags()
-            .then(tagData => setTagList(tagData))
-        getCurrentUser()
-            .then(user => setCurrentUser(user))
+                getTags()
+                    .then(tagData => setTagList(tagData))
             });
     }, []);
 
@@ -50,14 +46,11 @@ export const PostForm = () => {
         }
 
         const messageToSendToAPI = {
-            user: currentUser.id,
             title: post.title,
             image_url: post.image_url,
             content: post.content,
-            published_on: post.published_on,
             category: post.category,
-            approved: true,
-            flagged: false
+            tags: tagsOnPost
         };
 
         fetch("http://localhost:8000/posts", {
@@ -72,16 +65,66 @@ export const PostForm = () => {
             .then(response => response.json())
             .then((data) => {
                 const createdPostId = data.id;
-
-                // If tags were selected, create the post/tag relationships with the new post id
-
                 navigate(`/posts/${createdPostId}`);
+
             });
     }
 
+    const handleImageUpload = (url) => {
+        const copy = { ...post };
+        copy.image_url = url;
+        update(copy);
+    };
+
+    const addOrRemoveTag = (e) => {
+        const checkedTagId = parseInt(e.target.value)
+        console.log("checkedTagId", checkedTagId)
+        if (tagsOnPost.includes(checkedTagId)) {
+            const updatedTags = tagsOnPost.filter(tagId => tagId !== checkedTagId)
+            updateTagsOnPost(updatedTags)
+        } else {
+            const copy = [...tagsOnPost]
+            copy.push(checkedTagId)
+            updateTagsOnPost(copy)
+        }
+    }
+
+    const handleCreateNewTag = (event) => {
+        event.preventDefault();
+        if (!createNewTag) {
+            return; // Prevent creating an empty tag
+        }
+    
+        // Create a new tag object
+        const newTag = {
+            label: createNewTag
+        };
+    
+        // Send a POST request to create the new tag
+        fetch("http://localhost:8000/tags", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                "Authorization": `Token ${localStorage.getItem("auth_token")}`
+            },
+            body: JSON.stringify(newTag)
+        })
+        .then(response => response.json())
+        .then(() => {
+            // Clear the createNewTag input field
+            setCreateNewTag("");
+    
+            // Fetch the updated list of tags after creating the new tag
+            getTags()
+                .then(tagData => setTagList(tagData))
+        })
+    };
+    
+
     return (
         <form className="postForm column">
-            <h2 className="postFormHeader title is-2">Hi {currentUser[0]?.user?.first_name}, let's make a post!</h2>
+            <h2 className="postFormHeader title is-2">Let's make a post!</h2>
 
             <fieldset>
                 <div className="form-group">
@@ -100,6 +143,30 @@ export const PostForm = () => {
                     />
                 </div>
             </fieldset>
+
+            <fieldset>
+                <UploadPhotoWidget onImageUpload={handleImageUpload} />
+
+            </fieldset>
+
+            <fieldset>
+                <div className="form-group">
+                    <label htmlFor="content" className="contentPost subtitle">Content:</label>
+                    <textarea
+                        required
+                        type="text"
+                        className="textarea"
+                        rows="10"
+                        value={post.content}
+                        onChange={(evt) => {
+                            const copy = { ...post };
+                            copy.content = evt.target.value;
+                            update(copy);
+                        }}
+                    ></textarea>
+                </div>
+            </fieldset>
+
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="category" className="label-bold subtitle">Category:</label>
@@ -126,46 +193,54 @@ export const PostForm = () => {
             </fieldset>
 
             <fieldset>
-                <div className="form-group">
-                    <label htmlFor="imagePost" className="imagePost subtitle">Image:</label>
-                    <input
-                        required
-                        type="text"
-                        className="form-control input"
-                        value={post.image_url}
-                        onChange={(evt) => {
-                            const copy = { ...post };
-                            copy.image_url = evt.target.value;
-                            update(copy);
-                        }}
-                    />
-                </div>
+                <h3 className="is-size-5 has-text-weight-bold mt-3">Add Tags to Your Post</h3>
+                <section className="py-2 px-4">
+                    {
+                        tagList.length > 0 &&
+                        tagList.map((tag) => {
+                            return <div key={`tagCheck--${tag.id}`}>
+                                <label>
+                                    <input
+                                        type="checkbox"
+                                        value={tag.id}
+                                        checked={tagsOnPost.includes(tag.id)}
+                                        onChange={(e) => addOrRemoveTag(e)}
+                                    />
+                                    {tag.label}
+                                </label>
+                            </div>
+                        })
+                    }
+                </section>
             </fieldset>
+
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="content" className="contentPost subtitle">Content:</label>
-                    <textarea
-                        required
+                    <label htmlFor="NewTag" className="New-tag subtitle">Create New Tag:</label>
+                    <input
+                        required autoFocus
                         type="text"
-                        className="textarea"
-                        rows="10"
-                        value={post.content}
+                        className="form-control input"
+                        placeholder="Need a new tag? Add it here!"
+                        value={createNewTag}
                         onChange={(evt) => {
-                            const copy = { ...post };
-                            copy.content = evt.target.value;
-                            update(copy);
+                            setCreateNewTag(evt.target.value);
                         }}
-                    ></textarea>
+                    />
+                    <button
+                        onClick={(evt) => handleCreateNewTag(evt)}
+                        className="btn btn-secondary">
+                        Create Tag
+                    </button>
                 </div>
             </fieldset>
+
 
             <button
                 onClick={(clickEvent) => { handleSaveButtonClick(clickEvent) }}
                 className="btn btn-primary">
-                Save
+                Post
             </button>
-
-            {formError && <div className="alert alert-danger">Please fill in all of the required fields. You will not be approved until you do so. We don't mess around here.</div>}
         </form>
     );
 };
