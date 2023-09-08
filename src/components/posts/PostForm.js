@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { getCategories } from "../../managers/categories";
 import { getTags, postTagRelationships } from "../../managers/TagManager";
 import { getUserByToken } from "../../managers/tokens";
+import { getCurrentUser } from "../../managers/users.js";
 
 
 export const PostForm = () => {
@@ -10,7 +11,7 @@ export const PostForm = () => {
     const [categories, setCategories] = useState([]);
     const [formError, setFormError] = useState(false);
     const [token, setTokenState] = useState(localStorage.getItem('auth_token'))
-    const [currentUser, setCurrentUser]= useState()
+    const [currentUser, setCurrentUser] = useState()
 
 
     // Default state for all tags to list on form
@@ -21,34 +22,23 @@ export const PostForm = () => {
 
     const [post, update] = useState({
         user: 0,
-        category: 0,
         title: "",
-        publication_date: new Date().toISOString().split('T')[0],
         image_url: "",
         content: "",
-        approved: false
+        published_on: new Date().toISOString().split('T')[0],
+        category: 0,
     });
 
     useEffect(() => {
         getCategories()
             .then((categoryList) => {
                 setCategories(categoryList);
+        getTags()
+            .then(tagData => setTagList(tagData))
+        getCurrentUser()
+            .then(user => setCurrentUser(user))
             });
     }, []);
-
-    useEffect(
-        () => {
-            getTags()
-                .then(tagData => setTagList(tagData))
-        },
-        []
-    )
-
-    useEffect(() => {
-        if (token) {
-            getUserByToken(token).then(data => setCurrentUser(data.user))
-        }
-    }, [token])
 
     const navigate = useNavigate();
 
@@ -58,16 +48,18 @@ export const PostForm = () => {
             setFormError(true);
             return;
         }
+
         const messageToSendToAPI = {
             user: currentUser.id,
-            category: post.category,
             title: post.title,
-            publication_date: post.publication_date, 
             image_url: post.image_url,
             content: post.content,
-            approved: false
+            published_on: post.published_on,
+            category: post.category,
+            approved: true,
+            flagged: false
         };
-    
+
         fetch("http://localhost:8000/posts", {
             method: "POST",
             headers: {
@@ -77,21 +69,19 @@ export const PostForm = () => {
             },
             body: JSON.stringify(messageToSendToAPI)
         })
-        .then(response => response.json())
-        .then((data) => {
-            const createdPostId = data.id;
-             
-            // If tags were selected, create the post/tag relationships with the new post id
-        
-            navigate(`/posts/${createdPostId}`);
-        });
-    }
-        
+            .then(response => response.json())
+            .then((data) => {
+                const createdPostId = data.id;
 
+                // If tags were selected, create the post/tag relationships with the new post id
+
+                navigate(`/posts/${createdPostId}`);
+            });
+    }
 
     return (
         <form className="postForm column">
-            <h2 className="postFormHeader title is-2">Create a Post</h2>
+            <h2 className="postFormHeader title is-2">Hi {currentUser[0]?.user?.first_name}, let's make a post!</h2>
 
             <fieldset>
                 <div className="form-group">
@@ -139,7 +129,7 @@ export const PostForm = () => {
                 <div className="form-group">
                     <label htmlFor="imagePost" className="imagePost subtitle">Image:</label>
                     <input
-                        required 
+                        required
                         type="text"
                         className="form-control input"
                         value={post.image_url}
@@ -155,10 +145,10 @@ export const PostForm = () => {
                 <div className="form-group">
                     <label htmlFor="content" className="contentPost subtitle">Content:</label>
                     <textarea
-                        required 
+                        required
                         type="text"
                         className="textarea"
-                        rows= "10"
+                        rows="10"
                         value={post.content}
                         onChange={(evt) => {
                             const copy = { ...post };
@@ -169,11 +159,9 @@ export const PostForm = () => {
                 </div>
             </fieldset>
 
-
             <button
                 onClick={(clickEvent) => { handleSaveButtonClick(clickEvent) }}
-                className="btn btn-primary"
-            >
+                className="btn btn-primary">
                 Save
             </button>
 

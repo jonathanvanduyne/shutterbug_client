@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { getPosts, getPostsByCategory, getPostsByTitle, getPostsByUser, getPostsByTag} from "../../managers/posts";
+import { getPosts, getPostsByCategory, getPostsByTitle, getPostsByUser, getPostsByTag } from "../../managers/posts";
 import { getUsers } from "../../managers/users";
 import { getCategories } from "../../managers/categories";
 import { Link, useNavigate } from "react-router-dom";
 import { getTags } from "../../managers/TagManager";
 import { PostForm } from "./PostForm.js";
+import "./PostList.css";
 
 export const PostList = () => {
   const [posts, setPosts] = useState([]);
   const [filteredPosts, setFilteredPosts] = useState([]);
+
   const [users, setUsers] = useState([]);
   const [categories, setCategories] = useState([]);
   const [tags, setTags] = useState([]);
@@ -18,8 +20,11 @@ export const PostList = () => {
     title: "",
     tagId: 0
   });
-  const [titleInput, setTitleInput] = useState(""); // New state to track the input field value
-  const navigate = useNavigate()
+  const [titleInput, setTitleInput] = useState("");
+
+  const navigate = useNavigate();
+
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   useEffect(() => {
     getPosts().then((postsData) => setPosts(postsData));
@@ -32,6 +37,13 @@ export const PostList = () => {
     applyFilters();
   }, [filters, posts]);
 
+  // This useEffect listens to changes in titleInput and updates the filters.title accordingly
+  useEffect(() => {
+    setFilters({ ...filters, title: titleInput });
+  }, [titleInput]);
+
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
   const applyFilters = () => {
     let filteredResults = posts;
 
@@ -40,7 +52,6 @@ export const PostList = () => {
         (post) => post?.category?.id === filters.categoryId
       );
     }
- 
 
     if (filters.userId !== 0) {
       filteredResults = filteredResults.filter(
@@ -55,7 +66,9 @@ export const PostList = () => {
     }
 
     if (filters.tagId !== 0) {
-      getPostsByTag(filters.tagId).then((posts) => setFilteredPosts(posts))
+      filteredResults = filteredResults.filter((post) =>
+        post.tags.some((tag) => tag.id === filters.tagId)
+      );
     }
 
     setFilteredPosts(filteredResults);
@@ -72,80 +85,96 @@ export const PostList = () => {
   };
 
   const handleTagChange = (event) => {
-    const tagId = parseInt(event.target.value)
+    const tagId = parseInt(event.target.value);
     setFilters({ ...filters, tagId });
   };
 
   const handleTitleChange = (event) => {
-    setTitleInput(event.target.value); // Update the title input state
+    setTitleInput(event.target.value);
   };
 
-  const handleTitleSubmit = () => {
-    setFilters({ ...filters, title: titleInput }); // Update the title filter
-  };
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   return (
-    <div className="column"style={{ margin: "0rem 3rem" }}>
-      <h1 className="title">Posts</h1>
-      <div className="form-group">
-        <label htmlFor="category" className="subtitle">Category: </label>
-        
-        <select name="category" className="form-control select" onChange={handleCategoryChange}>
-          <option value={0}>Select a category</option>
-          {categories.map((category) => (
-            <option key={`catFilter--${category.id}`} value={category.id}>
-              {category.label}
-            </option>
-          ))}
-        </select>
-
-        <label htmlFor="filterByUser" className="subtitle">Author: </label>
-        <select name="filterByUser" className="form-control select" onChange={handleAuthorChange}>
-          <option value={0}>Filter By Author</option>
-          {users.map((user) => (
-            <option key={`userFilter--${user.id}`} value={user.id}>
-              {user.full_name}
-            </option>
-          ))}
-        </select>
-
-        <button link="/postform" className="button is-link">Add New Post</button>
-
-        <div>
-          <input type="text" value={titleInput} onChange={handleTitleChange} />
-          <button onClick={handleTitleSubmit}>Search</button>
+    <div className="post-list-container"> {/* Updated container class */}
+      <h1 className="page-title">Posts</h1>
+      <button onClick={() => navigate('/postform')} className="button is-link">Add New Post</button>
+      <div className="filter-form"> {/* New parent container for filters */}
+        <div className="filter-group"> {/* Filter group */}
+          <label htmlFor="category" className="filter-label">Category: </label>
+          <select name="category" className="filter-select" onChange={handleCategoryChange}>
+            <option value={0}>Select a Category</option>
+            {categories.map((category) => (
+              <option key={`catFilter--${category.id}`} value={category.id}>
+                {category.label}
+              </option>
+            ))}
+          </select>
+        </div>
+  
+        <div className="filter-group"> {/* Filter group */}
+          <label htmlFor="filterByUser" className="filter-label">Author: </label>
+          <select name="filterByUser" className="filter-select" onChange={handleAuthorChange}>
+            <option value={0}>Filter By Shutterbug</option>
+            {users.map((user) => (
+              <option key={`userFilter--${user.id}`} value={user.id}>
+                {user.full_name}
+              </option>
+            ))}
+          </select>
+        </div>
+  
+        <div className="filter-group"> {/* Filter group */}
+          <label htmlFor="tag" className="filter-label">Tag: </label>
+          <select name="tag" className="filter-select" onChange={handleTagChange}>
+            <option value={0}>Select a tag</option>
+            {tags.map((tag) => (
+              <option key={`tagFilter--${tag.id}`} value={tag.id}>
+                {tag.label}
+              </option>
+            ))}
+          </select>
+        </div>
+  
+        <div className="filter-group"> {/* Filter group */}
+          <input type="text" value={titleInput} placeholder="Search by Post Title" onChange={handleTitleChange} />
         </div>
       </div>
-
-       {/* Filter by tag is not set up for this version yet 
-         <label htmlFor="tag">Tag: </label>
-        <select name="tag" className="form-control" onChange={handleTagChange}>
-          <option value={0}>Select a tag</option>
-          {tags.map((tag) => (
-            <option key={`tagFilter--${tag.id}`} value={tag.id}>
-              {tag.label}
-            </option>
-          ))}
-        </select> */}
-
+  
+      
+  
       <article className="posts">
         {filteredPosts.map((post) => {
           return (
             <section className="post" key={`postList--${post.id}`}>
-              <div>==============================</div>
-              <div>
-                Post Title: <Link to={`/posts/${post.id}`}>{post.title}</Link>
+              <div className="post-divider"> {/* Divider line */}
+                <hr className="divider-line" />
               </div>
-              <div>
-                Author: <Link to={`/users/${post?.shutterbug_user?.id}`}>{post?.user_full_name}</Link>
+              <div className="post-title"> {/* Post title */}
+                <Link to={`/posts/${post.id}`}>{post.title}</Link>
               </div>
-              <img src={post.image_url} alt={post.title} />
-              <div>"{post?.content}"</div>
-              <div>{post?.published_on}</div>
+              <div className="post-shutterbug"> {/* Post author */}
+                By <Link to={`/users/${post?.shutterbug_user?.id}`}>{post?.user_full_name}</Link>
+              </div>
+              <img className="post-image" src={post.image_url} alt={post.title} />
+              <div className="reactions"> {/* Reactions */}
+                {post.reactions.map((reaction, index) => (
+                  <img key={`reaction-${index}`} src={reaction.image_url} alt={reaction.label} className="reaction-icon" />
+                ))}
+              </div>
+              <div className="post-content"> {/* Post content */}
+                "{post?.content}"
+              </div>
+              <div className="post-published"> {/* Published date */}
+                Published: {post?.published_on}
+              </div>
+              <div className="post-tags"> {/* Tags */}
+                Tags: {post.tags.map((tag) => tag.label).join(", ")}
+              </div>
             </section>
           );
         })}
       </article>
     </div>
   );
-};
+      }
