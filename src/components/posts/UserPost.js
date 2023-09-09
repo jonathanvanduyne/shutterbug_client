@@ -12,7 +12,6 @@ export const UserPost = () => {
   const navigate = useNavigate()
 
 
-
   useEffect(() => {
     viewUserPost({ token }).then((postsData) => setUserPosts(postsData)); // Pass token as an object
   }, []);

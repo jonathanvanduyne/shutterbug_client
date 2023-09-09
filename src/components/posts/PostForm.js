@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getCategories } from "../../managers/categories";
 import { getTags, postTagRelationships } from "../../managers/TagManager";
@@ -13,14 +13,13 @@ export const PostForm = () => {
     const [categories, setCategories] = useState([]);
     const [tagList, setTagList] = useState([])
     const [formError, setFormError] = useState(false);
-    const [token, setTokenState] = useState(localStorage.getItem('auth_token'))
 
     const [currentUser, setCurrentUser] = useState()
-    const [createNewTag, setCreateNewTag] = useState(false)
+    const [createNewTag, setCreateNewTag] = useState("")
     const [post, update] = useState({
         title: "",
-        image_url: "",
         content: "",
+        image_url: "",
         category: 0,
     });
 
@@ -71,9 +70,7 @@ export const PostForm = () => {
     }
 
     const handleImageUpload = (url) => {
-        const copy = { ...post };
-        copy.image_url = url;
-        update(copy);
+        update({ ...post, image_url: url });
     };
 
     const addOrRemoveTag = (e) => {
@@ -94,12 +91,12 @@ export const PostForm = () => {
         if (!createNewTag) {
             return; // Prevent creating an empty tag
         }
-    
+
         // Create a new tag object
         const newTag = {
             label: createNewTag
         };
-    
+
         // Send a POST request to create the new tag
         fetch("http://localhost:8000/tags", {
             method: "POST",
@@ -110,22 +107,26 @@ export const PostForm = () => {
             },
             body: JSON.stringify(newTag)
         })
-        .then(response => response.json())
-        .then(() => {
-            // Clear the createNewTag input field
-            setCreateNewTag("");
-    
-            // Fetch the updated list of tags after creating the new tag
-            getTags()
-                .then(tagData => setTagList(tagData))
-        })
+            .then(response => response.json())
+            .then(() => {
+                // Clear the createNewTag input field
+                setCreateNewTag("");
+
+                // Fetch the updated list of tags after creating the new tag
+                getTags()
+                    .then(tagData => setTagList(tagData))
+            })
     };
-    
+
 
     return (
         <form className="postForm column">
             <h2 className="postFormHeader title is-2">Let's make a post!</h2>
 
+            <fieldset>
+                <UploadPhotoWidget onImageUpload={handleImageUpload} />
+            </fieldset>
+            
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="postHTML" className="postTitle subtitle">Title:</label>
@@ -144,10 +145,6 @@ export const PostForm = () => {
                 </div>
             </fieldset>
 
-            <fieldset>
-                <UploadPhotoWidget onImageUpload={handleImageUpload} />
-
-            </fieldset>
 
             <fieldset>
                 <div className="form-group">

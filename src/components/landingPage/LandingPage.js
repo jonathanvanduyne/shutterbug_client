@@ -24,5 +24,6 @@ export const LandingPageGreeting = () => {
     
     <p>Where would you like to go?</p>
     <p><Link to="/posts">Posts</Link></p>
+    <p><Link to="/users">Shutterbug Admin Manager</Link></p>
     </>
 };
