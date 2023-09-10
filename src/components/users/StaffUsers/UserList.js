@@ -1,27 +1,45 @@
-import { Link } from "react-router-dom";
-import { getUsers, updateUser } from "../../../managers/users";
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { getUsers, updateUser } from '../../../managers/users';
 
 export const UserList = () => {
   const [users, setUsers] = useState([]);
-  const [activatedUser, setActivatedUser] = useState(null); // Initialize as null
 
-  const getData = () => {
-    getUsers().then(userArray => setUsers(userArray));
-  }
+  const getData = async () => {
+    try {
+      const userArray = await getUsers();
+      setUsers(userArray);
+    } catch (error) {
+      console.error('Error fetching users:', error);
+    }
+  };
 
   useEffect(() => {
     getData();
   }, []);
 
-  const toggleUserStatus = (userId, active) => {
-    const updatedUser = { ...users.find(user => user.id === userId) };
-    updatedUser.active = !active;
+  const handleToggleActive = async (userId, is_active) => {
+    const updatedUser = { ...users.find((user) => user.id === userId) };
+    updatedUser.user.is_active = !is_active;
 
-    updateUser(userId, updatedUser)
-      .then(() => {
-        getData();
-      });
+    try {
+      await updateUser(userId, updatedUser);
+      getData();
+    } catch (error) {
+      console.error('Error updating user:', error);
+    }
+  };
+
+  const handleToggleStaff = async (userId, is_staff) => {
+    const updatedUser = { ...users.find((user) => user.id === userId) };
+    updatedUser.user.is_staff = !is_staff;
+
+    try {
+      await updateUser(userId, updatedUser);
+      getData();
+    } catch (error) {
+      console.error('Error updating user role:', error);
+    }
   };
 
   return (
@@ -39,9 +57,40 @@ export const UserList = () => {
                 Full Name: <Link to={`/users/${user.id}`}>{user.full_name}</Link>
               </div>
               <div className="userEmail">Email: {user?.user?.email} </div>
+              <div className="adminOrStaffRadioButtons">
+                <p>Active:</p>
+                <input
+                  type="checkbox"
+                  checked={user?.user?.is_active}
+                  onChange={() => handleToggleActive(user.id, user.active)}
+                />
+              </div>
+              <div className="admin-buttons">
+                <label>
+                  <input
+                    type="radio"
+                    name={`role_${user.id}`}
+                    value="shutterbug"
+                    checked={!user.is_staff}
+                    onChange={() => handleToggleStaff(user.id, user.is_staff)}
+                  />
+                  Shutterbug
+                </label>
+
+                <label>
+                  <input
+                    type="radio"
+                    name={`role_${user.id}`}
+                    value="staff"
+                    checked={user?.user?.is_staff}
+                    onChange={() => handleToggleStaff(user.id, user.is_staff)}
+                  />
+                  Staff
+                </label>
+              </div>
             </section>
           ))}
       </article>
     </>
   );
-}
+};
