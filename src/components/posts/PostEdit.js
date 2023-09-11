@@ -63,7 +63,7 @@ export const PostEdit = () => {
                 Authorization: `Token ${localStorage.getItem("auth_token")}`,
             },
             body: JSON.stringify(updatedPost),
-        }).then(() => navigate(`/my-posts`));
+        }).then(() => navigate(`/posts`));
     };
 
     return (
@@ -145,7 +145,7 @@ export const PostEdit = () => {
             <button type="submit" className="btn btn-primary">
                 Save
             </button>
-            <button onClick={() => navigate(`/my-posts`)}> Cancel </button>
+            <button onClick={() => navigate(`/posts`)}> Cancel </button>
         </form>
     );
 };

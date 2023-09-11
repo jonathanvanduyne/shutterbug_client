@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { getUsers, updateUser } from '../../../managers/users';
+import { getCurrentUser, getUsers, updateUser } from '../../../managers/users';
 
 export const UserList = () => {
   const [users, setUsers] = useState([]);
@@ -12,6 +12,8 @@ export const UserList = () => {
     try {
       const userArray = await getUsers();
       setUsers(userArray);
+      const current = await getCurrentUser();
+      setCurrentUserArray(current);
     } catch (error) {
       console.error('Error fetching users:', error);
     }
@@ -26,7 +28,7 @@ export const UserList = () => {
     updatedUser.user.is_active = !updatedUser.user.is_active;
 
     try {
-      await updateUser(userId, updatedUser);
+      await updateUser(userId, updatedUser.user);
       getData();
     } catch (error) {
       console.error('Error updating user:', error);
@@ -60,37 +62,42 @@ export const UserList = () => {
                 Full Name: <Link to={`/users/${user.id}`}>{user.full_name}</Link>
               </div>
               <div className="userEmail">Email: {user?.user?.email} </div>
-              <div className="adminOrStaffRadioButtons">
-                <p>Active:</p>
-                <input
-                  type="checkbox"
-                  checked={user?.user?.is_active}
-                  onChange={() => handleToggleActive(user.id)}
-                />
-              </div>
-              <div className="admin-buttons">
-                <label>
+              {currentUser && currentUser.id === user.id ? null : (
+                <div className="active-button">
+                  <span>Active:</span>
                   <input
-                    type="radio"
-                    name={`role_${user.id}`}
-                    value="shutterbug"
-                    checked={!user.user.is_staff}
-                    onChange={() => handleToggleStaff(user.id)}
+                    name='active'
+                    type="checkbox"
+                    checked={user?.user?.is_active}
+                    onChange={() => handleToggleActive(user.id)}
                   />
-                  Shutterbug
-                </label>
+                </div>
+              )}
+              {currentUser && currentUser.id === user.id ? null : (
+                <div className="admin-buttons">
+                  <label>
+                    <input
+                      type="radio"
+                      name={`role_${user.id}`}
+                      value="shutterbug"
+                      checked={!user.user.is_staff}
+                      onChange={() => handleToggleStaff(user.id)}
+                    />
+                    Shutterbug
+                  </label>
 
-                <label>
-                  <input
-                    type="radio"
-                    name={`role_${user.id}`}
-                    value="staff"
-                    checked={user?.user?.is_staff}
-                    onChange={() => handleToggleStaff(user.id)}
-                  />
-                  Staff
-                </label>
-              </div>
+                  <label>
+                    <input
+                      type="radio"
+                      name={`role_${user.id}`}
+                      value="staff"
+                      checked={user?.user?.is_staff}
+                      onChange={() => handleToggleStaff(user.id)}
+                    />
+                    Staff
+                  </label>
+                </div>
+              )}
             </section>
           ))}
       </article>

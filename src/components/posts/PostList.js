@@ -13,7 +13,7 @@ export const PostList = () => {
   const [users, setUsers] = useState([]);
   const [currentUserArray, setCurrentUserArray] = useState([]);
   const currentUser = currentUserArray[0];
-  
+
   const [categories, setCategories] = useState([]);
   const [tags, setTags] = useState([]);
   const [filters, setFilters] = useState({
@@ -96,6 +96,21 @@ export const PostList = () => {
     setTitleInput(event.target.value);
   };
 
+  const ShowOnlyCurrentUserPosts = () => {
+    const currentUserPosts = filteredPosts.filter((post) => post?.shutterbug_user?.id === currentUser.id);
+    setFilteredPosts(currentUserPosts);
+  }
+
+  const resetFilters = () => {
+    setFilters({
+      categoryId: 0,
+      userId: 0,
+      title: "",
+      tagId: 0,
+    });
+    setTitleInput("");
+  };
+
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //Delete & Edit buttons
   const deleteButton = (postId) => {
@@ -116,22 +131,25 @@ export const PostList = () => {
   };
 
   const editButton = (post) => {
-    return currentUser.id === post?.shutterbug_user?.id ? 
-    (
-      <button
-        onClick={() => {
-          navigate(`/my-posts/${post.id}/edit`);
-        }}
-      >
-        Edit
-      </button>
-    ) 
-    : null;
+    return currentUser.id === post?.shutterbug_user?.id ?
+      (
+        <button
+          onClick={() => {
+            navigate(`/my-posts/${post.id}/edit`);
+          }}
+        >
+          Edit
+        </button>
+      )
+      : null;
   };
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   return (
     <div className="post-list-container">
       <h1 className="page-title">Posts</h1>
+
       <button onClick={() => navigate("/postform")} className="button is-link">
         Add New Post
       </button>
@@ -199,6 +217,18 @@ export const PostList = () => {
             onChange={handleTitleChange}
           />
         </div>
+      </div>
+
+      <span>
+        <button onClick={ShowOnlyCurrentUserPosts} className="button current-user-posts">
+          Show Only My Posts
+        </button>
+      </span>
+
+      <div className="reset-filters-container">
+        <button onClick={resetFilters} className="button reset-filters">
+          Reset Filters
+        </button>
       </div>
 
       <article className="posts">

@@ -1,29 +1,42 @@
 import { useState, useEffect } from "react";
-import { getUserById } from "../../../managers/users.js";
-import { useParams } from "react-router-dom";
+import { getCurrentUser, getUserById } from "../../../managers/users.js";
+import { useNavigate } from "react-router-dom";
 
 export const StaffProfile = () => {
 
-    const [currentUser, setCurrentUser] = useState({});
-    const { id } = useParams();
+    const [currentUserArray, setCurrentUserArray] = useState({});
+    const currentUser = currentUserArray[0];
+    const navigate = useNavigate();
 
     useEffect(() => {
-        getUserById(id) 
+        getCurrentUser()
             .then((response) => {
-                setCurrentUser(response);
-        });
+                setCurrentUserArray(response);
+            });
     }, []);
 
-    return (
+    const editProfileButton = () => {
+        return <>
+            <button
+                onClick={() => {
+                    navigate(`/profile/editForm`);
+                }}
+            >
+                Edit
+            </button>
+        </>
+    };
+
+    return <>
         <div>
             <h1>My Profile</h1>
-            <p>First Name: {currentUser.first_name}</p>
-            <p>Last Name: {currentUser.last_name}</p>
-            <p>Email: {currentUser.email}</p>
-            <p>Username: {currentUser.username}</p>
-            <p>Role: {currentUser.role}</p>
-
-
+            {editProfileButton()}
+            <img src={currentUser?.profile_image_url} alt="profile picture"></img>
+            <p>First Name: {currentUser?.user?.first_name}</p>
+            <p>Last Name: {currentUser?.user?.last_name}</p>
+            <p>Email: {currentUser?.user?.email}</p>
+            <p>Username: {currentUser?.user?.username}</p>
+            <p>Bio: {currentUser?.bio}</p>
         </div>
-    )
+    </>
 }
