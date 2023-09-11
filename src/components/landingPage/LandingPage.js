@@ -19,11 +19,13 @@ export const LandingPageGreeting = () => {
     }, []);
 
     const greeting = currentUser[0]?.user?.first_name;
+    const user_id = currentUser[0]?.id;
 
     return <> <span className="landing-page-greeting">Hi {greeting}!</span>
     
     <p>Where would you like to go?</p>
     <p><Link to="/posts">Posts</Link></p>
     <p><Link to="/users">Shutterbug Admin Manager</Link></p>
+    <p><Link to={`/profile/${user_id}`}>My Profile</Link></p>
     </>
 };

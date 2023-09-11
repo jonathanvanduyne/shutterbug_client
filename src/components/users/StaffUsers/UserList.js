@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { getUsers, updateUser } from '../../../managers/users';
 
 export const UserList = () => {
   const [users, setUsers] = useState([]);
+  const [currentUserArray, setCurrentUserArray] = useState([]);
+  const currentUser = currentUserArray[0];
+  const navigate = useNavigate();
 
   const getData = async () => {
     try {
@@ -18,9 +21,9 @@ export const UserList = () => {
     getData();
   }, []);
 
-  const handleToggleActive = async (userId, is_active) => {
+  const handleToggleActive = async (userId) => {
     const updatedUser = { ...users.find((user) => user.id === userId) };
-    updatedUser.user.is_active = !is_active;
+    updatedUser.user.is_active = !updatedUser.user.is_active;
 
     try {
       await updateUser(userId, updatedUser);
@@ -30,9 +33,9 @@ export const UserList = () => {
     }
   };
 
-  const handleToggleStaff = async (userId, is_staff) => {
+  const handleToggleStaff = async (userId) => {
     const updatedUser = { ...users.find((user) => user.id === userId) };
-    updatedUser.user.is_staff = !is_staff;
+    updatedUser.is_staff = !updatedUser.user.is_staff;
 
     try {
       await updateUser(userId, updatedUser);
@@ -62,7 +65,7 @@ export const UserList = () => {
                 <input
                   type="checkbox"
                   checked={user?.user?.is_active}
-                  onChange={() => handleToggleActive(user.id, user.active)}
+                  onChange={() => handleToggleActive(user.id)}
                 />
               </div>
               <div className="admin-buttons">
@@ -71,8 +74,8 @@ export const UserList = () => {
                     type="radio"
                     name={`role_${user.id}`}
                     value="shutterbug"
-                    checked={!user.is_staff}
-                    onChange={() => handleToggleStaff(user.id, user.is_staff)}
+                    checked={!user.user.is_staff}
+                    onChange={() => handleToggleStaff(user.id)}
                   />
                   Shutterbug
                 </label>
@@ -83,7 +86,7 @@ export const UserList = () => {
                     name={`role_${user.id}`}
                     value="staff"
                     checked={user?.user?.is_staff}
-                    onChange={() => handleToggleStaff(user.id, user.is_staff)}
+                    onChange={() => handleToggleStaff(user.id)}
                   />
                   Staff
                 </label>

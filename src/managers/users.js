@@ -17,7 +17,7 @@ export const getUserById = (id) => {
 };
 
 export const updateUser = (userId, data) => {
-    return fetch(`http://localhost:8000/users/${userId}`, {
+    return fetch(`http://localhost:8000/django_users/${userId}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -51,4 +51,3 @@ export const getCurrentUser = async () => {
         throw error; // You can choose to handle or rethrow the error as needed
     }
 };
-
