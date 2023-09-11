@@ -1,79 +1,116 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getCategories } from "../../managers/categories";
 
-
 export const PostEdit = () => {
-    const [newPost, setPost] = useState({});
-    const [categories, setCategories] = useState([])
     const { postId } = useParams();
     const navigate = useNavigate();
 
+    const [newPost, setNewPost] = useState({
+        title: "",
+        content: "",
+        image_url: "",
+        category: 0,
+    });
+    
+    const [categories, setCategories] = useState([]);
+
     useEffect(() => {
-        getCategories()
-            .then((categoryList) => {
+        const fetchData = async () => {
+            try {
+                const [postData, categoryList] = await Promise.all([
+                    fetch(`http://localhost:8000/posts/${postId}`, {
+                        headers: {
+                            Authorization: `Token ${localStorage.getItem("auth_token")}`,
+                        },
+                    }).then((response) => response.json()),
+                    getCategories(),
+                ]);
+
+                setNewPost(postData);
                 setCategories(categoryList);
-            });
-    }, []);
-
-    useEffect(() => {
-        // Fetch comment data when the component mounts
-        fetch(`http://localhost:8000/posts/${postId}`, {
-            headers: {
-                "Authorization": `Token ${localStorage.getItem("auth_token")}`
+            } catch (error) {
+                console.error("Error fetching data:", error);
             }
-        })
-            .then(response => response.json())
-            .then(data => {
-                data.category= data.category.id
-                setPost(data); 
-                // Update the state with the fetched comment data
-            });
-    }, []);
+        };
 
-    const changePostState = (domEvent) => {
-        // Update the specific field in the newPost state
-        const updatedPost = { ...newPost };
-        updatedPost[domEvent.target.name] = domEvent.target.value;
-        setPost(updatedPost);
-    }
+        fetchData();
+    }, [postId]);
+
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setNewPost({ ...newPost, [name]: value });
+    };
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const updatedPost = {
+            user: newPost.user?.id,
+            category: parseInt(newPost.category),
+            title: newPost.title,
+            image_url: newPost.image_url,
+            content: newPost.content,
+            approved: newPost.approved,
+            published_on: newPost.published_on,
+            approved: newPost.approved,
+            flagged: newPost.flagged,
+        };
+
+        fetch(`http://localhost:8000/posts/${newPost.id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Token ${localStorage.getItem("auth_token")}`,
+            },
+            body: JSON.stringify(updatedPost),
+        }).then(() => navigate(`/posts`));
+    };
 
     return (
-        <form className="postForm column">
+        <form className="postForm column" onSubmit={handleSubmit}>
             <h2 className="postFormHeader title">Edit a Post</h2>
 
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="numberOfPlayers" className="subtitle">Title: </label>
-                    <input type="text" name="title" required className="form-control input"
+                    <label htmlFor="title" className="subtitle">
+                        Title:{" "}
+                    </label>
+                    <input
+                        type="text"
+                        name="title"
+                        required
+                        className="form-control input"
                         value={newPost.title}
-                        onChange={changePostState}
+                        onChange={handleChange}
                     />
                 </div>
             </fieldset>
 
-
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="numberOfPlayers" className="subtitle">Content: </label>
-                    <input type="text" name="content" required className="form-control input"
+                    <label htmlFor="content" className="subtitle">
+                        Content:{" "}
+                    </label>
+                    <input
+                        type="text"
+                        name="content"
+                        required
+                        className="form-control input"
                         value={newPost.content}
-                        onChange={changePostState}
+                        onChange={handleChange}
                     />
                 </div>
             </fieldset>
 
-
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="category" className="subtitle">Category:</label>
+                    <label htmlFor="category" className="subtitle">
+                        Category:
+                    </label>
                     <select
                         className="select"
-                        value={newPost?.category}
-                        onChange={(event) => {
-                            const updatedCategory = parseInt(event.target.value);
-                            changePostState({ target: { name: "category", value: updatedCategory } });
-                        }}
+                        value={newPost.category}
+                        onChange={handleChange}
                         name="category"
                     >
                         <option value="0">Select Your Category</option>
@@ -88,44 +125,27 @@ export const PostEdit = () => {
                     </select>
                 </div>
             </fieldset>
+
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="numberOfPlayers" className="subtitle">Image: </label>
-                    <input type="text" name="image_url" required className="form-control input"
+                    <label htmlFor="image_url" className="subtitle">
+                        Image:{" "}
+                    </label>
+                    <input
+                        type="text"
+                        name="image_url"
+                        required
+                        className="form-control input"
                         value={newPost.image_url}
-                        onChange={changePostState}
+                        onChange={handleChange}
                     />
                 </div>
             </fieldset>
-            <button
-                type="submit"
-                onClick={evt => {
-                    evt.preventDefault(); // Prevent form submission
-                    const newestPost = {
-                        user: newPost?.user?.id, // Use the correct property from the state
-                        category: parseInt(newPost?.category), // Use the correct property from the state
-                        title: newPost.title,
-                        image_url: newPost.image_url,
-                        content: newPost.content,
-                        approved: newPost.approved,
-                        publication_date: newPost.publication_date
-                    };
-                    // Send the updated comment data to the server
-                    fetch(`http://localhost:8000/posts/${newPost.id}`, {
-                        method: "PUT",
-                        headers: {
-                            "Content-Type": "application/json",
-                            "Authorization": `Token ${localStorage.getItem("auth_token")}`
-                        },
-                        body: JSON.stringify(newestPost)
-                    })
-                        .then(() => navigate(`/my-posts`)); // Navigate after successful update
-                }}
-                className="btn btn-primary"
-            >
+
+            <button type="submit" className="btn btn-primary">
                 Save
             </button>
-            <button onClick={() => navigate(`/my-posts}`)}> Cancel </button>
+            <button onClick={() => navigate(`/posts`)}> Cancel </button>
         </form>
     );
 };
