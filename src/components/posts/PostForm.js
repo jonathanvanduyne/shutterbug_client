@@ -1,21 +1,18 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getCategories } from "../../managers/categories";
 import { getTags, postTagRelationships } from "../../managers/TagManager";
-import { getUserByToken } from "../../managers/tokens";
 import { getCurrentUser } from "../../managers/users.js";
 import { UploadPhotoWidget } from "./UploadPhotoWidget.js";
-import { upload } from "@testing-library/user-event/dist/upload.js";
-
+import "./postForm.css";
 
 export const PostForm = () => {
-
     const [categories, setCategories] = useState([]);
-    const [tagList, setTagList] = useState([])
+    const [tagList, setTagList] = useState([]);
     const [formError, setFormError] = useState(false);
 
-    const [currentUser, setCurrentUser] = useState()
-    const [createNewTag, setCreateNewTag] = useState("")
+    const [currentUser, setCurrentUser] = useState();
+    const [createNewTag, setCreateNewTag] = useState("");
     const [post, update] = useState({
         title: "",
         content: "",
@@ -24,15 +21,13 @@ export const PostForm = () => {
     });
 
     // Track state for tags being added to post
-    const [tagsOnPost, updateTagsOnPost] = useState([])
+    const [tagsOnPost, updateTagsOnPost] = useState([]);
 
     useEffect(() => {
-        getCategories()
-            .then((categoryList) => {
-                setCategories(categoryList);
-                getTags()
-                    .then(tagData => setTagList(tagData))
-            });
+        getCategories().then((categoryList) => {
+            setCategories(categoryList);
+            getTags().then((tagData) => setTagList(tagData));
+        });
     }, []);
 
     const navigate = useNavigate();
@@ -49,42 +44,40 @@ export const PostForm = () => {
             image_url: post.image_url,
             content: post.content,
             category: post.category,
-            tags: tagsOnPost
+            tags: tagsOnPost,
         };
 
         fetch("http://localhost:8000/posts", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "Accept": "application/json",
-                "Authorization": `Token ${localStorage.getItem("auth_token")}`
+                Accept: "application/json",
+                Authorization: `Token ${localStorage.getItem("auth_token")}`,
             },
-            body: JSON.stringify(messageToSendToAPI)
+            body: JSON.stringify(messageToSendToAPI),
         })
-            .then(response => response.json())
+            .then((response) => response.json())
             .then((data) => {
                 const createdPostId = data.id;
                 navigate(`/posts/${createdPostId}`);
-
             });
-    }
+    };
 
     const handleImageUpload = (url) => {
         update({ ...post, image_url: url });
     };
 
     const addOrRemoveTag = (e) => {
-        const checkedTagId = parseInt(e.target.value)
-        console.log("checkedTagId", checkedTagId)
+        const checkedTagId = parseInt(e.target.value);
         if (tagsOnPost.includes(checkedTagId)) {
-            const updatedTags = tagsOnPost.filter(tagId => tagId !== checkedTagId)
-            updateTagsOnPost(updatedTags)
+            const updatedTags = tagsOnPost.filter((tagId) => tagId !== checkedTagId);
+            updateTagsOnPost(updatedTags);
         } else {
-            const copy = [...tagsOnPost]
-            copy.push(checkedTagId)
-            updateTagsOnPost(copy)
+            const copy = [...tagsOnPost];
+            copy.push(checkedTagId);
+            updateTagsOnPost(copy);
         }
-    }
+    };
 
     const handleCreateNewTag = (event) => {
         event.preventDefault();
@@ -94,7 +87,7 @@ export const PostForm = () => {
 
         // Create a new tag object
         const newTag = {
-            label: createNewTag
+            label: createNewTag,
         };
 
         // Send a POST request to create the new tag
@@ -102,22 +95,20 @@ export const PostForm = () => {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "Accept": "application/json",
-                "Authorization": `Token ${localStorage.getItem("auth_token")}`
+                Accept: "application/json",
+                Authorization: `Token ${localStorage.getItem("auth_token")}`,
             },
-            body: JSON.stringify(newTag)
+            body: JSON.stringify(newTag),
         })
-            .then(response => response.json())
+            .then((response) => response.json())
             .then(() => {
                 // Clear the createNewTag input field
                 setCreateNewTag("");
 
                 // Fetch the updated list of tags after creating the new tag
-                getTags()
-                    .then(tagData => setTagList(tagData))
-            })
+                getTags().then((tagData) => setTagList(tagData));
+            });
     };
-
 
     return (
         <form className="postForm column">
@@ -126,12 +117,15 @@ export const PostForm = () => {
             <fieldset>
                 <UploadPhotoWidget onImageUpload={handleImageUpload} />
             </fieldset>
-            
+
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="postHTML" className="postTitle subtitle">Title:</label>
+                    <label htmlFor="postHTML" className="postTitle subtitle">
+                        Title:
+                    </label>
                     <input
-                        required autoFocus
+                        required
+                        autoFocus
                         type="text"
                         className="form-control input"
                         placeholder="THINK OF A FUN TITLE"
@@ -145,10 +139,11 @@ export const PostForm = () => {
                 </div>
             </fieldset>
 
-
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="content" className="contentPost subtitle">Content:</label>
+                    <label htmlFor="content" className="contentPost subtitle">
+                        Content:
+                    </label>
                     <textarea
                         required
                         type="text"
@@ -166,7 +161,9 @@ export const PostForm = () => {
 
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="category" className="label-bold subtitle">Category:</label>
+                    <label htmlFor="category" className="label-bold subtitle">
+                        Category:
+                    </label>
                     <select
                         value={post?.category?.id}
                         onChange={(evt) => {
@@ -174,7 +171,7 @@ export const PostForm = () => {
                             copy.category = parseInt(evt.target.value);
                             update(copy);
                         }}
-                        className="form-control select "
+                        className="form-control select"
                     >
                         <option value="0">Select Your Category</option>
                         {categories.map((category) => (
@@ -190,12 +187,13 @@ export const PostForm = () => {
             </fieldset>
 
             <fieldset>
-                <h3 className="is-size-5 has-text-weight-bold mt-3">Add Tags to Your Post</h3>
+                <h3 className="is-size-5 has-text-weight-bold mt-3">
+                    Add Tags to Your Post
+                </h3>
                 <section className="py-2 px-4">
-                    {
-                        tagList.length > 0 &&
-                        tagList.map((tag) => {
-                            return <div key={`tagCheck--${tag.id}`}>
+                    {tagList.length > 0 &&
+                        tagList.map((tag) => (
+                            <div key={`tagCheck--${tag.id}`}>
                                 <label>
                                     <input
                                         type="checkbox"
@@ -206,16 +204,18 @@ export const PostForm = () => {
                                     {tag.label}
                                 </label>
                             </div>
-                        })
-                    }
+                        ))}
                 </section>
             </fieldset>
 
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="NewTag" className="New-tag subtitle">Create New Tag:</label>
+                    <label htmlFor="NewTag" className="New-tag subtitle">
+                        Create New Tag:
+                    </label>
                     <input
-                        required autoFocus
+                        required
+                        autoFocus
                         type="text"
                         className="form-control input"
                         placeholder="Need a new tag? Add it here!"
@@ -226,16 +226,19 @@ export const PostForm = () => {
                     />
                     <button
                         onClick={(evt) => handleCreateNewTag(evt)}
-                        className="btn btn-secondary">
+                        className="btn btn-secondary"
+                    >
                         Create Tag
                     </button>
                 </div>
             </fieldset>
 
-
             <button
-                onClick={(clickEvent) => { handleSaveButtonClick(clickEvent) }}
-                className="btn btn-primary">
+                onClick={(clickEvent) => {
+                    handleSaveButtonClick(clickEvent);
+                }}
+                className="btn btn-primary"
+            >
                 Post
             </button>
         </form>

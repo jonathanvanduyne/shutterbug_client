@@ -1,89 +1,57 @@
 import { useEffect, useState } from "react";
 import { getUserById } from "../../../managers/users";
 import { useNavigate, useParams } from "react-router-dom";
-//import { addSubscription, getAllSubscriptions, deleteSubscription } from "../../managers/subscriptions";
 
-export const UserDetail = ({ token }) => {
-    const [user, setUser] = useState()
-    //const [subscriptions, setSubscriptions] = useState([])
-    //const [alreadySubscribed, setSubscribed] = useState()
-    let navigate = useNavigate()
-    const { userId } = useParams()
 
-    useEffect(() => {
-        getUserById(userId)
-            .then(setUser)
-    }, [userId])
+export const UserDetail = ({  }) => {
+    const [user, setUser] = useState({});
+    const { userId } = useParams();
+    const navigate = useNavigate();
 
-    /* useEffect(() => {
-        getAllSubscriptions().then(data => setSubscriptions(data));
-      }, [])
-
-      useEffect(() => {
-        if(subscriptions.length != 0) {
-        const alreadySubscribed = subscriptions.find(s => s.follower_id === parseInt(token) && s.author_id === user.id)
-        setSubscribed(alreadySubscribed)
+    const getData = async () => {
+        try {
+            const user = await getUserById(userId);
+            setUser(user);
+        } catch (error) {
+            console.error("Error fetching user:", error);
         }
-    }, [subscriptions, user])
-
-
-    const subscribeToUser = () => {
-        const follower_id = parseInt(localStorage.getItem("auth_token"))
-
-        addSubscription({
-            follower_id: follower_id,
-            author_id: parseInt(user.id),
-            created_on: new Date().toISOString().split('T')[0]
-        })
-            .then(() => {
-                // Update the follower_id in localStorage after successful subscription
-                localStorage.setItem("follower_id", follower_id);
-                navigate("/");
-            })
     }
 
-    const unsubscribeToUser = () => {
-
-        deleteSubscription(alreadySubscribed.id)
-            .then(() => {
-                navigate("/");
-            })
-    } */
-
-    
-    
+    useEffect(() => {
+        getData();
+    }
+    , []);
 
     return (
-        <section className="userPage">
-            <h1>{user?.full_name}</h1>
-            {user?.profile_image_url && (
-                <img
-                    className="user__profileIMG"
-                    src={user.profile_image_url}
-                />
-            )}
-            <div className="user__bio">Bio: {user?.bio}</div>
-            <div className="user_email">Email: {user?.user?.email}</div>
-            <div className="user__create_date">Rare User since: {user?.created_on}</div>
-            <div className="user__profile_type">
-                Profile Type: {user?.user?.is_staff ? "Staff" : "Author"}
+        <div className="user-detail-container">
+            <h2 className="user-detail-title">User Detail</h2>
+            <div className="user-detail">
+                <div className="user-detail-info">
+                    <p className="user-detail-info-item">
+                        <span className="user-detail-info-item-label">Username:</span>
+                        <span className="user-detail-info-item-value">{user?.user?.username}</span>
+                    </p>
+                    <p className="user-detail-info-item">
+                        <span className="user-detail-info-item-label">First Name:</span>
+                        <span className="user-detail-info-item-value">{user?.user?.first_name}</span>
+                    </p>
+                    <p className="user-detail-info-item">
+                        <span className="user-detail-info-item-label">Last Name:</span>
+                        <span className="user-detail-info-item-value">{user?.user?.last_name}</span>
+                    </p>
+                    <p className="user-detail-info-item">
+                        <span className="user-detail-info-item-label">Email:</span>
+                        <span className="user-detail-info-item-value">{user?.user?.email}</span>
+                    </p>
+                    <p className="user-detail-info-item">
+                        <span className="user-detail-info-item-label">Is Staff:</span>
+                        <span className="user-detail-info-item-value">{user?.user?.is_staff ? "Yes" : "No"}</span>
+                    </p>
+                </div>
+                <div className="user-detail-buttons">
+                    <button className="user-detail-button" onClick={() => navigate(-1)}>Back</button>
+                </div>
             </div>
-            
-            
-            {/* { 
-                alreadySubscribed ?
-                <button
-                onClick={() => { unsubscribeToUser() }}
-                className="btn btn-primary">Unsubscribe</button>
-                :
-            
-            <button
-                onClick={(clickEvt) => { subscribeToUser(clickEvt) }}
-                className="btn btn-primary"
-            >
-                Subscribe
-            </button>
-            } */}
-        </section>
+        </div>
     );
 };

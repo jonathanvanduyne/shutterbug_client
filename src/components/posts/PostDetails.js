@@ -2,6 +2,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { getPostById, deletePost } from "../../managers/posts";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import "./postDetails.css";
 
 export const PostDetails = () => {
     const { postId } = useParams();
@@ -21,14 +22,13 @@ export const PostDetails = () => {
 
                 const tagsResponse = await getPostById(postId);
                 setTags(tagsResponse.tags);
-
             } catch (error) {
                 console.error("Error fetching post details:", error);
             }
         }
 
         fetchPostDetails();
-    }, []);
+    }, [postId]);
 
     const deleteButton = (postId) => {
         return (
@@ -44,7 +44,7 @@ export const PostDetails = () => {
                         }
                     }
                 }}
-                className="submission__delete small-button"
+                className="post-details__delete-button"
             >
                 Delete
             </button>
@@ -52,36 +52,38 @@ export const PostDetails = () => {
     };
 
     return (
-        <div className="post" key={`postList--${post.id}`}>
-            <div className="post-divider">
-                <hr className="divider-line" />
+        <div className="post-details">
+            <div className="post-details__divider">
+                <hr className="post-details__divider-line" />
             </div>
-            <div className="post-title">
+            <div className="post-details__title">
                 <Link to={`/posts/${post.id}`}>{post.title}</Link>
             </div>
-            <div className="post-shutterbug">
+            <div className="post-details__shutterbug">
                 By{" "}
                 <Link to={`/users/${post?.shutterbug_user?.id}`}>
                     {post?.user_full_name}
                 </Link>
             </div>
-            <img className="post-image" src={post.image_url} alt={post.title} />
-            <div className="reactions">
+            <img className="post-details__image" src={post.image_url} alt={post.title} />
+            <div className="post-details__reactions">
                 {reactions.map((reaction, index) => (
                     <img
                         key={`reaction-${index}`}
                         src={reaction?.image_url}
                         alt={reaction?.label}
-                        className="reaction-icon"
+                        className="post-details__reaction-icon"
                     />
                 ))}
             </div>
-            <div className="post-content">"{post?.content}"</div>
-            <div className="post-published">Published: {post?.published_on}</div>
-            <div className="post-tags">
+            <div className="post-details__content">"{post?.content}"</div>
+            <div className="post-details__published">Published: {post?.published_on}</div>
+            <div className="post-details__tags">
                 Tags: {tags.map((tag) => tag?.label).join(", ")}
             </div>
-            <div>{deleteButton(post.id)}</div>
+            <div className="post-details__delete-button-container">
+                {deleteButton(post.id)}
+            </div>
         </div>
     );
 };

@@ -16,7 +16,18 @@ export const getUserById = (id) => {
         .then(res => res.json());
 };
 
-export const updateUser = (userId, data) => {
+export const updateShutterbugUser = (userId, data) => {
+    return fetch(`http://localhost:8000/users/${userId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Token ${localStorage.getItem('auth_token')}`,
+        },
+        body: JSON.stringify(data), // Send only the updated data
+    });
+};
+
+export const updateDjangoUser = (userId, data) => {
     return fetch(`http://localhost:8000/django_users/${userId}`, {
         method: 'PUT',
         headers: {

@@ -1,6 +1,5 @@
 import { Route, Routes } from "react-router-dom"
 import { PostList } from "../components/posts/PostList"
-import { UserPost } from "../components/posts/UserPost"
 import { PostDetails } from "../components/posts/PostDetails"
 import { UserList } from "../components/users/StaffUsers/UserList"
 import { PostForm } from "../components/posts/PostForm"
@@ -10,7 +9,7 @@ import { PostComments } from "../components/comments/PostComments"
 import { CommentForm } from "../components/comments/CommentForm"
 import { EditComment } from "../components/comments/CommentEdit.js"
 import { ManagePostTags } from "../components/posts/ManagePostTags"
-import { LandingPageGreeting } from "../components/landingPage/LandingPage.js"
+import { LandingPageGreeting } from "../components/landingPage/StaffLandingPage.js"
 
 
 export const UserViews = ({ token, setToken}) => {
@@ -20,7 +19,6 @@ export const UserViews = ({ token, setToken}) => {
 
         <Route path="/tags/:postId" element={<ManagePostTags />}  />
         <Route path="/posts" element={<PostList />}  />
-        <Route path="/my-posts" element={<UserPost token={token}/>}  />
         <Route path="/posts/:postId" element={<PostDetails />}  />
         <Route path="/comments/:postId" element={<PostComments token={token}/>}  />
         <Route path="/commentform/:postId" element={<CommentForm token={token}/>}  />

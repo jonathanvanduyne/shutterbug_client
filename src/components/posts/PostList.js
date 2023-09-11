@@ -4,7 +4,7 @@ import { getCurrentUser, getUsers } from "../../managers/users";
 import { getCategories } from "../../managers/categories";
 import { Link, useNavigate } from "react-router-dom";
 import { getTags } from "../../managers/TagManager";
-import "./PostList.css";
+import "./postList.css";
 
 export const PostList = () => {
   const [posts, setPosts] = useState([]);

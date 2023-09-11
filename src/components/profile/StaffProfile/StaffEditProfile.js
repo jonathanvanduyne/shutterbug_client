@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getCurrentUser, updateUser } from "../../../managers/users.js";
+import { getCurrentUser, updateDjangoUser, updateShutterbugUser, updateUser } from "../../../managers/users.js";
 import { useNavigate } from "react-router-dom";
 
 export const StaffEditProfile = () => {
@@ -56,10 +56,10 @@ export const StaffEditProfile = () => {
         event.preventDefault();
 
         // Make a PUT request to update the user data for the User model
-        updateUser(currentUser.id, userFormData)
+        updateDjangoUser(currentUser.id, userFormData)
             .then(() => {
                 // Make another PUT request to update the data for the ShutterbugUser model
-                updateUser(currentUser.id, shutterbugUserFormData, 'shutterbugUser')
+                updateShutterbugUser(currentUser.id, shutterbugUserFormData, 'shutterbugUser')
                     .then(() => {
                         navigate("/profile"); // Redirect to the desired page
                     })

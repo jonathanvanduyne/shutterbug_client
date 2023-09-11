@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { getCurrentUser, getUsers, updateUser } from '../../../managers/users';
+import {
+  getCurrentUser,
+  getUsers,
+  updateDjangoUser,
+} from '../../../managers/users';
+import './userList.css';
+
 
 export const UserList = () => {
   const [users, setUsers] = useState([]);
@@ -28,7 +34,7 @@ export const UserList = () => {
     updatedUser.user.is_active = !updatedUser.user.is_active;
 
     try {
-      await updateUser(userId, updatedUser.user);
+      await updateDjangoUser(userId, updatedUser.user);
       getData();
     } catch (error) {
       console.error('Error updating user:', error);
@@ -40,7 +46,7 @@ export const UserList = () => {
     updatedUser.is_staff = !updatedUser.user.is_staff;
 
     try {
-      await updateUser(userId, updatedUser);
+      await updateDjangoUser(userId, updatedUser);
       getData();
     } catch (error) {
       console.error('Error updating user role:', error);
@@ -48,25 +54,27 @@ export const UserList = () => {
   };
 
   return (
-    <>
-      <h2 className="userList title">List of Users</h2>
+    <div className="user-list-container">
+      <h2 className="user-list-title">List of Users</h2>
 
-      <article className="users column">
+      <div className="user-list">
         {users
           .sort((a, b) => a.full_name.localeCompare(b.full_name))
           .map((user) => (
-            <section className="user" key={user.id}>
-              <div>================================================</div>
-              <div className="userName">Username: {user?.user?.username}</div>
-              <div className="userfullName">
-                Full Name: <Link to={`/users/${user.id}`}>{user.full_name}</Link>
+            <div className="user-card" key={user.id}>
+              <hr className="divider-line" />
+              <div className="user-info">
+                <div className="user-username">Username: {user?.user?.username}</div>
+                <div className="user-fullname">
+                  Full Name: <Link to={`/users/${user.id}`}>{user.full_name}</Link>
+                </div>
+                <div className="user-email">Email: {user?.user?.email}</div>
               </div>
-              <div className="userEmail">Email: {user?.user?.email} </div>
               {currentUser && currentUser.id === user.id ? null : (
-                <div className="active-button">
+                <div className="user-active">
                   <span>Active:</span>
                   <input
-                    name='active'
+                    name={`active_${user.id}`}
                     type="checkbox"
                     checked={user?.user?.is_active}
                     onChange={() => handleToggleActive(user.id)}
@@ -74,7 +82,7 @@ export const UserList = () => {
                 </div>
               )}
               {currentUser && currentUser.id === user.id ? null : (
-                <div className="admin-buttons">
+                <div className="user-role">
                   <label>
                     <input
                       type="radio"
@@ -98,9 +106,9 @@ export const UserList = () => {
                   </label>
                 </div>
               )}
-            </section>
+            </div>
           ))}
-      </article>
-    </>
+      </div>
+    </div>
   );
 };

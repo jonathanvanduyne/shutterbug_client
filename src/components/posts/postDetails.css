@@ -1,0 +1,79 @@
+/* PostDetails.css */
+
+.post-details {
+    max-width: 400px; /* Adjust the maximum width as needed */
+    margin: 0 auto; /* Center the card horizontally */
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.post-details__divider {
+    margin: 10px 0;
+}
+
+.post-details__divider-line {
+    border: none;
+    border-top: 1px solid #ddd;
+}
+
+.post-details__title a {
+    font-size: 24px;
+    text-decoration: none;
+    color: #333;
+}
+
+.post-details__shutterbug {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #666;
+}
+
+.post-details__image {
+    max-width: 100%;
+    height: auto;
+    margin-top: 10px;
+}
+
+.post-details__reactions img {
+    width: 24px;
+    height: 24px;
+    margin-right: 5px;
+}
+
+.post-details__content {
+    margin-top: 10px;
+    font-size: 18px;
+}
+
+.post-details__published {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #666;
+}
+
+.post-details__tags {
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+.post-details__delete-button-container {
+    text-align: right;
+    margin-top: 20px;
+}
+
+.post-details__delete-button {
+    background-color: #ff6b6b;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.post-details__delete-button:hover {
+    background-color: #ff3030;
+}

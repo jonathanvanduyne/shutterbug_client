@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { getCurrentUser, getUserById } from "../../../managers/users.js";
 import { useNavigate } from "react-router-dom";
+import "./staffProfile.css";
 
 export const StaffProfile = () => {
 
@@ -27,16 +28,20 @@ export const StaffProfile = () => {
         </>
     };
 
-    return <>
-        <div>
-            <h1>My Profile</h1>
+    return (
+        <div className="profile-container">
+            <h1 className="profile-title">My Profile</h1>
             {editProfileButton()}
-            <img src={currentUser?.profile_image_url} alt="profile picture"></img>
-            <p>First Name: {currentUser?.user?.first_name}</p>
-            <p>Last Name: {currentUser?.user?.last_name}</p>
-            <p>Email: {currentUser?.user?.email}</p>
-            <p>Username: {currentUser?.user?.username}</p>
-            <p>Bio: {currentUser?.bio}</p>
+            <img
+                className="profile-image"
+                src={currentUser?.profile_image_url}
+                alt="Profile Picture"
+            />
+            <p className="profile-info">First Name: {currentUser?.user?.first_name}</p>
+            <p className="profile-info">Last Name: {currentUser?.user?.last_name}</p>
+            <p className="profile-info">Email: {currentUser?.user?.email}</p>
+            <p className="profile-info">Username: {currentUser?.user?.username}</p>
+            <p className="profile-bio">Bio: {currentUser?.bio}</p>
         </div>
-    </>
-}
+    );
+};
