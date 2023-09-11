@@ -30,7 +30,7 @@ export const StaffViews = ({ token, setToken}) => {
         <Route path="/comments/:commentId/edit" element={<EditComment />}  />
         
         <Route path="users" element={<UserList />} />
-        <Route path="/users/:userId" element={<UserDetail token={token}/>} />
+        <Route path="/users/:Id" element={<UserDetail token={token}/>} />
         
         <Route path="/profile" element={<UserProfileWithPosts />} />
         <Route path="/profile/editForm" element={<StaffEditProfile />} />

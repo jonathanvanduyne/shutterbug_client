@@ -7,14 +7,17 @@ export const getUsers = () => {
         .then(res => res.json());
 };
 
-export const getUserById = (id) => {
-    return fetch(`http://localhost:8000/users/${id}`, {
-        headers: {
-            Authorization: `Token ${localStorage.getItem("auth_token")}`
-        }
-    })
-        .then(res => res.json());
+export const getUserById = async (id) => {
+        const response = await fetch(`http://localhost:8000/users/${id}`, {
+            headers: {
+                Authorization: `Token ${localStorage.getItem("auth_token")}`,
+            },
+        });
+
+        const data = await response.json();
+        return data;
 };
+
 
 export const updateShutterbugUser = (userId, data) => {
     return fetch(`http://localhost:8000/users/${userId}`, {

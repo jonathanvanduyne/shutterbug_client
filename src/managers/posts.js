@@ -57,7 +57,7 @@ export const putPost = (postId, post) => {
     });
 };
 
-export const getPostsByUser = (userId) => {
+export const getPostsByUser = async (userId) => {
     return fetch(`http://localhost:8000/posts?user=${userId}`, {
         headers: {
             "Authorization": `Token ${localStorage.getItem("auth_token")}`

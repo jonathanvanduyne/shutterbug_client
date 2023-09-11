@@ -1,28 +1,26 @@
 import { useEffect, useState } from "react";
 import { getUserById } from "../../../managers/users";
 import { useNavigate, useParams } from "react-router-dom";
+import { UserDetailPosts } from "./UserPostDetail.js";
 
 
-export const UserDetail = ({  }) => {
+export const UserDetail = () => {
     const [user, setUser] = useState({});
-    const { userId } = useParams();
+    const { Id } = useParams();
     const navigate = useNavigate();
 
     const getData = async () => {
-        try {
-            const user = await getUserById(userId);
+            const user = await getUserById(Id);
             setUser(user);
-        } catch (error) {
-            console.error("Error fetching user:", error);
-        }
     }
-
+    
     useEffect(() => {
         getData();
     }
     , []);
 
     return (
+        <>
         <div className="user-detail-container">
             <h2 className="user-detail-title">User Detail</h2>
             <div className="user-detail">
@@ -53,5 +51,12 @@ export const UserDetail = ({  }) => {
                 </div>
             </div>
         </div>
+
+        <div className="user-posts-container">
+            <UserDetailPosts />
+
+
+        </div>
+        </>
     );
 };
