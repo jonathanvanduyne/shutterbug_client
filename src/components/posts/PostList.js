@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { getPosts, deletePost } from "../../managers/posts";
+import { getPosts, deletePost, flagPost } from "../../managers/posts";
 import { getCurrentUser, getUsers } from "../../managers/users";
 import { getCategories } from "../../managers/categories";
 import { Link, useNavigate } from "react-router-dom";
 import { getTags } from "../../managers/TagManager";
 import "./postList.css";
+import { getAllComments } from "../../managers/comments.js";
 
 export const PostList = () => {
   const [posts, setPosts] = useState([]);
@@ -16,6 +17,8 @@ export const PostList = () => {
 
   const [categories, setCategories] = useState([]);
   const [tags, setTags] = useState([]);
+  const [comments, setComments] = useState([]);
+
   const [filters, setFilters] = useState({
     categoryId: 0,
     userId: 0,
@@ -34,6 +37,7 @@ export const PostList = () => {
     getCurrentUser().then((userData) => setCurrentUserArray(userData));
     getCategories().then((categoriesData) => setCategories(categoriesData));
     getTags().then((tagData) => setTags(tagData));
+    getAllComments().then((commentsData) => setComments(commentsData));
   }, []);
 
   useEffect(() => {
@@ -112,7 +116,7 @@ export const PostList = () => {
   };
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  //Delete & Edit buttons
+  //Delete, Edit, Flag buttons
   const deleteButton = (postId) => {
     const handleDelete = () => {
       const shouldDelete = window.confirm(
@@ -144,6 +148,16 @@ export const PostList = () => {
       : null;
   };
 
+  const flagButton = (post) => {
+    return currentUser.id != post?.shutterbug_user?.id ?
+      (
+        <button className="material-symbols-outlined"
+        onClick={flagPost}>
+                flag
+              </button>
+      )
+      : null;
+  };
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   return (
@@ -241,6 +255,9 @@ export const PostList = () => {
               <div className="post-title">
                 <Link to={`/posts/${post.id}`}>{post.title}</Link>
               </div>
+              <div className="flag-post-button">{flagButton(post)}</div>
+              <div className="edit-post-button">{editButton(post)}</div>
+              <div className="delete-post-button">{deleteButton(post.id)}</div>
               <div className="post-shutterbug">
                 By{" "}
                 <Link to={`/users/${post?.shutterbug_user?.id}`}>
@@ -269,8 +286,18 @@ export const PostList = () => {
               <div className="post-tags">
                 Tags: {post.tags.map((tag) => tag.label).join(", ")}
               </div>
-              <div>{editButton(post)}</div>
-              <div>{deleteButton(post.id)}</div>
+              <div className="post-comments">
+                Comments: {comments
+                  .filter(comment => comment?.post?.id === post.id)
+                  .map(comment => (
+                    <div key={`comment-${comment.id}`}>
+                      <Link to={`/users/${comment?.shutterbug_user?.id}`}>
+                        {comment?.shutterbug_user?.full_name + ": "}
+                      </Link>
+                      {comment.content}
+                    </div>
+                  ))}
+              </div>
             </section>
           );
         })}

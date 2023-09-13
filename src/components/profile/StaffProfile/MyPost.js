@@ -5,6 +5,7 @@ import { getCategories } from "../../../managers/categories.js";
 import { getTags } from "../../../managers/TagManager.js";
 import { Link, useNavigate } from "react-router-dom";
 import "./MyPosts.css"; // Import the CSS file
+import { getAllComments } from "../../../managers/comments.js";
 
 export const MyPosts = ({ currentUser }) => {
     const [posts, setPosts] = useState([]);
@@ -12,6 +13,7 @@ export const MyPosts = ({ currentUser }) => {
     const [users, setUsers] = useState([]);
     const [categories, setCategories] = useState([]);
     const [tags, setTags] = useState([]);
+    const [comments, setComments] = useState([]);
     const [filters, setFilters] = useState({
         categoryId: 0,
         userId: 0,
@@ -28,6 +30,7 @@ export const MyPosts = ({ currentUser }) => {
         getUsers().then((usersData) => setUsers(usersData));
         getCategories().then((categoriesData) => setCategories(categoriesData));
         getTags().then((tagData) => setTags(tagData));
+        getAllComments().then((commentsData) => setComments(commentsData));
     }
 
     useEffect(() => {
@@ -200,7 +203,7 @@ export const MyPosts = ({ currentUser }) => {
                         {tags.map((tag) => (
                             <option key={`tagFilter--${tag.id}`} value={tag.id}>
                                 {tag.label}
-                            </option> 
+                            </option>
                         ))}
                     </select>
                 </div>
@@ -227,6 +230,10 @@ export const MyPosts = ({ currentUser }) => {
                         <div className="post-card" key={`postList--${post.id}`}>
                             <div className="post-title">
                                 <Link to={`/posts/${post.id}`}>{post.title}</Link>
+                            </div>
+                            <div className="post-actions">
+                                {editButton(post)}
+                                {deleteButton(post.id)}
                             </div>
                             <div className="post-details">
                                 <div className="post-image">
@@ -258,9 +265,17 @@ export const MyPosts = ({ currentUser }) => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="post-actions">
-                                {editButton(post)}
-                                {deleteButton(post.id)}
+                            <div className="post-comments">
+                                Comments: {comments
+                                    .filter(comment => comment?.post?.id === post.id)
+                                    .map(comment => (
+                                        <div key={`comment-${comment.id}`}>
+                                            <Link to={`/users/${comment?.shutterbug_user?.id}`}>
+                                                {comment?.shutterbug_user?.full_name + ": "}
+                                            </Link>
+                                            {comment.content}
+                                        </div>
+                                    ))}
                             </div>
                         </div>
                     ))
