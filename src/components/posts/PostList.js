@@ -4,7 +4,7 @@ import { getCurrentUser, getUsers } from "../../managers/users";
 import { getCategories } from "../../managers/categories";
 import { Link, useNavigate } from "react-router-dom";
 import { getTags } from "../../managers/TagManager";
-import "./postList.css";
+import "./postList.css"; // Import the CSS file
 import { getAllComments } from "../../managers/comments.js";
 
 export const PostList = () => {
@@ -29,31 +29,33 @@ export const PostList = () => {
 
   const navigate = useNavigate();
 
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  //UseEffect to get all posts, users, categories, and tags
-  useEffect(() => {
+  const getData = () => {
     getPosts().then((postsData) => setPosts(postsData));
     getUsers().then((usersData) => setUsers(usersData));
     getCurrentUser().then((userData) => setCurrentUserArray(userData));
     getCategories().then((categoriesData) => setCategories(categoriesData));
     getTags().then((tagData) => setTags(tagData));
     getAllComments().then((commentsData) => setComments(commentsData));
+  }
+
+  useEffect(() => {
+    getData();
   }, []);
 
   useEffect(() => {
     applyFilters();
   }, [filters, posts]);
 
-  // This useEffect listens to changes in titleInput and updates the filters.title accordingly
   useEffect(() => {
     setFilters({ ...filters, title: titleInput });
   }, [titleInput]);
 
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  //Function to apply filters
   const applyFilters = () => {
     let filteredResults = posts;
 
+    filteredResults = filteredResults.filter((post) => post.approved === true);
+    filteredResults = filteredResults.filter((post) => post.user_is_active === true);
+    
     if (filters.categoryId !== 0) {
       filteredResults = filteredResults.filter(
         (post) => post?.category?.id === filters.categoryId
@@ -101,9 +103,11 @@ export const PostList = () => {
   };
 
   const ShowOnlyCurrentUserPosts = () => {
-    const currentUserPosts = filteredPosts.filter((post) => post?.shutterbug_user?.id === currentUser.id);
+    const currentUserPosts = filteredPosts.filter(
+      (post) => post?.shutterbug_user?.id === currentUser.id
+    );
     setFilteredPosts(currentUserPosts);
-  }
+  };
 
   const resetFilters = () => {
     setFilters({
@@ -115,8 +119,6 @@ export const PostList = () => {
     setTitleInput("");
   };
 
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  //Delete, Edit, Flag buttons
   const deleteButton = (postId) => {
     const handleDelete = () => {
       const shouldDelete = window.confirm(
@@ -135,36 +137,39 @@ export const PostList = () => {
   };
 
   const editButton = (post) => {
-    return currentUser.id === post?.shutterbug_user?.id ?
-      (
-        <button
-          onClick={() => {
-            navigate(`/my-posts/${post.id}/edit`);
-          }}
-        >
-          Edit
-        </button>
-      )
-      : null;
+    return currentUser.id === post?.shutterbug_user?.id ? (
+      <button
+        onClick={() => {
+          navigate(`/my-posts/${post.id}/edit`);
+        }}
+      >
+        Edit
+      </button>
+    ) : null;
   };
 
   const flagButton = (post) => {
-    return currentUser.id != post?.shutterbug_user?.id ?
-      (
-        <button className="material-symbols-outlined"
-        onClick={flagPost}>
-                flag
-              </button>
-      )
-      : null;
+    const isFlagged = post?.flagged;
+  
+    return currentUser.id !== post?.shutterbug_user?.id ? (
+      <div>
+        <button
+          className={`material-symbols-outlined flag-button ${isFlagged ? 'flagged' : ''}`}
+          onClick={() => 
+            flagPost(post).then(() => getData())}
+        >
+          Flag
+        </button>
+        <p className="flag-post-text">{!isFlagged ? "Flag this post" : "Unflag this post"}</p>
+      </div>
+    ) : null;
   };
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   return (
     <div className="post-list-container">
       <h1 className="page-title">Posts</h1>
 
-      <button onClick={() => navigate("/postform")} className="button is-link">
+      <button onClick={() => navigate("/postform")} className="button add-post-button">
         Add New Post
       </button>
 
@@ -214,7 +219,7 @@ export const PostList = () => {
             className="filter-select"
             onChange={handleTagChange}
           >
-            <option value={0}>Select a tag</option>
+            <option value={0}>Select a Tag</option>
             {tags.map((tag) => (
               <option key={`tagFilter--${tag.id}`} value={tag.id}>
                 {tag.label}
@@ -229,18 +234,19 @@ export const PostList = () => {
             value={titleInput}
             placeholder="Search by Post Title"
             onChange={handleTitleChange}
+            className="filter-input"
           />
         </div>
       </div>
 
-      <span>
-        <button onClick={ShowOnlyCurrentUserPosts} className="button current-user-posts">
+      <div className="show-current-user-posts">
+        <button onClick={ShowOnlyCurrentUserPosts} className="button current-user-posts-button">
           Show Only My Posts
         </button>
-      </span>
+      </div>
 
       <div className="reset-filters-container">
-        <button onClick={resetFilters} className="button reset-filters">
+        <button onClick={resetFilters} className="button reset-filters-button">
           Reset Filters
         </button>
       </div>
@@ -253,14 +259,16 @@ export const PostList = () => {
                 <hr className="divider-line" />
               </div>
               <div className="post-title">
-                <Link to={`/posts/${post.id}`}>{post.title}</Link>
+                <Link to={`/posts/${post.id}`} className="post-link">
+                  {post.title}
+                </Link>
               </div>
               <div className="flag-post-button">{flagButton(post)}</div>
               <div className="edit-post-button">{editButton(post)}</div>
               <div className="delete-post-button">{deleteButton(post.id)}</div>
               <div className="post-shutterbug">
                 By{" "}
-                <Link to={`/users/${post?.shutterbug_user?.id}`}>
+                <Link to={`/users/${post?.shutterbug_user?.id}`} className="user-link">
                   {post?.user_full_name}
                 </Link>
               </div>
@@ -288,10 +296,13 @@ export const PostList = () => {
               </div>
               <div className="post-comments">
                 Comments: {comments
-                  .filter(comment => comment?.post?.id === post.id)
-                  .map(comment => (
-                    <div key={`comment-${comment.id}`}>
-                      <Link to={`/users/${comment?.shutterbug_user?.id}`}>
+                  .filter((comment) => comment?.post?.id === post.id)
+                  .map((comment) => (
+                    <div key={`comment-${comment.id}`} className="comment">
+                      <Link
+                        to={`/users/${comment?.shutterbug_user?.id}`}
+                        className="user-link"
+                      >
                         {comment?.shutterbug_user?.full_name + ": "}
                       </Link>
                       {comment.content}

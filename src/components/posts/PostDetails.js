@@ -3,12 +3,14 @@ import { getPostById, deletePost } from "../../managers/posts";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./postDetails.css";
+import { getAllComments } from "../../managers/comments.js";
 
 export const PostDetails = () => {
     const { postId } = useParams();
     const [post, setPost] = useState({});
     const [reactions, setReactions] = useState([]);
     const [tags, setTags] = useState([]);
+    const [comments, setComments] = useState([]);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -22,6 +24,10 @@ export const PostDetails = () => {
 
                 const tagsResponse = await getPostById(postId);
                 setTags(tagsResponse.tags);
+
+                const commentsResponse = await getAllComments();
+                setComments(commentsResponse);
+
             } catch (error) {
                 console.error("Error fetching post details:", error);
             }
@@ -80,6 +86,21 @@ export const PostDetails = () => {
             <div className="post-details__published">Published: {post?.published_on}</div>
             <div className="post-details__tags">
                 Tags: {tags.map((tag) => tag?.label).join(", ")}
+            </div>
+            <div className="post-comments">
+                Comments: {comments
+                    .filter((comment) => comment?.post?.id === post.id)
+                    .map((comment) => (
+                        <div key={`comment-${comment.id}`} className="comment">
+                            <Link
+                                to={`/users/${comment?.shutterbug_user?.id}`}
+                                className="user-link"
+                            >
+                                {comment?.shutterbug_user?.full_name + ": "}
+                            </Link>
+                            {comment.content}
+                        </div>
+                    ))}
             </div>
             <div className="post-details__delete-button-container">
                 {deleteButton(post.id)}

@@ -12,6 +12,7 @@ import { LandingPageGreeting } from "../components/landingPage/StaffLandingPage.
 import { StaffProfile } from "../components/profile/staffProfile/StaffProfile.js"
 import { StaffEditProfile } from "../components/profile/staffProfile/StaffEditProfile.js"
 import { UserProfileWithPosts } from "../components/profile/staffProfile/CompleteProfile.js"
+import { FlaggedAndUnapprovedPostList, FlaggedPostList } from "../components/users/StaffUsers/NaughtyPostsMonitor.js"
 
 
 
@@ -31,6 +32,7 @@ export const StaffViews = ({ token, setToken}) => {
         
         <Route path="users" element={<UserList />} />
         <Route path="/users/:Id" element={<UserDetail token={token}/>} />
+        <Route path="/flaggedPosts" element={<FlaggedAndUnapprovedPostList />} />
         
         <Route path="/profile" element={<UserProfileWithPosts />} />
         <Route path="/profile/editForm" element={<StaffEditProfile />} />

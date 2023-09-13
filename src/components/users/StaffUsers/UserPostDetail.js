@@ -4,13 +4,15 @@ import { getUsers } from "../../../managers/users.js";
 import { getCategories } from "../../../managers/categories.js";
 import { getTags } from "../../../managers/TagManager.js";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { getAllComments } from "../../../managers/comments.js";
 
-export const UserDetailPosts = ({ currentUser }) => {
+export const UserDetailPosts = ({ user }) => {
     const [posts, setPosts] = useState([]);
     const [filteredPosts, setFilteredPosts] = useState([]);
     const [users, setUsers] = useState([]);
     const [categories, setCategories] = useState([]);
     const [tags, setTags] = useState([]);
+    const [comments, setComments] = useState([]);
     const [filters, setFilters] = useState({
         categoryId: 0,
         userId: 0,
@@ -27,6 +29,7 @@ export const UserDetailPosts = ({ currentUser }) => {
         getUsers().then((usersData) => setUsers(usersData));
         getCategories().then((categoriesData) => setCategories(categoriesData));
         getTags().then((tagData) => setTags(tagData));
+        getAllComments().then((commentsData) => setComments(commentsData));
     }
 
     useEffect(() => {
@@ -97,11 +100,6 @@ export const UserDetailPosts = ({ currentUser }) => {
         setTitleInput(event.target.value);
     };
 
-    const ShowOnlyCurrentUserPosts = () => {
-        const currentUserPosts = filteredPosts.filter((post) => post?.shutterbug_user?.id === currentUser.id);
-        setFilteredPosts(currentUserPosts);
-    }
-
     const resetFilters = () => {
         setFilters({
             categoryId: 0,
@@ -116,11 +114,9 @@ export const UserDetailPosts = ({ currentUser }) => {
 
     return (
         <div className="post-list-container">
-            <h1 className="page-title">Your Posts</h1>
-
-            <button onClick={() => navigate("/postform")} className="button is-link">
-                Add New Post
-            </button>
+            <h1 className="page-title">
+                {user?.full_name}'s Posts
+            </h1>
 
             <div className="filter-form">
                 <div className="filter-group">
@@ -223,6 +219,21 @@ export const UserDetailPosts = ({ currentUser }) => {
                                     </div>
                                     <div className="post-tags">
                                         Tags: {post.tags.map((tag) => tag.label).join(", ")}
+                                    </div>
+                                    <div className="post-comments">
+                                        Comments: {comments
+                                            .filter((comment) => comment?.post?.id === post.id)
+                                            .map((comment) => (
+                                                <div key={`comment-${comment.id}`} className="comment">
+                                                    <Link
+                                                        to={`/users/${comment?.shutterbug_user?.id}`}
+                                                        className="user-link"
+                                                    >
+                                                        {comment?.shutterbug_user?.full_name + ": "}
+                                                    </Link>
+                                                    {comment.content}
+                                                </div>
+                                            ))}
                                     </div>
                                 </div>
                             </div>

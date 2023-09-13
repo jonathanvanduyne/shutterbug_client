@@ -267,10 +267,13 @@ export const MyPosts = ({ currentUser }) => {
                             </div>
                             <div className="post-comments">
                                 Comments: {comments
-                                    .filter(comment => comment?.post?.id === post.id)
-                                    .map(comment => (
-                                        <div key={`comment-${comment.id}`}>
-                                            <Link to={`/users/${comment?.shutterbug_user?.id}`}>
+                                    .filter((comment) => comment?.post?.id === post.id)
+                                    .map((comment) => (
+                                        <div key={`comment-${comment.id}`} className="comment">
+                                            <Link
+                                                to={`/users/${comment?.shutterbug_user?.id}`}
+                                                className="user-link"
+                                            >
                                                 {comment?.shutterbug_user?.full_name + ": "}
                                             </Link>
                                             {comment.content}

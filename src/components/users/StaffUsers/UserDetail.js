@@ -53,7 +53,7 @@ export const UserDetail = () => {
         </div>
 
         <div className="user-posts-container">
-            <UserDetailPosts />
+            <UserDetailPosts user={user}/>
 
 
         </div>
