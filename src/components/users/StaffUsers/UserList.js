@@ -72,7 +72,7 @@ export const UserList = () => {
               <div className="user-info">
                 <div className="user-username">Username: {user?.user?.username}</div>
                 <div className="user-fullname">
-                  Full Name: <Link to={`/users/${user.id}`} className="user-link">
+                  Name: <Link to={`/users/${user.id}`} className="user-link">
                     {user.full_name}
                   </Link>
                 </div>

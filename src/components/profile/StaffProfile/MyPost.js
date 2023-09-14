@@ -118,19 +118,19 @@ export const MyPosts = ({ currentUser }) => {
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Delete & Edit buttons
-    const deleteButton = (postId) => {
+    const deleteButton = (post) => {
         const handleDelete = () => {
             const shouldDelete = window.confirm(
                 "Are you sure you want to delete this post?"
             );
             if (shouldDelete) {
-                deletePost(postId).then(() => {
+                deletePost(post.id).then(() => {
                     getPosts().then((postsData) => setPosts(postsData));
                 });
             }
         };
 
-        return currentUser.id === postId ? (
+        return currentUser.id === post?.shutterbug_user?.id ? (
             <button onClick={handleDelete}>Delete</button>
         ) : null;
     };
@@ -147,7 +147,15 @@ export const MyPosts = ({ currentUser }) => {
         ) : null;
     };
 
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    const isUnnapproved = (post) => {
+        if (post.approved === false) {
+            return (
+                <p className="unapproved-post">Post is unnapproved by Admin and cannot be seen on Shutterbug, please revise or delete.</p>
+            )
+        }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     return (
         <div className="post-list-container">
@@ -228,12 +236,13 @@ export const MyPosts = ({ currentUser }) => {
                 {filteredPosts.length !== 0 ? (
                     filteredPosts.map((post) => (
                         <div className="post-card" key={`postList--${post.id}`}>
+                                {isUnnapproved(post)}
                             <div className="post-title">
                                 <Link to={`/posts/${post.id}`}>{post.title}</Link>
                             </div>
                             <div className="post-actions">
                                 {editButton(post)}
-                                {deleteButton(post.id)}
+                                {deleteButton(post)}
                             </div>
                             <div className="post-details">
                                 <div className="post-image">

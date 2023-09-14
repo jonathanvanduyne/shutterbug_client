@@ -3,7 +3,7 @@ import { getCurrentUser } from "../../managers/users.js";
 import { Link } from "react-router-dom";
 import "./staffLandingPage.css";
 
-export const LandingPageGreeting = () => {
+export const StaffLandingPageGreeting = () => {
     const [currentUser, setCurrentUser] = useState([]);
     
     const getData = async () => {

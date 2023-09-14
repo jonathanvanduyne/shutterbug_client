@@ -152,3 +152,8 @@
 .post-actions button:last-child {
     margin-right: 0;
 }
+
+.unapproved-post {
+    background-color: red;
+    color: white;
+}

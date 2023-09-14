@@ -21,7 +21,7 @@ export const AuthorUserList = () => {
             <section className="user" key={user.id}>
               <div>================================================</div>
               <div className="userName">Username: {user?.user?.username}</div>
-              <div className="userfullName">Full Name: <Link to={`/users/${user.id}`}>{user.full_name}</Link></div>
+              <div className="userfullName">Name: <Link to={`/users/${user.id}`}>{user.full_name}</Link></div>
               <div className="userEmail">Email: {user?.user?.email} </div>
             </section>
           ))}

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { getCurrentUser } from "../../managers/users.js";
 import { Link } from "react-router-dom";
 
-export const LandingPageGreeting = () => {
+export const UserLandingPageGreeting = () => {
     const [currentUser, setCurrentUser] = useState([]);
     
     const getData = async () => {

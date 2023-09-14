@@ -29,14 +29,31 @@ export const FlaggedAndUnapprovedPostList = () => {
 
     const navigate = useNavigate();
 
-    const getData = () => {
-        getFlaggedPosts().then((postsData) => setPosts(postsData));
-        getUnapprovedPosts().then((postsData) => posts.push(postsData));
-        getUsers().then((usersData) => setUsers(usersData));
-        getCategories().then((categoriesData) => setCategories(categoriesData));
-        getTags().then((tagData) => setTags(tagData));
-        getAllComments().then((commentsData) => setComments(commentsData));
+    const getData = async () => {
+        try {
+            const allPosts = await getPosts(); // Fetch all posts
+
+            // Filter posts that meet your criteria (flagged or approved)
+            const filteredPosts = allPosts.filter(
+                (post) => post.flagged === true || post.approved === false
+            );
+
+            setPosts(filteredPosts);
+
+            const usersData = await getUsers();
+            setUsers(usersData);
+            const categoriesData = await getCategories();
+            setCategories(categoriesData);
+            const tagData = await getTags();
+            setTags(tagData);
+            const commentsData = await getAllComments();
+            setComments(commentsData);
+        } catch (error) {
+            // Handle any errors here
+            console.error("Error fetching data:", error);
+        }
     };
+
 
     useEffect(() => {
         getData();
@@ -159,8 +176,71 @@ export const FlaggedAndUnapprovedPostList = () => {
             </div>
 
             <div className="filter-form">
-                {/* ... Your filter form code ... */}
+                <div className="filter-group">
+                    <label htmlFor="category" className="filter-label">
+                        Category:
+                    </label>
+                    <select
+                        name="category"
+                        className="filter-select"
+                        onChange={handleCategoryChange}
+                    >
+                        <option value={0}>Select a Category</option>
+                        {categories.map((category) => (
+                            <option key={`catFilter--${category.id}`} value={category.id}>
+                                {category.label}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+
+                <div className="filter-group">
+                    <label htmlFor="filterByUser" className="filter-label">
+                        Author:
+                    </label>
+                    <select
+                        name="filterByUser"
+                        className="filter-select"
+                        onChange={handleAuthorChange}
+                    >
+                        <option value={0}>Filter By Shutterbug</option>
+                        {users.map((user) => (
+                            <option key={`userFilter--${user.id}`} value={user.id}>
+                                {user.full_name}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+
+                <div className="filter-group">
+                    <label htmlFor="tag" className="filter-label">
+                        Tag:
+                    </label>
+                    <select
+                        name="tag"
+                        className="filter-select"
+                        onChange={handleTagChange}
+                    >
+                        <option value={0}>Select a Tag</option>
+                        {tags.map((tag) => (
+                            <option key={`tagFilter--${tag.id}`} value={tag.id}>
+                                {tag.label}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+
+                <div className="filter-group">
+                    <input
+                        type="text"
+                        value={titleInput}
+                        placeholder="Search by Post Title"
+                        onChange={handleTitleChange}
+                        className="filter-input"
+                    />
+                </div>
             </div>
+
 
             <div className="reset-filters-container">
                 <button onClick={resetFilters} className="reset-filters-button">
