@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { ApplicationViews } from "./views/ApplicationViews"
 import { NavBar } from "./components/nav/NavBar"
-
+import "./shutterbug.css"
 
 export const Shutterbug = () => {
   const [token, setTokenState] = useState(localStorage.getItem('auth_token'))
@@ -22,3 +22,6 @@ export const Shutterbug = () => {
     <ApplicationViews token={token} setToken={setToken} isStaff={JSON.parse(isShutterbugStaff)} setStaff={settingShutterbugStaff} />
   </>
 }
+
+
+

@@ -1,1 +1,17 @@
 @import 'bulma/css/bulma.css';
+
+:root {
+    --body_background: white;
+    --body_color: black;
+    --link_color: #99a7ca;
+}
+
+[data-theme="dark"] {
+    --body_background: #242424;
+    --body_color: #ebebeb;
+    --link_color: #7e7e7e;
+}
+
+* {
+    transition: background-color 0.3s ease-out, color 0.2s ease-out;
+}
