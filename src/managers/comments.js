@@ -15,7 +15,6 @@ export const getCommentsByPost = (postId) => {
 }
 
 
-
 export const postComment = (comment) => {
     return fetch(`http://localhost:8000/comments`, {
         method: "POST",

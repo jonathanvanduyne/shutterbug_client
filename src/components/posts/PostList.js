@@ -5,7 +5,7 @@ import { getCategories } from "../../managers/categories";
 import { Link, useNavigate } from "react-router-dom";
 import { getTags } from "../../managers/TagManager";
 import "./postList.css"; // Import the CSS file
-import { getAllComments } from "../../managers/comments.js";
+import { getAllComments, postComment } from "../../managers/comments.js";
 
 export const PostList = () => {
   const [posts, setPosts] = useState([]);
@@ -18,6 +18,11 @@ export const PostList = () => {
   const [categories, setCategories] = useState([]);
   const [tags, setTags] = useState([]);
   const [comments, setComments] = useState([]);
+  const [commentForm, setCommentForm] = useState({
+    post: 0,
+    content: "",
+  });
+  const [activeCommentInputPost, setActiveCommentInputPost] = useState(0);
 
   const [filters, setFilters] = useState({
     categoryId: 0,
@@ -132,7 +137,7 @@ export const PostList = () => {
     };
 
     return currentUser.id === postId ? (
-      <button onClick={handleDelete}>Delete</button>
+      <button onClick={handleDelete}>Delete Post</button>
     ) : null;
   };
 
@@ -143,7 +148,7 @@ export const PostList = () => {
           navigate(`/my-posts/${post.id}/edit`);
         }}
       >
-        Edit
+        Edit Post
       </button>
     ) : null;
   };
@@ -164,6 +169,70 @@ export const PostList = () => {
       </div>
     ) : null;
   };
+
+
+  const addCommentButton = (post) => {
+    // Hide the add comment button if in comment input mode
+    if (activeCommentInputPost === post.id) {
+      return null;
+    }
+    return (
+      <button
+        onClick={() => {
+          setCommentForm({ post: post.id, content: "" }); // Clear the comment form
+          setActiveCommentInputPost(post.id);
+        }}
+      >
+        Add Comment
+      </button>
+    );
+  };
+
+  const commentInput = (post) => {
+  // Show the comment input and submit button only for the active comment input post
+  if (activeCommentInputPost !== post.id) {
+    return null;
+  }
+  return (
+    <form className="comment-form">
+      <fieldset>
+        <div className="form-group">
+          <label htmlFor="content">Comment:</label>
+          <input
+            type="text"
+            name="content"
+            required
+            autoFocus
+            className="form-control"
+            placeholder="Comment"
+            value={commentForm.content}
+            onChange={(evt) => {
+              const copy = { ...commentForm };
+              copy.content = evt.target.value;
+              setCommentForm(copy);
+            }}
+          />
+        </div>
+      </fieldset>
+      <button
+        className="btn btn-primary"
+        onClick={(evt) => {
+          evt.preventDefault();
+          postComment(commentForm).then(() => {
+            // Reset the comment input and hide it
+            setCommentForm({ post: 0, content: "" });
+            setActiveCommentInputPost(0);
+            getData();
+          });
+        }}
+      >
+        Save Comment
+      </button>
+    </form>
+  );
+};
+
+
 
   return (
     <div className="post-list-container">
@@ -308,6 +377,8 @@ export const PostList = () => {
                       {comment.content}
                     </div>
                   ))}
+                  {addCommentButton(post)}
+                  {commentInput(post)} 
               </div>
             </section>
           );
