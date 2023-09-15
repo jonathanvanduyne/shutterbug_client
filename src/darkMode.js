@@ -5,11 +5,11 @@ import "./darkMode.css";
 
 export const DarkMode = () => {
     const setDarkMode = () => {
-        document.querySelector("body").setAttribute("data-theme", "dark");
+        document.body.setAttribute("data-theme", "dark");
     }
 
     const setLightMode = () => {
-        document.querySelector("body").setAttribute("data-theme", "light");
+        document.body.setAttribute("data-theme", "light");
     }
 
     const toggleTheme = (e) => {
@@ -19,7 +19,7 @@ export const DarkMode = () => {
             setLightMode();
         }
     }
-    
+
     return (
         <div className='dark_mode'>
             <input
@@ -28,10 +28,11 @@ export const DarkMode = () => {
                 id='darkmode-toggle'
                 onChange={toggleTheme}
             />
-            <label className='dark_mode_label' for='darkmode-toggle'>
+            <label className='dark_mode_label' htmlFor='darkmode-toggle'>
                 <Sun />
                 <Moon />
             </label>
         </div>
     );
 };
+

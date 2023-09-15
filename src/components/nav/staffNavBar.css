@@ -1,0 +1,77 @@
+/* NavBar.css */
+
+/* Navbar styling */
+.navbar {
+    background-color: #007bff;
+    /* Change this to your preferred background color */
+    color: #ffffff;
+    /* Change this to your preferred text color */
+}
+
+.navbar a.navbar-item {
+    color: #ffffff;
+    /* Text color for navbar items */
+}
+
+.navbar a.navbar-item:hover {
+    background-color: #0056b3;
+    /* Background color on hover */
+}
+
+/* Hamburger icon styling */
+.navbar-burger {
+    color: #ffffff;
+    /* Hamburger icon color */
+}
+
+/* Mobile menu styling */
+.navbar-menu {
+    display: none;
+    background-color: #007bff;
+    /* Mobile menu background color */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    transition: opacity 0.3s, visibility 0.3s, top 0.3s;
+    opacity: 0;
+    z-index: 10;
+}
+
+.navbar.is-active .navbar-menu {
+    display: block;
+    opacity: 1;
+    top: 3.5rem;
+    /* Adjust the distance from the top as needed */
+}
+
+/* Mobile menu item styling */
+.navbar-menu .navbar-item {
+    padding: 1rem;
+    color: #ffffff;
+    /* Text color for mobile menu items */
+    text-align: center;
+}
+
+/* Add other styles as needed */
+
+/* Auto-close mobile menu after 3 seconds of inactivity */
+.navbar:hover .navbar-menu {
+    opacity: 1;
+    top: 3.5rem;
+    /* Adjust the distance from the top as needed */
+}
+
+.navbar:not(:hover) .navbar-menu {
+    opacity: 0;
+    top: 100%;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.3s, visibility 0.3s, top 0.3s;
+}
+
+.dark-mode-toggle {
+    display: flex;
+    align-items: center;
+    margin-right: 1rem; /* Add some spacing to the right of the toggle */
+}

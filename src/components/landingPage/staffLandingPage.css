@@ -1,41 +1,52 @@
 /* LandingPageGreeting.css */
 
-.landing-page {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start; /* Align the card to the top of the screen */
-    min-height: 100vh;
+/* Light mode styles */
+.landing-page.light {
+    color: #333333;
+}
+
+/* Dark mode styles */
+.landing-page.dark {
+    color: #ffffff;
+}
+
+body.light {
     background-color: #f8f8f8;
-    opacity: 0;
-    animation: fadeIn 2s forwards; /* Slower fade-in animation */
+    background-repeat: repeat;
+}
+
+body.dark {
+    background-color: #222222;
+    background-repeat: repeat;
 }
 
 .landing-page-greeting {
-    background-color: #fff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
     text-align: center;
-    font-size: 24px; /* Increase the font size */
+    font-size: 24px;
 }
 
 .landing-page-greeting h1 {
-    font-size: 48px; /* Increase the font size and make the h1 bigger */
-    margin-bottom: 5px; /* Increase the margin */
-    color: #333;
-
+    font-size: 48px;
+    margin-bottom: 5px;
 }
 
 .landing-page-greeting p {
-    font-size: 20px; /* Increase the font size */
+    font-size: 20px;
     margin: 10px 0;
-    color: #666;
 }
 
 .landing-page-greeting a {
     text-decoration: none;
-    color: #007bff;
+    color: var(--social-media-icon-color); /* Use CSS variable for social media icon color */
     font-weight: bold;
+}
+
+/* Define CSS variable for social media icon color */
+:root {
+    --social-media-icon-color: #007bff;
 }
 
 @keyframes fadeIn {

@@ -1,6 +1,6 @@
 import { useRef } from "react"
 import { Link, useNavigate } from "react-router-dom"
-import "./NavBar.css"
+import "./staffNavBar.css"
 import Logo from "./shutterbug.jpeg"
 import { DarkMode } from "../../darkMode.js"
 

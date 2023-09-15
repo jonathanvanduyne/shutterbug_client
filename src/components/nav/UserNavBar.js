@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom"
 import "./NavBar.css"
 import Logo from "./shutterbug.jpeg"
 import { getCurrentUser } from "../../managers/users.js"
+import { DarkMode } from "../../darkMode.js"
 
 export const UserNavBar = ({ token, setToken }) => {
     const navigate = useNavigate()
@@ -21,7 +22,8 @@ export const UserNavBar = ({ token, setToken }) => {
                     <img src={Logo} height="3rem" alt="Shutterbug Logo" /> <h1 className="title is-4">ShutterBug</h1>
                 </a>
 
-                {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+                <p className="dark-mode-toggle"><DarkMode /></p>
+
                 <a role="button" className="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" onClick={showMobileNavbar} ref={hamburger}>
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
