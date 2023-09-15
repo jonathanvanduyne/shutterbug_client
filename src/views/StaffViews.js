@@ -10,10 +10,9 @@ import { EditComment } from "../components/comments/CommentEdit"
 import { StaffLandingPageGreeting } from "../components/landingPage/StaffLandingPage.js"
 import { StaffEditProfile } from "../components/profile/staffProfile/StaffEditProfile.js"
 import { UserProfileWithPosts } from "../components/profile/staffProfile/CompleteProfile.js"
-import { FlaggedAndUnapprovedPostList, FlaggedPostList } from "../components/users/StaffUsers/NaughtyPostsMonitor.js"
-
-
-
+import { FlaggedAndUnapprovedPostList} from "../components/users/StaffUsers/NaughtyPostsMonitor.js"
+import { DirectMessagesList } from "../components/directMessages/DirectMessagesList.js"
+import { DirectMessageThread } from "../components/directMessages/DirectMessageThread.js"
 
 export const StaffViews = ({ token, setToken}) => {
   return <>
@@ -32,6 +31,9 @@ export const StaffViews = ({ token, setToken}) => {
         <Route path="/users/:Id" element={<UserDetail token={token}/>} />
         <Route path="/flaggedPosts" element={<FlaggedAndUnapprovedPostList />} />
         
+        <Route path="/direct_messages" element={<DirectMessagesList />} />
+        <Route path="/direct_messages_thread/:userId" element={<DirectMessageThread />} />
+
         <Route path="/profile" element={<UserProfileWithPosts />} />
         <Route path="/profile/editForm" element={<StaffEditProfile />} />
 

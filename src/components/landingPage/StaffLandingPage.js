@@ -30,6 +30,9 @@ export const StaffLandingPageGreeting = () => {
                     <Link to="/posts">Posts</Link>
                 </p>
                 <p>
+                    <Link to="/direct_messages">Direct Messages</Link>
+                </p>
+                <p>
                     <Link to="/users">Shutterbug Admin Manager</Link>
                 </p>
                 <p>

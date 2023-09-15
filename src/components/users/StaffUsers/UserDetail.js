@@ -42,18 +42,15 @@ export const UserDetail = () => {
                         <span className="user-detail-info-item-value">{user?.user?.email}</span>
                     </p>
                     <p className="user-detail-info-item">
-                        <span className="user-detail-info-item-label">Is Staff:</span>
+                        <span className="user-detail-info-item-label">Shutterbug Staff:</span>
                         <span className="user-detail-info-item-value">{user?.user?.is_staff ? "Yes" : "No"}</span>
                     </p>
-                </div>
-                <div className="user-detail-buttons">
-                    <button className="user-detail-button" onClick={() => navigate(-1)}>Back</button>
                 </div>
             </div>
         </div>
 
         <div className="user-posts-container">
-            <UserDetailPosts user={user}/>
+            <UserDetailPosts user={user} updateData={getData}/>
 
 
         </div>

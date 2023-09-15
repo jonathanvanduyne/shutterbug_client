@@ -6,7 +6,7 @@ import { getTags } from "../../../managers/TagManager.js";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { getAllComments } from "../../../managers/comments.js";
 
-export const UserDetailPosts = ({ user }) => {
+export const UserDetailPosts = ({ user, updateData }) => {
     const [posts, setPosts] = useState([]);
     const [filteredPosts, setFilteredPosts] = useState([]);
     const [users, setUsers] = useState([]);
@@ -38,6 +38,7 @@ export const UserDetailPosts = ({ user }) => {
 
     useEffect(() => {
         getPostsByUser(Id).then((postsData) => setPosts(postsData));
+        updateData();
     }, [Id]);
 
     useEffect(() => {

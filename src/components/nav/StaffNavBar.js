@@ -21,7 +21,7 @@ export const StaffNavBar = ({ token, setToken }) => {
                     <img src={Logo} height="3rem" alt="Shutterbug Logo" /> <h1 className="title is-4">ShutterBug</h1>
                 </a>
 
-            <p className="dark-mode-toggle"><DarkMode /></p>
+                <p className="dark-mode-toggle"><DarkMode /></p>
 
                 <a role="button" className="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" onClick={showMobileNavbar} ref={hamburger}>
                     <span aria-hidden="true"></span>
@@ -37,6 +37,7 @@ export const StaffNavBar = ({ token, setToken }) => {
                             ?
                             <>
                                 <Link to="/posts" className="navbar-item">Posts</Link>
+                                <Link to="/direct_messages" className="navbar-item">Direct Messages</Link>
                                 <Link to="/users" className="navbar-item">Shutterbug Admin Manager</Link>
                                 <Link to="/profile" className="navbar-item">My Profile</Link>
 
@@ -52,10 +53,16 @@ export const StaffNavBar = ({ token, setToken }) => {
                             {
                                 token
                                     ?
-                                    <button className="button is-outlined" onClick={() => {
-                                        setToken('')
-                                        navigate('/login')
-                                    }}>Logout</button>
+                                    <button
+                                        className="button is-outlined custom-red-background"
+                                        onClick={() => {
+                                            setToken('');
+                                            navigate('/login');
+                                        }}
+                                    >
+                                        Logout
+                                    </button>
+
                                     :
                                     <>
                                         <Link to="/register" className="button is-link">Register</Link>

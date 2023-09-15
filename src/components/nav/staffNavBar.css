@@ -73,5 +73,19 @@
 .dark-mode-toggle {
     display: flex;
     align-items: center;
-    margin-right: 1rem; /* Add some spacing to the right of the toggle */
+    margin-right: 1rem;
+    /* Add some spacing to the right of the toggle */
+}
+
+/* Add this to staffnavbar.css */
+.custom-red-background {
+    background-color: #ff3860;
+    /* Red background color */
+    color: #ffffff;
+    /* White text color */
+}
+
+.custom-red-background:hover {
+    background-color: #e31a45;
+    /* Darker red background color on hover */
 }
