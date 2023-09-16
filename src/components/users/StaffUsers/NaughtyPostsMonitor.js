@@ -1,19 +1,24 @@
 import React, { useEffect, useState } from "react";
-import { deletePost, getPosts, getPostsByUser, viewUserPost } from "../../../managers/posts.js";
-import { getUsers } from "../../../managers/users.js";
-import { getCategories } from "../../../managers/categories.js";
+import {
+    UnapprovePost, deletePost, flagPost, getFlaggedPosts, getPosts, getUnapprovedPosts,
+} from "../../../managers/posts.js";
+import { getCurrentUser, getUsers } from "../../../managers/users.js";
 import { getTags } from "../../../managers/TagManager.js";
-import { Link, useNavigate } from "react-router-dom";
-import "./MyPosts.css"; // Import the CSS file
+import { getCategories } from "../../../managers/categories.js";
 import { getAllComments } from "../../../managers/comments.js";
+import { Link, useNavigate } from "react-router-dom";
 
-export const MyPosts = ({ currentUser }) => {
+import "./naughtyPostsMonitor.css"; // Import the CSS file
+
+export const FlaggedAndUnapprovedPostList = () => {
     const [posts, setPosts] = useState([]);
     const [filteredPosts, setFilteredPosts] = useState([]);
+
     const [users, setUsers] = useState([]);
     const [categories, setCategories] = useState([]);
     const [tags, setTags] = useState([]);
     const [comments, setComments] = useState([]);
+
     const [filters, setFilters] = useState({
         categoryId: 0,
         userId: 0,
@@ -21,37 +26,47 @@ export const MyPosts = ({ currentUser }) => {
         tagId: 0,
     });
     const [titleInput, setTitleInput] = useState("");
-    const Id = currentUser?.id;
+
     const navigate = useNavigate();
 
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // UseEffect to get all posts, users, categories, and tags
-    const getData = () => {
-        getUsers().then((usersData) => setUsers(usersData));
-        getCategories().then((categoriesData) => setCategories(categoriesData));
-        getTags().then((tagData) => setTags(tagData));
-        getAllComments().then((commentsData) => setComments(commentsData));
-    }
+    const getData = async () => {
+        try {
+            const allPosts = await getPosts(); // Fetch all posts
+
+            // Filter posts that meet your criteria (flagged or approved)
+            const filteredPosts = allPosts.filter(
+                (post) => post.flagged === true || post.approved === false
+            );
+
+            setPosts(filteredPosts);
+
+            const usersData = await getUsers();
+            setUsers(usersData);
+            const categoriesData = await getCategories();
+            setCategories(categoriesData);
+            const tagData = await getTags();
+            setTags(tagData);
+            const commentsData = await getAllComments();
+            setComments(commentsData);
+        } catch (error) {
+            // Handle any errors here
+            console.error("Error fetching data:", error);
+        }
+    };
+
 
     useEffect(() => {
         getData();
     }, []);
 
     useEffect(() => {
-        getPostsByUser(Id).then((postsData) => setPosts(postsData));
-    }, [Id]);
-
-    useEffect(() => {
         applyFilters();
     }, [filters, posts]);
 
-    // This useEffect listens to changes in titleInput and updates the filters.title accordingly
     useEffect(() => {
         setFilters({ ...filters, title: titleInput });
     }, [titleInput]);
 
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // Function to apply filters
     const applyFilters = () => {
         let filteredResults = posts;
 
@@ -101,11 +116,6 @@ export const MyPosts = ({ currentUser }) => {
         setTitleInput(event.target.value);
     };
 
-    const ShowOnlyCurrentUserPosts = () => {
-        const currentUserPosts = filteredPosts.filter((post) => post?.shutterbug_user?.id === currentUser.id);
-        setFilteredPosts(currentUserPosts);
-    }
-
     const resetFilters = () => {
         setFilters({
             categoryId: 0,
@@ -114,56 +124,56 @@ export const MyPosts = ({ currentUser }) => {
             tagId: 0,
         });
         setTitleInput("");
+        getData();
     };
 
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // Delete & Edit buttons
-    const deleteButton = (post) => {
-        const handleDelete = () => {
-            const shouldDelete = window.confirm(
-                "Are you sure you want to delete this post?"
-            );
-            if (shouldDelete) {
-                deletePost(post.id).then(() => {
-                    getPosts().then((postsData) => setPosts(postsData));
-                });
-            }
-        };
+    const flagButton = (post) => {
+        const isFlagged = post?.flagged;
 
-        return currentUser.id === post?.shutterbug_user?.id ? (
-            <button onClick={handleDelete}>Delete</button>
-        ) : null;
+        return (
+            <div>
+                <button
+                    className={`material-symbols-outlined flag-button ${isFlagged ? "flagged" : ""
+                        }`}
+                    onClick={() => flagPost(post).then(() => getData())}
+                >
+                    Flag
+                </button>
+                <p className="flag-post-text">
+                    {!isFlagged ? "Flag this post" : "Unflag this post"}
+                </p>
+            </div>
+        );
     };
 
-    const editButton = (post) => {
-        return currentUser.id === post?.shutterbug_user?.id ? (
-            <button
-                onClick={() => {
-                    navigate(`/my-posts/${post.id}/edit`);
-                }}
-            >
-                Edit
-            </button>
-        ) : null;
+    const approvalButton = (post) => {
+        const isApproved = post?.approved;
+        const buttonText = isApproved ? "Unapprove" : "Approve";
+
+        return (
+            <div>
+                <button
+                    className={`material-symbols-outlined approve-button ${isApproved ? "approved" : "disapproved"
+                        }`}
+                    onClick={() => UnapprovePost(post).then(() => getData())}
+                >
+                    {buttonText}
+                </button>
+            </div>
+        );
     };
 
-    const isUnnapproved = (post) => {
-        if (post.approved === false) {
-            return (
-                <p className="unapproved-post">Post is unnapproved by Admin and cannot be seen on Shutterbug, please revise or delete.</p>
-            )
-        }
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     return (
         <div className="post-list-container">
-            <h1 className="page-title">Your Posts</h1>
-
-            <button onClick={() => navigate("/postform")} className="button is-link">
-                Add New Post
-            </button>
+            <div className="header-links">
+                <Link to="/users" className="user-list-link">
+                    List of Users
+                </Link>
+                <Link to="/flaggedPosts" className="flagged-posts-link">
+                    Flagged Posts
+                </Link>
+            </div>
 
             <div className="filter-form">
                 <div className="filter-group">
@@ -206,8 +216,12 @@ export const MyPosts = ({ currentUser }) => {
                     <label htmlFor="tag" className="filter-label">
                         Tag:
                     </label>
-                    <select name="tag" className="filter-select" onChange={handleTagChange}>
-                        <option value={0}>Select a tag</option>
+                    <select
+                        name="tag"
+                        className="filter-select"
+                        onChange={handleTagChange}
+                    >
+                        <option value={0}>Select a Tag</option>
                         {tags.map((tag) => (
                             <option key={`tagFilter--${tag.id}`} value={tag.id}>
                                 {tag.label}
@@ -222,60 +236,68 @@ export const MyPosts = ({ currentUser }) => {
                         value={titleInput}
                         placeholder="Search by Post Title"
                         onChange={handleTitleChange}
+                        className="filter-input"
                     />
                 </div>
             </div>
 
+
             <div className="reset-filters-container">
-                <button onClick={resetFilters} className="button reset-filters">
+                <button onClick={resetFilters} className="reset-filters-button">
                     Reset Filters
                 </button>
             </div>
 
-            <div className="post-cards">
-                {filteredPosts.length !== 0 ? (
+            <article className="posts">
+                {filteredPosts.length === 0 ? (
+                    <p>No Flagged or Unapproved Posts</p>
+                ) : (
                     filteredPosts.map((post) => (
-                        <div className="post-card" key={`postList--${post.id}`}>
-                                {isUnnapproved(post)}
+                        <section className="post" key={`postList--${post.id}`}>
+                            <div className="flag-post-button">{flagButton(post)}</div>
+                            <div className="approve-post-button">{approvalButton(post)}</div>
+                            <div className="post-divider">
+                                <hr className="divider-line" />
+                            </div>
                             <div className="post-title">
-                                <Link to={`/posts/${post.id}`}>{post.title}</Link>
+                                <Link to={`/posts/${post.id}`} className="post-link">
+                                    {post.title}
+                                </Link>
                             </div>
-                            <div className="post-actions">
-                                {editButton(post)}
-                                {deleteButton(post)}
+                            <div className="post-shutterbug">
+                                By{" "}
+                                <Link
+                                    to={`/users/${post?.shutterbug_user?.id}`}
+                                    className="user-link"
+                                >
+                                    {post?.user_full_name}
+                                </Link>
                             </div>
-                            <div className="post-details">
-                                <div className="post-image">
-                                    <img src={post.image_url} alt={post.title} />
-                                </div>
-                                <div className="post-info">
-                                    <div className="post-shutterbug">
-                                        By{" "}
-                                        <Link to={`/users/${post?.shutterbug_user?.id}`}>
-                                            {post?.user_full_name}
-                                        </Link>
-                                    </div>
-                                    <div className="reactions">
-                                        {post.reactions.map((reaction, index) => (
-                                            <img
-                                                key={`reaction-${index}`}
-                                                src={reaction.image_url}
-                                                alt={reaction.label}
-                                                className="reaction-icon"
-                                            />
-                                        ))}
-                                    </div>
-                                    <div className="post-content">"{post?.content}"</div>
-                                    <div className="post-published">
-                                        Published: {post?.published_on}
-                                    </div>
-                                    <div className="post-tags">
-                                        Tags: {post.tags.map((tag) => tag.label).join(", ")}
-                                    </div>
-                                </div>
+                            <img
+                                className="post-image"
+                                src={post.image_url}
+                                alt={post.title}
+                            />
+                            <div className="reactions">
+                                {post.reactions.map((reaction, index) => (
+                                    <img
+                                        key={`reaction-${index}`}
+                                        src={reaction.image_url}
+                                        alt={reaction.label}
+                                        className="reaction-icon"
+                                    />
+                                ))}
+                            </div>
+                            <div className="post-content">"{post?.content}"</div>
+                            <div className="post-published">
+                                Published: {post?.published_on}
+                            </div>
+                            <div className="post-tags">
+                                Tags: {post.tags.map((tag) => tag.label).join(", ")}
                             </div>
                             <div className="post-comments">
-                                Comments: {comments
+                                Comments:{" "}
+                                {comments
                                     .filter((comment) => comment?.post?.id === post.id)
                                     .map((comment) => (
                                         <div key={`comment-${comment.id}`} className="comment">
@@ -289,12 +311,10 @@ export const MyPosts = ({ currentUser }) => {
                                         </div>
                                     ))}
                             </div>
-                        </div>
+                        </section>
                     ))
-                ) : (
-                    null
                 )}
-            </div>
+            </article>
         </div>
     );
-}
+}      

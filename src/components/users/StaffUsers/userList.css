@@ -1,81 +1,73 @@
-/* UserList.css */
+/* userList.css */
 
-/* Container for the user list */
+/* Container styles */
 .user-list-container {
+    max-width: 1200px;
+    margin: 0 auto;
     padding: 20px;
-}
-
-/* User list title */
-.user-list-title {
-    font-size: 24px;
-    margin-bottom: 10px;
-    color: #333;
-}
-
-/* User card container */
-.user-list {
+  }
+  
+  .header-links {
     display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-/* User card */
-.user-card {
+    justify-content: space-around;
+    margin-bottom: 20px;
+  }
+  
+  .user-list-link,
+  .flagged-posts-link {
+    font-size: 20px;
+    text-decoration: none;
+    color: #333;
+  }
+  
+  /* User card styles */
+  .user-card {
     background-color: #fff;
+    border: 1px solid #e0e0e0;
+    margin-bottom: 20px;
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* Divider line */
-.divider-line {
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-}
-
-/* User info section */
-.user-info {
-    margin-bottom: 10px;
-}
-
-/* User username */
-.user-username {
-    font-size: 18px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .divider-line {
+    margin: 10px 0;
+    border: 0;
+    border-top: 1px solid #e0e0e0;
+  }
+  
+  /* User info styles */
+  .user-info {
+    margin-bottom: 20px;
+  }
+  
+  .user-username {
+    font-weight: bold;
+  }
+  
+  .user-fullname .user-link {
+    text-decoration: none;
     color: #333;
-}
-
-/* User full name */
-.user-fullname {
-    font-size: 16px;
-    color: #007bff;
-}
-
-/* User email */
-.user-email {
-    font-size: 16px;
-    color: #333;
-}
-
-/* User active status section */
-.user-active {
+  }
+  
+  .user-email {
+    color: #777;
+  }
+  
+  /* User action styles */
+  .user-active {
     display: flex;
     align-items: center;
-    font-size: 16px;
-    color: #333;
-}
-
-/* User role section */
-.user-role {
-    display: flex;
-    align-items: center;
-    font-size: 16px;
-    color: #333;
-}
-
-/* Radio button labels */
-.user-role label {
+    margin-bottom: 10px;
+  }
+  
+  .user-role input[type="radio"] {
     margin-right: 10px;
-    cursor: pointer;
-}
-
-/* Additional styling as needed */
+  }
+  
+  /* Styling for checked radio buttons */
+  .user-role input[type="radio"]:checked + label {
+    font-weight: bold;
+    color: #007bff;
+  }
+  

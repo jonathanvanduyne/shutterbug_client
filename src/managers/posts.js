@@ -80,3 +80,63 @@ export const getPostsByTag = (tagId) => {
         }
     }).then(res => res.json());
 };
+
+export const flagPost = (post) => {
+    const postToAPI = {
+        title: post.title,
+        shutterbug_user: post?.shutterbug_user?.id,
+        image_url: post.image_url,
+        content: post.content,
+        published_on: post.published_on,
+        category: post?.category?.id,
+        approved: post.approved,
+        flagged: !post.flagged,
+    };
+
+    return fetch(`http://localhost:8000/posts/${post.id}`, {
+        method: "PUT",
+        headers: {
+            "Authorization": `Token ${localStorage.getItem("auth_token")}`,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(postToAPI)
+    })
+};
+
+export const UnapprovePost = (post) => {
+    const postToAPI = {
+        title: post.title,
+        shutterbug_user: post?.shutterbug_user?.id,
+        image_url: post.image_url,
+        content: post.content,
+        published_on: post.published_on,
+        category: post?.category?.id,
+        approved: !post.approved,
+        flagged: post.flagged,
+    };
+
+    return fetch(`http://localhost:8000/posts/${post.id}`, {
+        method: "PUT",
+        headers: {
+            "Authorization": `Token ${localStorage.getItem("auth_token")}`,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(postToAPI)
+    })
+}
+
+export const getFlaggedPosts = () => {
+    return fetch("http://localhost:8000/posts?flagged=true", {
+        headers: {
+            "Authorization": `Token ${localStorage.getItem("auth_token")}`
+        }
+    }).then(res => res.json());
+}
+
+export const getUnapprovedPosts = () => {
+    return fetch("http://localhost:8000/posts?approved=false", {
+        headers: {
+            "Authorization": `Token ${localStorage.getItem("auth_token")}`
+        }
+    }).then(res => res.json());
+}

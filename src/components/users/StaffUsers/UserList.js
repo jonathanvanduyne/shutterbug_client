@@ -5,8 +5,7 @@ import {
   getUsers,
   updateDjangoUser,
 } from '../../../managers/users';
-import './userList.css';
-
+import './userList.css'; // Import your CSS file
 
 export const UserList = () => {
   const [users, setUsers] = useState([]);
@@ -55,7 +54,14 @@ export const UserList = () => {
 
   return (
     <div className="user-list-container">
-      <h2 className="user-list-title">List of Users</h2>
+      <div className="header-links">
+        <Link to="/users" className="user-list-link">
+          List of Users
+        </Link>
+        <Link to="/flaggedPosts" className="flagged-posts-link">
+          Flagged Posts
+        </Link>
+      </div>
 
       <div className="user-list">
         {users
@@ -66,7 +72,9 @@ export const UserList = () => {
               <div className="user-info">
                 <div className="user-username">Username: {user?.user?.username}</div>
                 <div className="user-fullname">
-                  Full Name: <Link to={`/users/${user.id}`}>{user.full_name}</Link>
+                  Name: <Link to={`/users/${user.id}`} className="user-link">
+                    {user.full_name}
+                  </Link>
                 </div>
                 <div className="user-email">Email: {user?.user?.email}</div>
               </div>

@@ -1,1 +1,29 @@
 @import 'bulma/css/bulma.css';
+
+/* App.css */
+
+:root {
+    --background-color-light: #ffffff;
+    /* Light mode background color */
+    --text-color-light: #333333;
+    /* Light mode text color */
+    --background-color-dark: #222222;
+    /* Dark mode background color */
+    --text-color-dark: #ffffff;
+    /* Dark mode text color */
+}
+
+body {
+    background-color: var(--background-color-light);
+    color: var(--text-color-light);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body[data-theme="dark"] {
+    background-color: var(--background-color-dark);
+    color: var(--text-color-dark);
+}
+
+* {
+    transition: background-color 0.3s ease-out, color 0.2s ease-out;
+}

@@ -1,73 +1,14 @@
-import { useRef, useState } from "react"
-import { Link, useNavigate } from "react-router-dom"
 import "./NavBar.css"
-import Logo from "./shutterbug.jpeg"
-import { getCurrentUser } from "../../managers/users.js"
+import { StaffNavBar } from "./StaffNavBar.js"
+import { UserNavBar } from "./UserNavBar.js"
 
 export const NavBar = ({ token, setToken }) => {
-  const navigate = useNavigate()
-  const navbar = useRef()
-  const hamburger = useRef()
-
-  const showMobileNavbar = () => {
-    hamburger.current.classList.toggle('is-active')
-    navbar.current.classList.toggle('is-active')
+  const is_staff = JSON.parse(localStorage.getItem('is_staff'))
+  
+  if (is_staff) {
+    return <StaffNavBar token={token} setToken={setToken} />
   }
-
-  return (
-    <nav className="navbar is-info mb-3" role="navigation" aria-label="main navigation">
-      <div className="navbar-brand">
-        <a className="navbar-item" href="/">
-          <img src={Logo} height="3rem" alt="Shutterbug Logo" /> <h1 className="title is-4">ShutterBug</h1>
-        </a>
-
-        {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-        <a role="button" className="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" onClick={showMobileNavbar} ref={hamburger}>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-        </a>
-      </div>
-
-      <div className="navbar-menu" ref={navbar}>
-        <div className="navbar-start">
-          {
-            token
-              ?
-              <>
-                <Link to="/posts" className="navbar-item">Posts</Link>
-                <Link to="/users" className="navbar-item">User Management</Link>
-                <Link to="/profile" className="navbar-item">My Profile</Link>
-
-
-
-              </>
-              :
-              ""
-          }
-        </div>
-
-        <div className="navbar-end">
-          <div className="navbar-item">
-            <div className="buttons">
-              {
-                token
-                  ?
-                  <button className="button is-outlined" onClick={() => {
-                    setToken('')
-                    navigate('/login')
-                  }}>Logout</button>
-                  :
-                  <>
-                    <Link to="/register" className="button is-link">Register</Link>
-                    <Link to="/login" className="button is-outlined">Login</Link>
-
-                  </>
-              }
-            </div>
-          </div>
-        </div>
-      </div>
-    </nav>
-  )
+  else {
+    return <UserNavBar token={token} setToken={setToken} />
+  }
 }

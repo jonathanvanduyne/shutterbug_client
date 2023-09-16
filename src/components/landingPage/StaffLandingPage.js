@@ -3,7 +3,7 @@ import { getCurrentUser } from "../../managers/users.js";
 import { Link } from "react-router-dom";
 import "./staffLandingPage.css";
 
-export const LandingPageGreeting = () => {
+export const StaffLandingPageGreeting = () => {
     const [currentUser, setCurrentUser] = useState([]);
     
     const getData = async () => {
@@ -28,6 +28,9 @@ export const LandingPageGreeting = () => {
                 <p>Where would you like to go?</p>
                 <p>
                     <Link to="/posts">Posts</Link>
+                </p>
+                <p>
+                    <Link to="/direct_messages">Direct Messages</Link>
                 </p>
                 <p>
                     <Link to="/users">Shutterbug Admin Manager</Link>
