@@ -5,7 +5,7 @@ import { getCategories } from "../../managers/categories";
 import { Link, useNavigate } from "react-router-dom";
 import { getTags } from "../../managers/TagManager";
 import "./postList.css"; // Import the CSS file
-import { getAllComments, postComment } from "../../managers/comments.js";
+import { deleteComment, getAllComments, postComment } from "../../managers/comments.js";
 
 export const PostList = () => {
   const [posts, setPosts] = useState([]);
@@ -232,6 +232,22 @@ export const PostList = () => {
   );
 };
 
+const deleteCommentButton = (comment) => {
+  const handleDelete = () => {
+    const shouldDelete = window.confirm(
+      "Are you sure you want to delete this comment?"
+    );
+    if (shouldDelete) {
+      deleteComment(comment.id).then(() => {
+        getAllComments().then((commentsData) => setComments(commentsData));
+      });
+    }
+  };
+
+  return currentUser.id === comment?.shutterbug_user?.id ? (
+    <button onClick={handleDelete}>Delete Comment</button>
+  ) : null;
+};
 
 
   return (
@@ -375,6 +391,7 @@ export const PostList = () => {
                         {comment?.shutterbug_user?.full_name + ": "}
                       </Link>
                       {comment.content}
+                      {deleteCommentButton(comment)}
                     </div>
                   ))}
                   {addCommentButton(post)}
@@ -386,4 +403,4 @@ export const PostList = () => {
       </article>
     </div>
   );
-};
+}
