@@ -17,7 +17,7 @@ import { NewDMForm } from "../components/directMessages/NewDirectMessageForm.js"
 export const UserViews = ({ token, setToken}) => {
   return <>
     <Routes>
-        <Route path="/" element={<UserLandingPageGreeting/>}  />
+        <Route path="/" element={<UserLandingPageGreeting token={token} setToken={setToken}/>}  />
         
         <Route path="/posts" element={<PostList />}  />
         <Route path="/postform" element={<PostForm token={token}/>}  />

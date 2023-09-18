@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom"
 import "./NavBar.css"
 import Logo from "./shutterbug.jpeg"
 import { getCurrentUser } from "../../managers/users.js"
-import { DarkMode } from "../../darkMode.js"
+import { DarkMode } from "./DarkMode.js"
 
 export const UserNavBar = ({ token, setToken }) => {
     const navigate = useNavigate()

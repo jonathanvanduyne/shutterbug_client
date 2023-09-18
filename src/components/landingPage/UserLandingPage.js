@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { getCurrentUser } from "../../managers/users.js";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-export const UserLandingPageGreeting = () => {
+export const UserLandingPageGreeting = ({token, setToken}) => {
     const [currentUser, setCurrentUser] = useState([]);
+    const navigate = useNavigate();
     
     const getData = async () => {
         try {
@@ -26,5 +27,14 @@ export const UserLandingPageGreeting = () => {
     <p><Link to="/posts">Posts</Link></p>
     <p><Link to="/direct_messages">Direct Messages</Link></p>
     <p><Link to={`/profile`}>My Profile</Link></p>
+    <button
+                                        className="button is-outlined custom-red-background"
+                                        onClick={() => {
+                                            setToken('');
+                                            navigate('/login');
+                                        }}
+                                    >
+                                        Logout
+                                    </button>
     </>
 };
