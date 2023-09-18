@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { DarkMode } from "./DarkMode.js";
+import { DarkestModeModal } from "./DarkestMode.js"; // Import your DarkestMode component
+import { DarkMode } from "./DarkMode.js"; // Import your DarkMode component
 import Logo from "./shutterbug.jpeg";
 import batmanLogo from "./batman-logo.png";
 import "./staffNavBar.css";
@@ -10,7 +11,7 @@ export const StaffNavBar = ({ token, setToken }) => {
     const navbar = useRef();
     const hamburger = useRef();
     const [isDarkMode, setIsDarkMode] = useState(null);
-    const [triggerDarkestMode, setTriggerDarkestMode] = useState(false);
+    const [triggerDarkestMode, setTriggerDarkestMode] = useState(false); // State to control the modal
 
     const showMobileNavbar = () => {
         hamburger.current.classList.toggle("is-active");
@@ -18,8 +19,8 @@ export const StaffNavBar = ({ token, setToken }) => {
     };
 
     const triggerDarkestModeHandler = () => {
-        setTriggerDarkestMode(true);
-    }
+        setTriggerDarkestMode(true); // Set triggerDarkestMode to true when the logo is clicked
+    };
 
     return (
         <nav
@@ -32,12 +33,12 @@ export const StaffNavBar = ({ token, setToken }) => {
                     <img src={Logo} height="3rem" alt="Shutterbug Logo" />{" "}
                     <h1 className="title is-4">ShutterBug</h1>
                 </a>
-    
-                <div className="dark-mode-container"> {/* Wrap Dark Mode toggle and Batman logo */}
+
+                <div className="dark-mode-container">
                     <p className="dark-mode-toggle">
                         <DarkMode setIsDarkMode={setIsDarkMode} />
                     </p>
-    
+
                     {isDarkMode && (
                         <img
                             src={batmanLogo}
@@ -48,7 +49,7 @@ export const StaffNavBar = ({ token, setToken }) => {
                         />
                     )}
                 </div>
-    
+
                 <a
                     role="button"
                     className="navbar-burger"
@@ -63,7 +64,6 @@ export const StaffNavBar = ({ token, setToken }) => {
                     <span aria-hidden="true"></span>
                 </a>
             </div>
-
 
             <div className="navbar-menu is-active" ref={navbar}>
                 <div className="navbar-start">
@@ -114,6 +114,9 @@ export const StaffNavBar = ({ token, setToken }) => {
                     </div>
                 </div>
             </div>
+
+            {/* Render the DarkestMode modal when triggerDarkestMode is true */}
+            {triggerDarkestMode && <DarkestModeModal triggerDarkestMode={triggerDarkestMode} setTriggerDarkestMode={setTriggerDarkestMode}/>}
         </nav>
     );
 };
