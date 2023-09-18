@@ -24,6 +24,7 @@ export const UserLandingPageGreeting = () => {
     
     <p>Where would you like to go?</p>
     <p><Link to="/posts">Posts</Link></p>
+    <p><Link to="/direct_messages">Direct Messages</Link></p>
     <p><Link to={`/profile`}>My Profile</Link></p>
     </>
 };

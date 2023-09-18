@@ -12,9 +12,7 @@ import { UserProfileWithPosts } from "../components/profile/staffProfile/Complet
 import { UserLandingPageGreeting } from "../components/landingPage/UserLandingPage.js"
 import { DirectMessagesList } from "../components/directMessages/DirectMessagesList.js"
 import { DirectMessageThread } from "../components/directMessages/DirectMessageThread.js"
-
-
-
+import { NewDMForm } from "../components/directMessages/NewDirectMessageForm.js"
 
 export const UserViews = ({ token, setToken}) => {
   return <>
@@ -33,6 +31,7 @@ export const UserViews = ({ token, setToken}) => {
 
         <Route path="/direct_messages" element={<DirectMessagesList />} />
         <Route path="/direct_messages_thread/:userId" element={<DirectMessageThread />} />
+        <Route path="/newDM" element={<NewDMForm />} />
         
         <Route path="/profile" element={<UserProfileWithPosts />} />
         <Route path="/profile/editForm" element={<StaffEditProfile />} />

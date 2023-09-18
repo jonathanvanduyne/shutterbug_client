@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { getDirectMessages } from "../../managers/directMessages.js";
 import { getCurrentUser } from "../../managers/users.js";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const DirectMessagesList = () => {
     const [currentUserArray, setCurrentUserArray] = useState([]);
     const currentUser = currentUserArray[0];
     const [directMessagesList, setDirectMessagesList] = useState([]);
-    const [filteredMessages, setFilteredMessages] = useState([]);
+    const [filteredThreads, setFilteredThreads] = useState([]);
     const navigate = useNavigate();
 
     const getData = async () => {
@@ -23,27 +23,49 @@ export const DirectMessagesList = () => {
     }, []);
 
     useEffect(() => {
-        // Create a set to store unique sender user IDs
-        const uniqueSenderUserIds = new Set();
-    
-        // Filter directMessages to include only the first message for each unique sender user
-        // and messages sent to the current user
-        const filteredMessages = directMessagesList.filter((message) => {
-            if (
-                message.sender?.user?.id !== currentUser?.id && // Exclude the current user as sender
-                !uniqueSenderUserIds.has(message?.sender?.user?.id) &&
-                message.recipient?.user?.id === currentUser?.id
-            ) {
-                // If the sender user ID is not in the set and it's sent to the current user, add it and return true
-                uniqueSenderUserIds.add(message?.sender?.user?.id);
-                return true;
+        // Create a set to store unique thread identifiers
+        const uniqueThreadIdentifiers = new Set();
+
+        // Filter directMessages to include threads where the current user is either sender or recipient
+        // and exclude threads where the current user is both sender and recipient
+        const threads = directMessagesList.reduce((filtered, message) => {
+            const senderUserId = message.sender?.user?.id;
+            const recipientUserId = message.recipient?.user?.id;
+
+            // Check if the message involves the current user as sender or recipient
+            const isCurrentUserSender = senderUserId === currentUser?.id;
+            const isCurrentUserRecipient = recipientUserId === currentUser?.id;
+
+            if (isCurrentUserSender || isCurrentUserRecipient) {
+                // Generate a unique thread identifier by combining sender and recipient IDs
+                const threadIdentifier = [senderUserId, recipientUserId].sort().join('-');
+
+                // Check if this thread has already been added
+                if (!uniqueThreadIdentifiers.has(threadIdentifier)) {
+                    uniqueThreadIdentifiers.add(threadIdentifier);
+
+                    // Determine the other user in the thread
+                    const otherUser = isCurrentUserSender ? message.recipient.user : message.sender.user;
+
+                    // Add the thread to the filtered array
+                    filtered.push({
+                        id: threadIdentifier, // Use the thread identifier as a unique ID
+                        otherUser,
+                        latestMessage: message,
+                    });
+                }
             }
-            return false;
-        });
-    
-        setFilteredMessages(filteredMessages);
+
+            return filtered;
+        }, []);
+
+        // Sort the threads by the latest message's created_on timestamp
+        threads.sort((a, b) =>
+            new Date(b.latestMessage.created_on) - new Date(a.latestMessage.created_on)
+        );
+
+        setFilteredThreads(threads);
     }, [directMessagesList, currentUser]);
-    
 
     const createNewThreadButton = () => {
         return (
@@ -53,7 +75,7 @@ export const DirectMessagesList = () => {
                 </button>
             </div>
         );
-    }
+    };
 
     return (
         <div>
@@ -61,19 +83,19 @@ export const DirectMessagesList = () => {
                 <h1 className="title">{currentUser?.user?.first_name}'s Threads</h1>
             </div>
             <div className="direct-message-list">
-                {filteredMessages.map((message) => (
-                    <div className="direct-message" key={message.id}>
-                            <Link to={`/direct_messages_thread/${message.sender.user.id}`}>
-                        <div className="direct-message__profile_picture">
-                            <img src={message.sender.profile_image_url} alt="Profile" />
-                        </div>
-                        <div className="direct-message__sender">
-                                {message.sender.user.first_name} {message.sender.user.last_name}
-                        </div>
-                        <div className="direct-message__created_on">
-                            {message.created_on}
+                {filteredThreads.map((thread) => (
+                    <div className="direct-message" key={thread.id}>
+                        <Link to={`/direct_messages_thread/${thread.otherUser.id}`}>
+                            <div className="direct-message__sender">
+                                {thread.otherUser.first_name} {thread.otherUser.last_name}
                             </div>
-                            </Link>
+                            <div className="direct-message__profile_picture">
+                                "{thread.latestMessage.content}""
+                            </div>
+                            <div className="direct-message__created_on">
+                                {thread.latestMessage.created_on}
+                            </div>
+                        </Link>
                     </div>
                 ))}
             </div>
