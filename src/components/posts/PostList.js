@@ -193,6 +193,7 @@ export const PostList = () => {
   if (activeCommentInputPost !== post.id) {
     return null;
   }
+  
   return (
     <form className="comment-form">
       <fieldset>
@@ -204,7 +205,7 @@ export const PostList = () => {
             required
             autoFocus
             className="form-control"
-            placeholder="Comment"
+            placeholder={`Let ${post?.user_first_name} know what you think...`}
             value={commentForm.content}
             onChange={(evt) => {
               const copy = { ...commentForm };

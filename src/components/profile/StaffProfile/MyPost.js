@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { deletePost, getPosts, getPostsByUser, viewUserPost } from "../../../managers/posts.js";
+import { deletePost, flagPost, getPosts, getPostsByUser, viewUserPost } from "../../../managers/posts.js";
 import { getUsers } from "../../../managers/users.js";
 import { getCategories } from "../../../managers/categories.js";
 import { getTags } from "../../../managers/TagManager.js";
 import { Link, useNavigate } from "react-router-dom";
 import "./MyPosts.css"; // Import the CSS file
-import { getAllComments } from "../../../managers/comments.js";
+import { deleteComment, getAllComments, postComment } from "../../../managers/comments.js";
 
 export const MyPosts = ({ currentUser }) => {
     const [posts, setPosts] = useState([]);
@@ -23,6 +23,12 @@ export const MyPosts = ({ currentUser }) => {
     const [titleInput, setTitleInput] = useState("");
     const Id = currentUser?.id;
     const navigate = useNavigate();
+    const [commentForm, setCommentForm] = useState({
+        post: 0,
+        content: "",
+    });
+    const [activeCommentInputPost, setActiveCommentInputPost] = useState(0);
+
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // UseEffect to get all posts, users, categories, and tags
@@ -125,13 +131,13 @@ export const MyPosts = ({ currentUser }) => {
             );
             if (shouldDelete) {
                 deletePost(post.id).then(() => {
-                    getPosts().then((postsData) => setPosts(postsData));
+                    getPostsByUser(Id).then((postsData) => setPosts(postsData));
                 });
             }
         };
 
         return currentUser.id === post?.shutterbug_user?.id ? (
-            <button onClick={handleDelete}>Delete</button>
+            <button onClick={handleDelete}>Delete Post</button>
         ) : null;
     };
 
@@ -155,6 +161,103 @@ export const MyPosts = ({ currentUser }) => {
         }
     }
 
+    const flagButton = (post) => {
+        const isFlagged = post?.flagged;
+
+        return currentUser?.id !== post?.shutterbug_user?.id ? (
+            <div>
+                <button
+                    className={`material-symbols-outlined flag-button ${isFlagged ? 'flagged' : ''}`}
+                    onClick={() =>
+                        flagPost(post).then(() => getData())}
+                >
+                    Flag
+                </button>
+                <p className="flag-post-text">{!isFlagged ? "Flag this post" : "Unflag this post"}</p>
+            </div>
+        ) : null;
+    };
+
+
+    const addCommentButton = (post) => {
+        // Hide the add comment button if in comment input mode
+        if (activeCommentInputPost === post.id) {
+            return null;
+        }
+        return (
+            <button
+                onClick={() => {
+                    setCommentForm({ post: post.id, content: "" }); // Clear the comment form
+                    setActiveCommentInputPost(post.id);
+                }}
+            >
+                Add Comment
+            </button>
+        );
+    };
+
+    const commentInput = (post) => {
+        // Show the comment input and submit button only for the active comment input post
+        if (activeCommentInputPost !== post.id) {
+            return null;
+        }
+
+
+        return (
+            <form className="comment-form">
+                <fieldset>
+                    <div className="form-group">
+                        <label htmlFor="content">Comment:</label>
+                        <input
+                            type="text"
+                            name="content"
+                            required
+                            autoFocus
+                            className="form-control"
+                            placeholder={`Let ${post?.user_first_name} know what you think!`}
+                            value={commentForm.content}
+                            onChange={(evt) => {
+                                const copy = { ...commentForm };
+                                copy.content = evt.target.value;
+                                setCommentForm(copy);
+                            }}
+                        />
+                    </div>
+                </fieldset>
+                <button
+                    className="btn btn-primary"
+                    onClick={(evt) => {
+                        evt.preventDefault();
+                        postComment(commentForm).then(() => {
+                            // Reset the comment input and hide it
+                            setCommentForm({ post: 0, content: "" });
+                            setActiveCommentInputPost(0);
+                            getData();
+                        });
+                    }}
+                >
+                    Save Comment
+                </button>
+            </form>
+        );
+    };
+
+    const deleteCommentButton = (comment) => {
+        const handleDelete = () => {
+            const shouldDelete = window.confirm(
+                "Are you sure you want to delete this comment?"
+            );
+            if (shouldDelete) {
+                deleteComment(comment.id).then(() => {
+                    getAllComments().then((commentsData) => setComments(commentsData));
+                });
+            }
+        };
+
+        return currentUser?.id === comment?.shutterbug_user?.id ? (
+            <button onClick={handleDelete}>Delete Comment</button>
+        ) : null;
+    };
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     return (
@@ -236,13 +339,13 @@ export const MyPosts = ({ currentUser }) => {
                 {filteredPosts.length !== 0 ? (
                     filteredPosts.map((post) => (
                         <div className="post-card" key={`postList--${post.id}`}>
-                                {isUnnapproved(post)}
+                            {isUnnapproved(post)}
                             <div className="post-title">
                                 <Link to={`/posts/${post.id}`}>{post.title}</Link>
                             </div>
                             <div className="post-actions">
                                 {editButton(post)}
-                                {deleteButton(post)}
+
                             </div>
                             <div className="post-details">
                                 <div className="post-image">
@@ -286,13 +389,19 @@ export const MyPosts = ({ currentUser }) => {
                                                 {comment?.shutterbug_user?.full_name + ": "}
                                             </Link>
                                             {comment.content}
+                                            {deleteCommentButton(comment)}
                                         </div>
                                     ))}
+                                {addCommentButton(post)}
+                                {commentInput(post)}
                             </div>
+                            {deleteButton(post)}
                         </div>
                     ))
                 ) : (
-                    null
+                    <div className="no-posts-message">
+                        You do not have any posts yet.
+                    </div>
                 )}
             </div>
         </div>

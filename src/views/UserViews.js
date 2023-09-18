@@ -10,6 +10,8 @@ import { LandingPageGreeting } from "../components/landingPage/StaffLandingPage.
 import { StaffEditProfile } from "../components/profile/staffProfile/StaffEditProfile.js"
 import { UserProfileWithPosts } from "../components/profile/staffProfile/CompleteProfile.js"
 import { UserLandingPageGreeting } from "../components/landingPage/UserLandingPage.js"
+import { DirectMessagesList } from "../components/directMessages/DirectMessagesList.js"
+import { DirectMessageThread } from "../components/directMessages/DirectMessageThread.js"
 
 
 
@@ -28,6 +30,9 @@ export const UserViews = ({ token, setToken}) => {
         <Route path="/comments/:commentId/edit" element={<EditComment />}  />
         
         <Route path="/users/:Id" element={<UserDetail token={token}/>} />
+
+        <Route path="/direct_messages" element={<DirectMessagesList />} />
+        <Route path="/direct_messages_thread/:userId" element={<DirectMessageThread />} />
         
         <Route path="/profile" element={<UserProfileWithPosts />} />
         <Route path="/profile/editForm" element={<StaffEditProfile />} />

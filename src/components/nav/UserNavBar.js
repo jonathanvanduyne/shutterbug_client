@@ -38,10 +38,8 @@ export const UserNavBar = ({ token, setToken }) => {
                             ?
                             <>
                                 <Link to="/posts" className="navbar-item">Posts</Link>
+                                <Link to="/direct_messages" className="navbar-item">Direct Messages</Link>
                                 <Link to="/profile" className="navbar-item">My Profile</Link>
-
-
-
                             </>
                             :
                             ""

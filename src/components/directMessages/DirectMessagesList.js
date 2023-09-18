@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { getDirectMessages } from "../../managers/directMessages.js";
 import { getCurrentUser } from "../../managers/users.js";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 export const DirectMessagesList = () => {
     const [currentUserArray, setCurrentUserArray] = useState([]);
     const currentUser = currentUserArray[0];
     const [directMessagesList, setDirectMessagesList] = useState([]);
     const [filteredMessages, setFilteredMessages] = useState([]);
+    const navigate = useNavigate();
 
     const getData = async () => {
         const messages = await getDirectMessages();
@@ -24,21 +25,35 @@ export const DirectMessagesList = () => {
     useEffect(() => {
         // Create a set to store unique sender user IDs
         const uniqueSenderUserIds = new Set();
-
+    
         // Filter directMessages to include only the first message for each unique sender user
         // and messages sent to the current user
         const filteredMessages = directMessagesList.filter((message) => {
-            if (!uniqueSenderUserIds.has(message?.sender?.user?.id) && 
-                message.recipient?.user?.id === currentUser?.id) {
+            if (
+                message.sender?.user?.id !== currentUser?.id && // Exclude the current user as sender
+                !uniqueSenderUserIds.has(message?.sender?.user?.id) &&
+                message.recipient?.user?.id === currentUser?.id
+            ) {
                 // If the sender user ID is not in the set and it's sent to the current user, add it and return true
                 uniqueSenderUserIds.add(message?.sender?.user?.id);
                 return true;
             }
             return false;
         });
-
+    
         setFilteredMessages(filteredMessages);
     }, [directMessagesList, currentUser]);
+    
+
+    const createNewThreadButton = () => {
+        return (
+            <div className="direct-message">
+                <button className="create-new-thread-button" onClick={() => navigate("/newDM")}>
+                    Create New Thread
+                </button>
+            </div>
+        );
+    }
 
     return (
         <div>
@@ -62,6 +77,7 @@ export const DirectMessagesList = () => {
                     </div>
                 ))}
             </div>
+            {createNewThreadButton()}
         </div>
     );
 };
