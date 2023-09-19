@@ -2,9 +2,15 @@ import React, { useState, useEffect } from "react";
 import "./darkestMode.css";
 import Joker from "./Joker.png";
 import MrFreeze from "./MrFreeze.png";
+import Riddler from "./Riddler.png";
+import PoisonIvy from "./PoisonIvy.png";
+import Penguin from "./Penguin.png";
+import HarleyQuinn from "./HarleyQuinn.png";
+import Bane from "./Bane.png";
+
 
 export const DarkestModeModal = ({ triggerDarkestMode, setTriggerDarkestMode }) => {
-    const [isFlying, setIsFlying] = useState(true);
+    const [isFlying, setIsFlying] = useState(false);
 
     const body = document.body;
 
@@ -68,6 +74,11 @@ export const DarkestModeModal = ({ triggerDarkestMode, setTriggerDarkestMode }) 
         // Start flying when the component mounts for both buttons
         flyButton("joker-button");
         flyButton("mr-freeze-button");
+        flyButton("riddler-button");
+        flyButton("poison-ivy-button");
+        flyButton("penguin-button");
+        flyButton("harley-quinn-button");
+        flyButton("bane-button");
     }, []);
 
     return (
@@ -93,9 +104,49 @@ export const DarkestModeModal = ({ triggerDarkestMode, setTriggerDarkestMode }) 
                 <img src={MrFreeze} alt="Mr. Freeze" />
             </button>
 
-            <button className="close-darkest-mode-button" onClick={() => setTriggerDarkestMode()}>
-                Close Darkest Mode #GiveUp
+            <button
+                className={`flying-button3 ${isFlying ? "flying" : ""}`}
+                id="riddler-button"
+                onClick={() => setTriggerDarkestMode()}
+                >
+                <img src={Riddler} alt="Riddler" />
             </button>
+
+            <button
+                className={`flying-button4 ${isFlying ? "flying" : ""}`}
+                id="poison-ivy-button"
+                onClick={() => setTriggerDarkestMode()}
+                >
+                <img src={PoisonIvy} alt="Poison Ivy" />
+            </button>
+
+            <button
+                className={`flying-button5 ${isFlying ? "flying" : ""}`}
+                id="penguin-button"
+                onClick={() => setTriggerDarkestMode()}
+                >
+                <img src={Penguin} alt="Penguin" />
+            </button>
+
+            <button
+                className={`flying-button6 ${isFlying ? "flying" : ""}`}
+                id="harley-quinn-button"
+                onClick={() => setTriggerDarkestMode()}
+                >
+                <img src={HarleyQuinn} alt="Harley Quinn" />
+            </button>
+
+            <button
+                className={`flying-button7 ${isFlying ? "flying" : ""}`}
+                id="bane-button"
+                onClick={() => setTriggerDarkestMode()}
+                >
+                <img src={Bane} alt="Bane" />
+            </button>
+
+                <button className="close-darkest-mode-button" onClick={() => setTriggerDarkestMode()}>
+                    Close Darkest Mode #GiveUp
+                </button>
         </div>
     );
 };

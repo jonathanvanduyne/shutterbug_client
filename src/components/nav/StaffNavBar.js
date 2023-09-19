@@ -43,7 +43,7 @@ export const StaffNavBar = ({ token, setToken }) => {
                         <img
                             src={batmanLogo}
                             height="3rem"
-                            alt="Red Batman Logo"
+                            alt="Batman-Logo"
                             className="batman-logo"
                             onClick={triggerDarkestModeHandler}
                         />

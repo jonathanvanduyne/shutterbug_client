@@ -48,6 +48,7 @@
         opacity: 1;
     }
 }
+
 /* Style the buttons */
 .flying-button {
     /* White background for buttons */
@@ -55,7 +56,6 @@
     /* Black text color */
     border: none;
     cursor: pointer;
-    border-radius: 5px;
     transition: background-color 0.3s, color 0.3s;
     background: none;
     /* Remove the background */
@@ -64,6 +64,7 @@
     outline: none;
     /* Remove the outline */
     padding: 0;
+    overflow: hidden;
     /* Remove padding if needed */
 }
 
@@ -78,14 +79,14 @@
 /* Style the flying button */
 .flying-button.flying {
     position: absolute;
-    animation: flyingAnimation 240s linear infinite;
+    animation: flyingAnimation 16s linear infinite;
 }
 
 /* Style the image inside the button */
 .flying-button img {
-    display: flex;
+    display: block;
     /* Ensure the image is a block element */
-    max-width: 10%;
+    max-width: 15%;
     /* Stretch to fill the button */
     height: auto;
     /* Preserve aspect ratio */
@@ -140,14 +141,229 @@
 /* Style the flying button */
 .flying-button2.flying {
     position: absolute;
-    animation: flyingAnimation 300s linear infinite;
+    animation: flyingAnimation2 15s linear infinite;
 }
 
 /* Style the image inside the Mr. Freeze button */
 .flying-button2 img {
+    display: block;
+    /* Ensure the image is a block element */
+    max-width: 20%;
+    /* Stretch to fill the button */
+    height: auto;
+    /* Preserve aspect ratio */
+}
+
+/* Style the flying-button3 */
+.flying-button3 {
+    /* White background for buttons */
+    color: #000;
+    /* Black text color */
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+    background: none;
+    /* Remove the background */
+    border: none;
+    /* Remove the border */
+    outline: none;
+    /* Remove the outline */
+    padding: 0;
+    /* Remove padding if needed */
+}
+
+/* Hover effect for flying-button3 */
+.flying-button3:hover {
+    background-color: #000;
+    /* Black background on hover */
+    color: #fff;
+    /* White text color on hover */
+}
+
+/* Style the flying button for flying-button3 */
+.flying-button3.flying {
+    position: absolute;
+    animation: flyingAnimation3 14s linear infinite;
+}
+
+/* Style the image inside flying-button3 */
+.flying-button3 img {
+    display: block;
+    /* Ensure the image is a block element */
+    max-width: 40%;
+    /* Stretch to fill the button */
+    height: auto;
+    /* Preserve aspect ratio */
+}
+
+/* Apply the flying-button class to the Riddler button */
+.flying-button4 {
+    /* White background for buttons */
+    color: #000;
+    /* Black text color */
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+    background: none;
+    /* Remove the background */
+    border: none;
+    /* Remove the border */
+    outline: none;
+    /* Remove the outline */
+    padding: 0;
+    /* Remove padding if needed */
+}
+
+/* Hover effect for the Riddler button */
+.flying-button4:hover {
+    background-color: #000;
+    /* Black background on hover */
+    color: #fff;
+    /* White text color on hover */
+}
+
+/* Style the flying button for flying-button4 */
+.flying-button4.flying {
+    position: absolute;
+    animation: flyingAnimation4 13s linear infinite;
+}
+
+/* Style the image inside the Riddler button */
+.flying-button4 img {
+    display: block;
+    /* Ensure the image is a block element */
+    max-width: 40%;
+    /* Stretch to fill the button */
+    height: auto;
+    /* Preserve aspect ratio */
+}
+
+/* Apply the flying-button class to the Poison Ivy button */
+.flying-button5 {
+    /* White background for buttons */
+    color: #000;
+    /* Black text color */
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+    background: none;
+    /* Remove the background */
+    border: none;
+    /* Remove the border */
+    outline: none;
+    /* Remove the outline */
+    padding: 0;
+    /* Remove padding if needed */
+}
+
+/* Hover effect for the Poison Ivy button */
+.flying-button5:hover {
+    background-color: #000;
+    /* Black background on hover */
+    color: #fff;
+    /* White text color on hover */
+}
+
+/* Style the flying button for flying-button5 */
+.flying-button5.flying {
+    position: absolute;
+    animation: flyingAnimation5 12s linear infinite;
+}
+
+/* Style the image inside the Poison Ivy button */
+.flying-button5 img {
+    display: block;
+    /* Ensure the image is a block element */
+    max-width: 25%;
+    /* Stretch to fill the button */
+    height: auto;
+    /* Preserve aspect ratio */
+}
+
+/* Apply the flying-button class to the Penguin button */
+.flying-button6 {
+    /* White background for buttons */
+    color: #000;
+    /* Black text color */
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+    background: none;
+    /* Remove the background */
+    border: none;
+    /* Remove the border */
+    outline: none;
+    /* Remove the outline */
+    padding: 0;
+    /* Remove padding if needed */
+}
+
+/* Hover effect for the Penguin button */
+.flying-button6:hover {
+    background-color: #000;
+    /* Black background on hover */
+    color: #fff;
+    /* White text color on hover */
+}
+
+/* Style the flying button for flying-button6 */
+.flying-button6.flying {
+    position: absolute;
+    animation: flyingAnimation6 11s linear infinite;
+}
+
+/* Style the image inside the Penguin button */
+.flying-button6 img {
+    display: block;
+    /* Ensure the image is a block element */
+    max-width: 17%;
+    /* Stretch to fill the button */
+    height: auto;
+    /* Preserve aspect ratio */
+}
+
+/* Apply the flying-button class to the Harley Quinn button */
+.flying-button7 {
+    /* White background for buttons */
+    color: #000;
+    /* Black text color */
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+    background: none;
+    /* Remove the background */
+    border: none;
+    /* Remove the border */
+    outline: none;
+    /* Remove the outline */
+    padding: 0;
+    /* Remove padding if needed */
+}
+
+/* Hover effect for the Harley Quinn button */
+.flying-button7:hover {
+    background-color: #000;
+    /* Black background on hover */
+    color: #fff;
+    /* White text color on hover */
+}
+
+/* Style the flying button for flying-button7 */
+.flying-button7.flying {
+    position: absolute;
+    animation: flyingAnimation7 10s linear infinite;
+}
+
+/* Style the image inside the Harley Quinn button */
+.flying-button7 img {
     display: flex;
     /* Ensure the image is a block element */
-    max-width: 15%;
+    max-width: 30%;
     /* Stretch to fill the button */
     height: auto;
     /* Preserve aspect ratio */
@@ -161,809 +377,604 @@
     /* Text color on hover */
 }
 
-
-@keyframes flyingAnimation {
+/* @keyframes flyingAnimation {
     0% {
-        transform: translateY(100vh) translateX(100vh);
-    }
-
-    0.5% {
-        transform: translateY(581px) translateX(-254px);
-    }
-
-    1% {
-        transform: translateY(-1175px) translateX(141px);
-    }
-
-    1.5% {
-        transform: translateY(-712px) translateX(-394px);
-    }
-
-    2% {
-        transform: translateY(425px) translateX(469px);
-    }
-
-    2.5% {
-        transform: translateY(-542px) translateX(595px);
-    }
-
-    3% {
-        transform: translateY(875px) translateX(-206px);
-    }
-
-    3.5% {
-        transform: translateY(-285px) translateX(-588px);
-    }
-
-    4% {
-        transform: translateY(-804px) translateX(227px);
-    }
-
-    4.5% {
-        transform: translateY(83px) translateX(-254px);
+        transform: translateY(0px) translateX(0px);
     }
 
     5% {
-        transform: translateY(735px) translateX(555px);
-    }
-
-    5.5% {
-        transform: translateY(57px) translateX(131px);
-    }
-
-    6% {
-        transform: translateY(-1079px) translateX(-126px);
-    }
-
-    6.5% {
-        transform: translateY(-36px) translateX(-570px);
-    }
-
-    7% {
-        transform: translateY(287px) translateX(66px);
-    }
-
-    7.5% {
-        transform: translateY(-995px) translateX(-28px);
-    }
-
-    8% {
-        transform: translateY(597px) translateX(375px);
-    }
-
-    8.5% {
-        transform: translateY(453px) translateX(414px);
-    }
-
-    9% {
-        transform: translateY(-795px) translateX(-95px);
-    }
-
-    9.5% {
-        transform: translateY(308px) translateX(-123px);
+        transform: translateY(-400px) translateX(-550px);
     }
 
     10% {
-        transform: translateY(1200px) translateX(40px);
-    }
-
-    10.5% {
-        transform: translateY(-1183px) translateX(105px);
-    }
-
-    11% {
-        transform: translateY(1197px) translateX(88px);
-    }
-
-    11.5% {
-        transform: translateY(-425px) translateX(374px);
-    }
-
-    12% {
-        transform: translateY(-345px) translateX(23px);
-    }
-
-    12.5% {
-        transform: translateY(987px) translateX(-238px);
-    }
-
-    13% {
-        transform: translateY(46px) translateX(-280px);
-    }
-
-    13.5% {
-        transform: translateY(-73px) translateX(-254px);
-    }
-
-    14% {
-        transform: translateY(380px) translateX(539px);
-    }
-
-    14.5% {
-        transform: translateY(152px) translateX(-160px);
+        transform: translateY(400px) translateX(875px);
     }
 
     15% {
-        transform: translateY(1185px) translateX(-318px);
-    }
-
-    15.5% {
-        transform: translateY(-1025px) translateX(41px);
-    }
-
-    16% {
-        transform: translateY(-1020px) translateX(-74px);
-    }
-
-    16.5% {
-        transform: translateY(572px) translateX(366px);
-    }
-
-    17% {
-        transform: translateY(-358px) translateX(-91px);
-    }
-
-    17.5% {
-        transform: translateY(-1054px) translateX(267px);
-    }
-
-    18% {
-        transform: translateY(860px) translateX(292px);
-    }
-
-    18.5% {
-        transform: translateY(727px) translateX(-388px);
-    }
-
-    19% {
-        transform: translateY(1010px) translateX(54px);
-    }
-
-    19.5% {
-        transform: translateY(96px) translateX(249px);
+        transform: translateY(-250px) translateX(-290px);
     }
 
     20% {
-        transform: translateY(-347px) translateX(-377px);
-    }
-
-    20.5% {
-        transform: translateY(833px) translateX(-119px);
-    }
-
-    21% {
-        transform: translateY(342px) translateX(176px);
-    }
-
-    21.5% {
-        transform: translateY(1170px) translateX(590px);
-    }
-
-    22% {
-        transform: translateY(38px) translateX(-538px);
-    }
-
-    22.5% {
-        transform: translateY(-427px) translateX(375px);
-    }
-
-    23% {
-        transform: translateY(-330px) translateX(-387px);
-    }
-
-    23.5% {
-        transform: translateY(1072px) translateX(174px);
-    }
-
-    24% {
-        transform: translateY(18px) translateX(491px);
-    }
-
-    24.5% {
-        transform: translateY(-426px) translateX(-413px);
+        transform: translateY(400px) translateX(875px);
     }
 
     25% {
-        transform: translateY(-597px) translateX(-440px);
-    }
-
-    25.5% {
-        transform: translateY(-671px) translateX(-109px);
-    }
-
-    26% {
-        transform: translateY(222px) translateX(78px);
-    }
-
-    26.5% {
-        transform: translateY(206px) translateX(-578px);
-    }
-
-    27% {
-        transform: translateY(-292px) translateX(242px);
-    }
-
-    27.5% {
-        transform: translateY(-484px) translateX(-376px);
-    }
-
-    28% {
-        transform: translateY(-805px) translateX(171px);
-    }
-
-    28.5% {
-        transform: translateY(248px) translateX(-501px);
-    }
-
-    29% {
-        transform: translateY(-1175px) translateX(411px);
-    }
-
-    29.5% {
-        transform: translateY(232px) translateX(124px);
+        transform: translateY(-200px) translateX(-320px);
     }
 
     30% {
-        transform: translateY(987px) translateX(-216px);
-    }
-
-    30.5% {
-        transform: translateY(-390px) translateX(58px);
-    }
-
-    31% {
-        transform: translateY(-614px) translateX(189px);
-    }
-
-    31.5% {
-        transform: translateY(159px) translateX(318px);
-    }
-
-    32% {
-        transform: translateY(-63px) translateX(219px);
-    }
-
-    32.5% {
-        transform: translateY(-1042px) translateX(-408px);
-    }
-
-    33% {
-        transform: translateY(170px) translateX(-41px);
-    }
-
-    33.5% {
-        transform: translateY(1125px) translateX(-300px);
-    }
-
-    34% {
-        transform: translateY(-419px) translateX(-530px);
-    }
-
-    34.5% {
-        transform: translateY(-191px) translateX(271px);
+        transform: translateY(400px) translateX(875px);
     }
 
     35% {
-        transform: translateY(-293px) translateX(-48px);
-    }
-
-    35.5% {
-        transform: translateY(-428px) translateX(-361px);
-    }
-
-    36% {
-        transform: translateY(-195px) translateX(388px);
-    }
-
-    36.5% {
-        transform: translateY(504px) translateX(547px);
-    }
-
-    37% {
-        transform: translateY(-151px) translateX(-8px);
-    }
-
-    37.5% {
-        transform: translateY(1128px) translateX(407px);
-    }
-
-    38% {
-        transform: translateY(1013px) translateX(-156px);
-    }
-
-    38.5% {
-        transform: translateY(1189px) translateX(556px);
-    }
-
-    39% {
-        transform: translateY(-973px) translateX(27px);
-    }
-
-    39.5% {
-        transform: translateY(375px) translateX(193px);
+        transform: translateY(-150px) translateX(-550px);
     }
 
     40% {
-        transform: translateY(635px) translateX(585px);
-    }
-
-    40.5% {
-        transform: translateY(-496px) translateX(-163px);
-    }
-
-    41% {
-        transform: translateY(428px) translateX(349px);
-    }
-
-    41.5% {
-        transform: translateY(1011px) translateX(-19px);
-    }
-
-    42% {
-        transform: translateY(-1169px) translateX(492px);
-    }
-
-    42.5% {
-        transform: translateY(41px) translateX(-295px);
-    }
-
-    43% {
-        transform: translateY(770px) translateX(-496px);
-    }
-
-    43.5% {
-        transform: translateY(-47px) translateX(-506px);
-    }
-
-    44% {
-        transform: translateY(-300px) translateX(226px);
-    }
-
-    44.5% {
-        transform: translateY(683px) translateX(352px);
+        transform: translateY(400px) translateX(227px);
     }
 
     45% {
-        transform: translateY(-287px) translateX(101px);
-    }
-
-    45.5% {
-        transform: translateY(-1200px) translateX(0px);
-    }
-
-    46% {
-        transform: translateY(-946px) translateX(-120px);
-    }
-
-    46.5% {
-        transform: translateY(1174px) translateX(-212px);
-    }
-
-    47% {
-        transform: translateY(989px) translateX(-518px);
-    }
-
-    47.5% {
-        transform: translateY(-286px) translateX(-140px);
-    }
-
-    48% {
-        transform: translateY(135px) translateX(199px);
-    }
-
-    48.5% {
-        transform: translateY(-799px) translateX(-325px);
-    }
-
-    49% {
-        transform: translateY(678px) translateX(-527px);
-    }
-
-    49.5% {
-        transform: translateY(1003px) translateX(-400px);
+        transform: translateY(-400px) translateX(-550px);
     }
 
     50% {
-        transform: translateY(-24px) translateX(-243px);
-    }
-
-    50.5% {
-        transform: translateY(564px) translateX(344px);
-    }
-
-    51% {
-        transform: translateY(-393px) translateX(-340px);
-    }
-
-    51.5% {
-        transform: translateY(-58px) translateX(-28px);
-    }
-
-    52% {
-        transform: translateY(-1021px) translateX(91px);
-    }
-
-    52.5% {
-        transform: translateY(-791px) translateX(84px);
-    }
-
-    53% {
-        transform: translateY(962px) translateX(-532px);
-    }
-
-    53.5% {
-        transform: translateY(18px) translateX(-148px);
-    }
-
-    54% {
-        transform: translateY(1193px) translateX(361px);
-    }
-
-    54.5% {
-        transform: translateY(-217px) translateX(106px);
+        transform: translateY(400px) translateX(555px);
     }
 
     55% {
-        transform: translateY(-546px) translateX(-178px);
-    }
-
-    55.5% {
-        transform: translateY(346px) translateX(66px);
-    }
-
-    56% {
-        transform: translateY(-268px) translateX(-527px);
-    }
-
-    56.5% {
-        transform: translateY(-1159px) translateX(-107px);
-    }
-
-    57% {
-        transform: translateY(-1200px) translateX(600px);
-    }
-
-    57.5% {
-        transform: translateY(86px) translateX(365px);
-    }
-
-    58% {
-        transform: translateY(511px) translateX(-195px);
-    }
-
-    58.5% {
-        transform: translateY(985px) translateX(-505px);
-    }
-
-    59% {
-        transform: translateY(-1215px) translateX(-224px);
-    }
-
-    59.5% {
-        transform: translateY(827px) translateX(-41px);
+        transform: translateY(-350px) translateX(131px);
     }
 
     60% {
-        transform: translateY(-442px) translateX(505px);
-    }
-
-    60.5% {
-        transform: translateY(-1028px) translateX(-139px);
-    }
-
-    61% {
-        transform: translateY(83px) translateX(116px);
-    }
-
-    61.5% {
-        transform: translateY(-667px) translateX(69px);
-    }
-
-    62% {
-        transform: translateY(794px) translateX(-38px);
-    }
-
-    62.5% {
-        transform: translateY(673px) translateX(267px);
-    }
-
-    63% {
-        transform: translateY(-453px) translateX(-516px);
-    }
-
-    63.5% {
-        transform: translateY(-852px) translateX(165px);
-    }
-
-    64% {
-        transform: translateY(-351px) translateX(582px);
-    }
-
-    64.5% {
-        transform: translateY(978px) translateX(512px);
+        transform: translateY(-400px) translateX(-550px);
     }
 
     65% {
-        transform: translateY(-618px) translateX(385px);
-    }
-
-    65.5% {
-        transform: translateY(763px) translateX(510px);
-    }
-
-    66% {
-        transform: translateY(228px) translateX(176px);
-    }
-
-    66.5% {
-        transform: translateY(-29px) translateX(184px);
-    }
-
-    67% {
-        transform: translateY(554px) translateX(-16px);
-    }
-
-    67.5% {
-        transform: translateY(-991px) translateX(102px);
-    }
-
-    68% {
-        transform: translateY(215px) translateX(-86px);
-    }
-
-    68.5% {
-        transform: translateY(398px) translateX(319px);
-    }
-
-    69% {
-        transform: translateY(1154px) translateX(-412px);
-    }
-
-    69.5% {
-        transform: translateY(-13px) translateX(53px);
+        transform: translateY(400px) translateX(-320px);
     }
 
     70% {
-        transform: translateY(263px) translateX(479px);
-    }
-
-    70.5% {
-        transform: translateY(-566px) translateX(-51px);
-    }
-
-    71% {
-        transform: translateY(1084px) translateX(-437px);
-    }
-
-    71.5% {
-        transform: translateY(-981px) translateX(144px);
-    }
-
-    72% {
-        transform: translateY(827px) translateX(51px);
-    }
-
-    72.5% {
-        transform: translateY(-295px) translateX(167px);
-    }
-
-    73% {
-        transform: translateY(238px) translateX(-250px);
-    }
-
-    73.5% {
-        transform: translateY(482px) translateX(187px);
-    }
-
-    74% {
-        transform: translateY(440px) translateX(367px);
-    }
-
-    74.5% {
-        transform: translateY(-718px) translateX(-10px);
+        transform: translateY(-300px) translateX(66px);
     }
 
     75% {
-        transform: translateY(-731px) translateX(73px);
-    }
-
-    75.5% {
-        transform: translateY(-1014px) translateX(253px);
-    }
-
-    76% {
-        transform: translateY(86px) translateX(35px);
-    }
-
-    76.5% {
-        transform: translateY(725px) translateX(356px);
-    }
-
-    77% {
-        transform: translateY(1025px) translateX(365px);
-    }
-
-    77.5% {
-        transform: translateY(-338px) translateX(-341px);
-    }
-
-    78% {
-        transform: translateY(-670px) translateX(-173px);
-    }
-
-    78.5% {
-        transform: translateY(-877px) translateX(-444px);
-    }
-
-    79% {
-        transform: translateY(-831px) translateX(-124px);
-    }
-
-    79.5% {
-        transform: translateY(-113px) translateX(383px);
+        transform: translateY(-400px) translateX(-290px);
     }
 
     80% {
-        transform: translateY(-22px) translateX(286px);
-    }
-
-    80.5% {
-        transform: translateY(248px) translateX(-598px);
-    }
-
-    81% {
-        transform: translateY(-548px) translateX(-34px);
-    }
-
-    81.5% {
-        transform: translateY(-973px) translateX(-225px);
-    }
-
-    82% {
-        transform: translateY(887px) translateX(-564px);
-    }
-
-    82.5% {
-        transform: translateY(-70px) translateX(-444px);
-    }
-
-    83% {
-        transform: translateY(-341px) translateX(-10px);
-    }
-
-    83.5% {
-        transform: translateY(431px) translateX(-587px);
-    }
-
-    84% {
-        transform: translateY(-280px) translateX(362px);
-    }
-
-    84.5% {
-        transform: translateY(-670px) translateX(470px);
+        transform: translateY(400px) translateX(375px);
     }
 
     85% {
-        transform: translateY(825px) translateX(-417px);
-    }
-
-    85.5% {
-        transform: translateY(-77px) translateX(273px);
-    }
-
-    86% {
-        transform: translateY(-1071px) translateX(-50px);
-    }
-
-    86.5% {
-        transform: translateY(485px) translateX(60px);
-    }
-
-    87% {
-        transform: translateY(84px) translateX(541px);
-    }
-
-    87.5% {
-        transform: translateY(706px) translateX(-237px);
-    }
-
-    88% {
-        transform: translateY(72px) translateX(-107px);
-    }
-
-    88.5% {
-        transform: translateY(900px) translateX(86px);
-    }
-
-    89% {
-        transform: translateY(321px) translateX(-248px);
-    }
-
-    89.5% {
-        transform: translateY(1018px) translateX(53px);
+        transform: translateY(-400px) translateX(414px);
     }
 
     90% {
-        transform: translateY(378px) translateX(275px);
-    }
-
-    90.5% {
-        transform: translateY(-926px) translateX(564px);
-    }
-
-    91% {
-        transform: translateY(-282px) translateX(181px);
-    }
-
-    91.5% {
-        transform: translateY(-738px) translateX(-371px);
-    }
-
-    92% {
-        transform: translateY(614px) translateX(-379px);
-    }
-
-    92.5% {
-        transform: translateY(-540px) translateX(478px);
-    }
-
-    93% {
-        transform: translateY(741px) translateX(-116px);
-    }
-
-    93.5% {
-        transform: translateY(-844px) translateX(95px);
-    }
-
-    94% {
-        transform: translateY(119px) translateX(-437px);
-    }
-
-    94.5% {
-        transform: translateY(830px) translateX(348px);
+        transform: translateY(400px) translateX(-95px);
     }
 
     95% {
-        transform: translateY(-409px) translateX(303px);
-    }
-
-    95.5% {
-        transform: translateY(-53px) translateX(458px);
-    }
-
-    96% {
-        transform: translateY(-858px) translateX(-585px);
-    }
-
-    96.5% {
-        transform: translateY(413px) translateX(-362px);
-    }
-
-    97% {
-        transform: translateY(617px) translateX(-450px);
-    }
-
-    97.5% {
-        transform: translateY(966px) translateX(247px);
-    }
-
-    98% {
-        transform: translateY(554px) translateX(-167px);
-    }
-
-    98.5% {
-        transform: translateY(940px) translateX(-287px);
-    }
-
-    99% {
-        transform: translateY(-318px) translateX(484px);
-    }
-
-    99.5% {
-        transform: translateY(78px) translateX(80px);
+        transform: translateY(0px) translateX(-123px);
     }
 
     100% {
-        transform: translateY(764px) translateX(-52px);
+        transform: translateY(400px) translateX(40px);
+    }
+} */
+
+@keyframes flyingAnimation2 {
+    0% {
+        transform: translateY(400px) translateX(-550px);
+    }
+
+    5% {
+        transform: translateY(-400px) translateX(875px);
+    }
+
+    10% {
+        transform: translateY(203px) translateX(504px);
+    }
+
+    15% {
+        transform: translateY(-29px) translateX(-303px);
+    }
+
+    20% {
+        transform: translateY(-137px) translateX(190px);
+    }
+
+    25% {
+        transform: translateY(-191px) translateX(194px);
+    }
+
+    30% {
+        transform: translateY(186px) translateX(-86px);
+    }
+
+    35% {
+        transform: translateY(-112px) translateX(-361px);
+    }
+
+    40% {
+        transform: translateY(-319px) translateX(70px);
+    }
+
+    45% {
+        transform: translateY(33px) translateX(-277px);
+    }
+
+    50% {
+        transform: translateY(164px) translateX(603px);
+    }
+
+    55% {
+        transform: translateY(29px) translateX(10px);
+    }
+
+    60% {
+        transform: translateY(-400px) translateX(-550px);
+    }
+
+    65% {
+        transform: translateY(-43px) translateX(-144px);
+    }
+
+    70% {
+        transform: translateY(91px) translateX(256px);
+    }
+
+    75% {
+        transform: translateY(-231px) translateX(-14px);
+    }
+
+    80% {
+        transform: translateY(320px) translateX(278px);
+    }
+
+    85% {
+        transform: translateY(244px) translateX(376px);
+    }
+
+    90% {
+        transform: translateY(-400px) translateX(-550px);
+    }
+
+    95% {
+        transform: translateY(400px) translateX(-123px);
+    }
+
+    100% {
+        transform: translateY(400px) translateX(875px);
+    }
+}
+
+@keyframes flyingAnimation3 {
+    0% {
+        transform: translateY(400px) translateX(875px);
+    }
+
+    5% {
+        transform: translateY(223px) translateX(-416px);
+    }
+
+    10% {
+        transform: translateY(-159px) translateX(641px);
+    }
+
+    15% {
+        transform: translateY(-307px) translateX(-539px);
+    }
+
+    20% {
+        transform: translateY(38px) translateX(875px);
+    }
+
+    25% {
+        transform: translateY(-150px) translateX(875px);
+    }
+
+    30% {
+        transform: translateY(265px) translateX(-307px);
+    }
+
+    35% {
+        transform: translateY(-256px) translateX(-550px);
+    }
+
+    40% {
+        transform: translateY(-400px) translateX(204px);
+    }
+
+    45% {
+        transform: translateY(400px) translateX(-550px);
+    }
+
+    50% {
+        transform: translateY(106px) translateX(875px);
+    }
+
+    55% {
+        transform: translateY(23px) translateX(41px);
+    }
+
+    60% {
+        transform: translateY(-400px) translateX(-550px);
+    }
+
+    65% {
+        transform: translateY(-35px) translateX(-486px);
+    }
+
+    70% {
+        transform: translateY(158px) translateX(66px);
+    }
+
+    75% {
+        transform: translateY(-240px) translateX(-28px);
+    }
+
+    80% {
+        transform: translateY(235px) translateX(671px);
+    }
+
+    85% {
+        transform: translateY(400px) translateX(444px);
+    }
+
+    90% {
+        transform: translateY(-400px) translateX(-95px);
+    }
+
+    95% {
+        transform: translateY(320px) translateX(-123px);
+    }
+
+    100% {
+        transform: translateY(70px) translateX(875px);
+    }
+}
+
+@keyframes flyingAnimation4 {
+    0% {
+        transform: translateY(400px) translateX(875px);
+    }
+
+    5% {
+        transform: translateY(223px) translateX(-416px);
+    }
+
+    10% {
+        transform: translateY(-159px) translateX(641px);
+    }
+
+    15% {
+        transform: translateY(-400px) translateX(-262px);
+    }
+
+    20% {
+        transform: translateY(-61px) translateX(875px);
+    }
+
+    25% {
+        transform: translateY(29px) translateX(875px);
+    }
+
+    30% {
+        transform: translateY(400px) translateX(-307px);
+    }
+
+    35% {
+        transform: translateY(-160px) translateX(-550px);
+    }
+
+    40% {
+        transform: translateY(-400px) translateX(204px);
+    }
+
+    45% {
+        transform: translateY(136px) translateX(-550px);
+    }
+
+    50% {
+        transform: translateY(400px) translateX(875px);
+    }
+
+    55% {
+        transform: translateY(195px) translateX(131px);
+    }
+
+    60% {
+        transform: translateY(-400px) translateX(-550px);
+    }
+
+    65% {
+        transform: translateY(-47px) translateX(-570px);
+    }
+
+    70% {
+        transform: translateY(248px) translateX(66px);
+    }
+
+    75% {
+        transform: translateY(-240px) translateX(-28px);
+    }
+
+    80% {
+        transform: translateY(235px) translateX(671px);
+    }
+
+    85% {
+        transform: translateY(400px) translateX(444px);
+    }
+
+    90% {
+        transform: translateY(-400px) translateX(-95px);
+    }
+
+    95% {
+        transform: translateY(320px) translateX(-123px);
+    }
+
+    100% {
+        transform: translateY(70px) translateX(875px);
+    }
+}
+
+@keyframes flyingAnimation5 {
+    0% {
+        transform: translateY(-356px) translateX(-550px);
+    }
+
+    5% {
+        transform: translateY(400px) translateX(875px);
+    }
+
+    10% {
+        transform: translateY(-400px) translateX(463px);
+    }
+
+    15% {
+        transform: translateY(265px) translateX(-394px);
+    }
+
+    20% {
+        transform: translateY(38px) translateX(875px);
+    }
+
+    25% {
+        transform: translateY(-400px) translateX(595px);
+    }
+
+    30% {
+        transform: translateY(400px) translateX(-206px);
+    }
+
+    35% {
+        transform: translateY(-285px) translateX(-550px);
+    }
+
+    40% {
+        transform: translateY(-316px) translateX(227px);
+    }
+
+    45% {
+        transform: translateY(400px) translateX(-550px);
+    }
+
+    50% {
+        transform: translateY(-400px) translateX(555px);
+    }
+
+    55% {
+        transform: translateY(-272px) translateX(131px);
+    }
+
+    60% {
+        transform: translateY(400px) translateX(-126px);
+    }
+
+    65% {
+        transform: translateY(400px) translateX(-570px);
+    }
+
+    70% {
+        transform: translateY(400px) translateX(66px);
+    }
+
+    75% {
+        transform: translateY(-240px) translateX(-28px);
+    }
+
+    80% {
+        transform: translateY(-400px) translateX(375px);
+    }
+
+    85% {
+        transform: translateY(308px) translateX(414px);
+    }
+
+    90% {
+        transform: translateY(-400px) translateX(-95px);
+    }
+
+    95% {
+        transform: translateY(70px) translateX(-123px);
+    }
+
+    100% {
+        transform: translateY(400px) translateX(875px);
+    }
+}
+
+@keyframes flyingAnimation6 {
+    0% {
+        transform: translateY(-400px) translateX(875px);
+    }
+
+    5% {
+        transform: translateY(-212px) translateX(-552px);
+    }
+
+    10% {
+        transform: translateY(400px) translateX(466px);
+    }
+
+    15% {
+        transform: translateY(313px) translateX(-550px);
+    }
+
+    20% {
+        transform: translateY(400px) translateX(875px);
+    }
+
+    25% {
+        transform: translateY(-147px) translateX(875px);
+    }
+
+    30% {
+        transform: translateY(-400px) translateX(-206px);
+    }
+
+    35% {
+        transform: translateY(400px) translateX(-550px);
+    }
+
+    40% {
+        transform: translateY(-378px) translateX(227px);
+    }
+
+    45% {
+        transform: translateY(400px) translateX(-550px);
+    }
+
+    50% {
+        transform: translateY(-400px) translateX(555px);
+    }
+
+    55% {
+        transform: translateY(-259px) translateX(131px);
+    }
+
+    60% {
+        transform: translateY(400px) translateX(-126px);
+    }
+
+    65% {
+        transform: translateY(400px) translateX(-570px);
+    }
+
+    70% {
+        transform: translateY(400px) translateX(66px);
+    }
+
+    75% {
+        transform: translateY(-240px) translateX(-28px);
+    }
+
+    80% {
+        transform: translateY(-400px) translateX(375px);
+    }
+
+    85% {
+        transform: translateY(308px) translateX(414px);
+    }
+
+    90% {
+        transform: translateY(-400px) translateX(-95px);
+    }
+
+    95% {
+        transform: translateY(400px) translateX(-123px);
+    }
+
+    100% {
+        transform: translateY(400px) translateX(875px);
+    }
+}
+
+@keyframes flyingAnimation7 {
+    0% {
+        transform: translateY(400px) translateX(-550px);
+    }
+
+    5% {
+        transform: translateY(-117px) translateX(875px);
+    }
+
+    10% {
+        transform: translateY(400px) translateX(141px);
+    }
+
+    15% {
+        transform: translateY(400px) translateX(-394px);
+    }
+
+    20% {
+        transform: translateY(400px) translateX(875px);
+    }
+
+    25% {
+        transform: translateY(-400px) translateX(595px);
+    }
+
+    30% {
+        transform: translateY(-400px) translateX(-206px);
+    }
+
+    35% {
+        transform: translateY(400px) translateX(-550px);
+    }
+
+    40% {
+        transform: translateY(-169px) translateX(227px);
+    }
+
+    45% {
+        transform: translateY(400px) translateX(-550px);
+    }
+
+    50% {
+        transform: translateY(-400px) translateX(555px);
+    }
+
+    55% {
+        transform: translateY(262px) translateX(131px);
+    }
+
+    60% {
+        transform: translateY(-400px) translateX(-126px);
+    }
+
+    65% {
+        transform: translateY(400px) translateX(-570px);
+    }
+
+    70% {
+        transform: translateY(-400px) translateX(66px);
+    }
+
+    75% {
+        transform: translateY(-400px) translateX(-28px);
+    }
+
+    80% {
+        transform: translateY(400px) translateX(375px);
+    }
+
+    85% {
+        transform: translateY(400px) translateX(414px);
+    }
+
+    90% {
+        transform: translateY(-400px) translateX(-95px);
+    }
+
+    95% {
+        transform: translateY(308px) translateX(-123px);
+    }
+
+    100% {
+        transform: translateY(-400px) translateX(875px);
     }
 }
