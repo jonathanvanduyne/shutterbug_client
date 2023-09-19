@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./darkestMode.css";
-import Joker from "./joker-chibi-PhotoRoom.png-PhotoRoom.png"
+import Joker from "./Joker.png";
+import MrFreeze from "./MrFreeze.png";
 
 export const DarkestModeModal = ({ triggerDarkestMode, setTriggerDarkestMode }) => {
     const [isFlying, setIsFlying] = useState(true);
@@ -16,10 +17,10 @@ export const DarkestModeModal = ({ triggerDarkestMode, setTriggerDarkestMode }) 
         }
     };
 
-    const flyButton = () => {
+    const flyButton = (buttonId) => {
         if (!isFlying) {
             setIsFlying(true);
-            const button = document.getElementById("flying-button");
+            const button = document.getElementById(buttonId);
             const screenWidth = window.innerWidth;
             const screenHeight = window.innerHeight;
 
@@ -63,32 +64,35 @@ export const DarkestModeModal = ({ triggerDarkestMode, setTriggerDarkestMode }) 
         }
     };
 
-
-
     useEffect(() => {
-        // Start flying when the component mounts
-        flyButton();
+        // Start flying when the component mounts for both buttons
+        flyButton("joker-button");
+        flyButton("mr-freeze-button");
     }, []);
 
     return (
         <div className="darkest-mode-modal-container">
             <h4 className="darkest-mode-modal-title animated fadeInTitle">Darkest Mode</h4>
-            <h5 className="darkest-mode-modal-subtitle animated fadeInSubtitle delay-2s">The Night is darkest just before the dawn. Help save the city by catching a villain</h5>
+            <h5 className="darkest-mode-modal-subtitle animated fadeInSubtitle delay-2s">
+                The Night is darkest just before the dawn. Help save the city by catching a villain
+            </h5>
 
             <button
                 className={`flying-button ${isFlying ? "flying" : ""}`}
-                id="flying-button"
+                id="joker-button"
                 onClick={() => setTriggerDarkestMode()}
             >
                 <img src={Joker} alt="Joker" />
             </button>
+
             <button
-                className={`flying-button ${isFlying ? "flying" : ""}`}
-                id="flying-button"
+                className={`flying-button2 ${isFlying ? "flying" : ""}`}
+                id="mr-freeze-button"
                 onClick={() => setTriggerDarkestMode()}
             >
-                <img src={Joker} alt="Joker" />
+                <img src={MrFreeze} alt="Mr. Freeze" />
             </button>
+
             <button className="close-darkest-mode-button" onClick={() => setTriggerDarkestMode()}>
                 Close Darkest Mode #GiveUp
             </button>

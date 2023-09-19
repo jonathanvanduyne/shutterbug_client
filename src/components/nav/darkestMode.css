@@ -48,10 +48,6 @@
         opacity: 1;
     }
 }
-
-
-/* Rest of your CSS styles */
-
 /* Style the buttons */
 .flying-button {
     /* White background for buttons */
@@ -114,6 +110,49 @@
     /* Ensure it's above other content */
 }
 
+/* Apply the flying-button class to the Mr. Freeze button */
+.flying-button2 {
+    /* White background for buttons */
+    color: #000;
+    /* Black text color */
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+    background: none;
+    /* Remove the background */
+    border: none;
+    /* Remove the border */
+    outline: none;
+    /* Remove the outline */
+    padding: 0;
+    /* Remove padding if needed */
+}
+
+/* Hover effect for the Mr. Freeze button */
+.flying-button2:hover {
+    background-color: #000;
+    /* Black background on hover */
+    color: #fff;
+    /* White text color on hover */
+}
+
+/* Style the flying button */
+.flying-button2.flying {
+    position: absolute;
+    animation: flyingAnimation 300s linear infinite;
+}
+
+/* Style the image inside the Mr. Freeze button */
+.flying-button2 img {
+    display: flex;
+    /* Ensure the image is a block element */
+    max-width: 15%;
+    /* Stretch to fill the button */
+    height: auto;
+    /* Preserve aspect ratio */
+}
+
 /* Hover effect for the close button */
 .close-darkest-mode-button:hover {
     background-color: white;
@@ -121,6 +160,7 @@
     color: black;
     /* Text color on hover */
 }
+
 
 @keyframes flyingAnimation {
     0% {
