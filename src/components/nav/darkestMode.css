@@ -56,7 +56,7 @@
     /* Black text color */
     border: none;
     cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
+
     background: none;
     /* Remove the background */
     border: none;
@@ -66,6 +66,12 @@
     padding: 0;
     overflow: hidden;
     /* Remove padding if needed */
+    display: flex;
+    /* Ensure the image is a block element */
+    max-width: 5%;
+    /* Stretch to fill the button */
+    height: auto;
+    /* Preserve aspect ratio */
 }
 
 /* Hover effect for buttons */
@@ -80,16 +86,6 @@
 .flying-button.flying {
     position: absolute;
     animation: flyingAnimation 16s linear infinite;
-}
-
-/* Style the image inside the button */
-.flying-button img {
-    display: block;
-    /* Ensure the image is a block element */
-    max-width: 15%;
-    /* Stretch to fill the button */
-    height: auto;
-    /* Preserve aspect ratio */
 }
 
 /* Style the close button */
@@ -128,6 +124,12 @@
     /* Remove the outline */
     padding: 0;
     /* Remove padding if needed */
+    display: block;
+    /* Ensure the image is a block element */
+    max-width: 10%;
+    /* Stretch to fill the button */
+    height: auto;
+    /* Preserve aspect ratio */
 }
 
 /* Hover effect for the Mr. Freeze button */
@@ -142,16 +144,6 @@
 .flying-button2.flying {
     position: absolute;
     animation: flyingAnimation2 15s linear infinite;
-}
-
-/* Style the image inside the Mr. Freeze button */
-.flying-button2 img {
-    display: block;
-    /* Ensure the image is a block element */
-    max-width: 20%;
-    /* Stretch to fill the button */
-    height: auto;
-    /* Preserve aspect ratio */
 }
 
 /* Style the flying-button3 */
@@ -171,6 +163,12 @@
     /* Remove the outline */
     padding: 0;
     /* Remove padding if needed */
+    display: block;
+    /* Ensure the image is a block element */
+    max-width: 20%;
+    /* Stretch to fill the button */
+    height: auto;
+    /* Preserve aspect ratio */
 }
 
 /* Hover effect for flying-button3 */
@@ -185,16 +183,6 @@
 .flying-button3.flying {
     position: absolute;
     animation: flyingAnimation3 14s linear infinite;
-}
-
-/* Style the image inside flying-button3 */
-.flying-button3 img {
-    display: block;
-    /* Ensure the image is a block element */
-    max-width: 40%;
-    /* Stretch to fill the button */
-    height: auto;
-    /* Preserve aspect ratio */
 }
 
 /* Apply the flying-button class to the Riddler button */
@@ -214,6 +202,12 @@
     /* Remove the outline */
     padding: 0;
     /* Remove padding if needed */
+    display: block;
+    /* Ensure the image is a block element */
+    max-width: 20%;
+    /* Stretch to fill the button */
+    height: auto;
+    /* Preserve aspect ratio */
 }
 
 /* Hover effect for the Riddler button */
@@ -228,16 +222,6 @@
 .flying-button4.flying {
     position: absolute;
     animation: flyingAnimation4 13s linear infinite;
-}
-
-/* Style the image inside the Riddler button */
-.flying-button4 img {
-    display: block;
-    /* Ensure the image is a block element */
-    max-width: 40%;
-    /* Stretch to fill the button */
-    height: auto;
-    /* Preserve aspect ratio */
 }
 
 /* Apply the flying-button class to the Poison Ivy button */
@@ -257,6 +241,12 @@
     /* Remove the outline */
     padding: 0;
     /* Remove padding if needed */
+    display: block;
+    /* Ensure the image is a block element */
+    max-width: 15%;
+    /* Stretch to fill the button */
+    height: auto;
+    /* Preserve aspect ratio */
 }
 
 /* Hover effect for the Poison Ivy button */
@@ -271,16 +261,6 @@
 .flying-button5.flying {
     position: absolute;
     animation: flyingAnimation5 12s linear infinite;
-}
-
-/* Style the image inside the Poison Ivy button */
-.flying-button5 img {
-    display: block;
-    /* Ensure the image is a block element */
-    max-width: 25%;
-    /* Stretch to fill the button */
-    height: auto;
-    /* Preserve aspect ratio */
 }
 
 /* Apply the flying-button class to the Penguin button */
@@ -300,6 +280,12 @@
     /* Remove the outline */
     padding: 0;
     /* Remove padding if needed */
+    display: block;
+    /* Ensure the image is a block element */
+    max-width: 7%;
+    /* Stretch to fill the button */
+    height: auto;
+    /* Preserve aspect ratio */
 }
 
 /* Hover effect for the Penguin button */
@@ -314,16 +300,6 @@
 .flying-button6.flying {
     position: absolute;
     animation: flyingAnimation6 11s linear infinite;
-}
-
-/* Style the image inside the Penguin button */
-.flying-button6 img {
-    display: block;
-    /* Ensure the image is a block element */
-    max-width: 17%;
-    /* Stretch to fill the button */
-    height: auto;
-    /* Preserve aspect ratio */
 }
 
 /* Apply the flying-button class to the Harley Quinn button */
@@ -343,6 +319,12 @@
     /* Remove the outline */
     padding: 0;
     /* Remove padding if needed */
+    display: flex;
+    /* Ensure the image is a block element */
+    max-width: 15%;
+    /* Stretch to fill the button */
+    height: auto;
+    /* Preserve aspect ratio */
 }
 
 /* Hover effect for the Harley Quinn button */
@@ -359,16 +341,6 @@
     animation: flyingAnimation7 10s linear infinite;
 }
 
-/* Style the image inside the Harley Quinn button */
-.flying-button7 img {
-    display: flex;
-    /* Ensure the image is a block element */
-    max-width: 30%;
-    /* Stretch to fill the button */
-    height: auto;
-    /* Preserve aspect ratio */
-}
-
 /* Hover effect for the close button */
 .close-darkest-mode-button:hover {
     background-color: white;
@@ -377,7 +349,7 @@
     /* Text color on hover */
 }
 
-/* @keyframes flyingAnimation {
+@keyframes flyingAnimation {
     0% {
         transform: translateY(0px) translateX(0px);
     }
@@ -461,7 +433,7 @@
     100% {
         transform: translateY(400px) translateX(40px);
     }
-} */
+}
 
 @keyframes flyingAnimation2 {
     0% {
