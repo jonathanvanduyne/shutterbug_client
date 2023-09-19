@@ -19,7 +19,7 @@ export const StaffNavBar = ({ token, setToken }) => {
     };
 
     const triggerDarkestModeHandler = () => {
-        setTriggerDarkestMode(true); // Set triggerDarkestMode to true when the logo is clicked
+        setTriggerDarkestMode(!triggerDarkestMode); // Set triggerDarkestMode to true when the logo is clicked
     };
 
     return (

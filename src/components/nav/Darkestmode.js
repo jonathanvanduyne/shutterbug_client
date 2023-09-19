@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./darkestMode.css";
+import Joker from "./joker-chibi-PhotoRoom.png-PhotoRoom.png"
 
 export const DarkestModeModal = ({ triggerDarkestMode, setTriggerDarkestMode }) => {
     const [isFlying, setIsFlying] = useState(true);
@@ -18,57 +19,79 @@ export const DarkestModeModal = ({ triggerDarkestMode, setTriggerDarkestMode }) 
     const flyButton = () => {
         if (!isFlying) {
             setIsFlying(true);
-            let posX = 0;
-            let posY = 0;
-            let speedX = 5;
-            let speedY = 5;
-
+            const button = document.getElementById("flying-button");
             const screenWidth = window.innerWidth;
             const screenHeight = window.innerHeight;
 
-            const flyInterval = setInterval(() => {
-                if (posX >= screenWidth - 100 || posX <= 0) {
-                    speedX = -speedX;
-                }
-
-                if (posY >= screenHeight - 50 || posY <= 0) {
-                    speedY = -speedY;
-                }
-
-                posX += speedX;
-                posY += speedY;
-
-                const flyingButton = document.getElementById("flying-button");
-                if (flyingButton) {
-                    flyingButton.style.left = posX + "px";
-                    flyingButton.style.top = posY + "px";
-                }
-            }, 10);
-
-            const flyingButton = document.getElementById("flying-button");
-            if (flyingButton) {
-                flyingButton.addEventListener("click", () => {
-                    clearInterval(flyInterval);
-                    setIsFlying(false);
-                });
+            // Create an array of random positions within the screen boundaries
+            const positions = [];
+            for (let i = 0; i < 100; i++) {
+                const posX = Math.random() * screenWidth;
+                const posY = Math.random() * screenHeight;
+                positions.push({ posX, posY });
             }
+
+            let currentPositionIndex = 0;
+
+            const flyInterval = setInterval(() => {
+                // Get the next random position from the array
+                const { posX, posY } = positions[currentPositionIndex];
+
+                // Create keyframes for random movement
+                const keyframes = [
+                    { transform: `translate(${button.style.left || "0"}, ${button.style.top || "0"})` },
+                    { transform: `translate(${posX}px, ${posY}px)` },
+                ];
+
+                // Define animation options
+                const options = {
+                    duration: 1000, // 1 second
+                    easing: "ease-in-out",
+                    iterations: 1,
+                };
+
+                // Apply the animation
+                button.animate(keyframes, options);
+
+                // Update button position
+                button.style.left = `${posX}px`;
+                button.style.top = `${posY}px`;
+
+                // Move to the next position in the array (loop back to the beginning if needed)
+                currentPositionIndex = (currentPositionIndex + 1) % positions.length;
+            }, 100000); // Change the interval to control the speed of movement
         }
     };
 
-    const flyingButtonClassName = `flying-button ${isFlying ? "flying" : ""}`;
+
+
+    useEffect(() => {
+        // Start flying when the component mounts
+        flyButton();
+    }, []);
 
     return (
         <div className="darkest-mode-modal-container">
-            <div className="darkest-mode-modal-content">
-                <div className="darkest-mode-modal-buttons">
-                    <button className={flyingButtonClassName} id="flying-button" onClick={() => setTriggerDarkestMode(false)}>
-                        Catch Me!
-                    </button>
-                    <button className="close-darkest-mode-button" onClick={() => setTriggerDarkestMode(false)}>
-                        Close #GiveUp
-                    </button>
-                </div>
-            </div>
+            <h4 className="darkest-mode-modal-title animated fadeInTitle">Darkest Mode</h4>
+            <h5 className="darkest-mode-modal-subtitle animated fadeInSubtitle delay-2s">The Night is darkest just before the dawn. Help save the city by catching a villain</h5>
+
+            <button
+                className={`flying-button ${isFlying ? "flying" : ""}`}
+                id="flying-button"
+                onClick={() => setTriggerDarkestMode()}
+            >
+                <img src={Joker} alt="Joker" />
+            </button>
+            <button
+                className={`flying-button ${isFlying ? "flying" : ""}`}
+                id="flying-button"
+                onClick={() => setTriggerDarkestMode()}
+            >
+                <img src={Joker} alt="Joker" />
+            </button>
+            <button className="close-darkest-mode-button" onClick={() => setTriggerDarkestMode()}>
+                Close Darkest Mode #GiveUp
+            </button>
         </div>
     );
-    }
+};
