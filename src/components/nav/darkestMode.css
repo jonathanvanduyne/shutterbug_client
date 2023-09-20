@@ -23,6 +23,7 @@
     text-align: center;
     font-size: 24px;
     opacity: 0;
+    color: white;
     animation: fadeIn 2s ease-in .5s forwards;
     /* Fade in over 10 seconds with a 2-second delay */
 }
@@ -37,6 +38,7 @@
     font-size: 16px;
     opacity: 0;
     animation: fadeIn 2s ease-in 2s forwards;
+    color: white
 }
 
 @keyframes fadeIn {
@@ -122,7 +124,7 @@
 /* Style the flying button */
 .flying-button.flying {
     position: absolute;
-    animation: flyingAnimation 10s linear infinite;
+    animation: flyingAnimation 15s linear infinite;
 }
 
 /* Style the close button */
@@ -180,7 +182,7 @@
 /* Style the flying button */
 .flying-button2.flying {
     position: absolute;
-    animation: flyingAnimation2 11s linear infinite;
+    animation: flyingAnimation2 16s linear infinite;
 }
 
 /* Style the flying-button3 */
@@ -219,7 +221,7 @@
 /* Style the flying button for flying-button3 */
 .flying-button3.flying {
     position: absolute;
-    animation: flyingAnimation3 12s linear infinite;
+    animation: flyingAnimation3 17s linear infinite;
 }
 
 /* Apply the flying-button class to the Riddler button */
@@ -258,7 +260,7 @@
 /* Style the flying button for flying-button4 */
 .flying-button4.flying {
     position: absolute;
-    animation: flyingAnimation4 13s linear infinite;
+    animation: flyingAnimation4 18s linear infinite;
 }
 
 /* Apply the flying-button class to the Poison Ivy button */
@@ -297,7 +299,7 @@
 /* Style the flying button for flying-button5 */
 .flying-button5.flying {
     position: absolute;
-    animation: flyingAnimation5 14s linear infinite;
+    animation: flyingAnimation5 19s linear infinite;
 }
 
 /* Apply the flying-button class to the Penguin button */
@@ -336,7 +338,7 @@
 /* Style the flying button for flying-button6 */
 .flying-button6.flying {
     position: absolute;
-    animation: flyingAnimation6 15s linear infinite;
+    animation: flyingAnimation6 20s linear infinite;
 }
 
 /* Apply the flying-button class to the Harley Quinn button */
@@ -375,7 +377,7 @@
 /* Style the flying button for flying-button7 */
 .flying-button7.flying {
     position: absolute;
-    animation: flyingAnimation7 12s linear infinite;
+    animation: flyingAnimation7 18s linear infinite;
 }
 
 /* Hover effect for the close button */
