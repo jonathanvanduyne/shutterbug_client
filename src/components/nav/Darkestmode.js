@@ -31,6 +31,7 @@ export const DarkestModeModal = ({ triggerDarkestMode, setTriggerDarkestMode }) 
             setIsFlying(true);
         };
     }
+        
 
     const handleButtonClick = (buttonId) => {
         // Remove the clicked button from the remainingButtons array
@@ -113,11 +114,7 @@ export const DarkestModeModal = ({ triggerDarkestMode, setTriggerDarkestMode }) 
                 <div>
                     <div className="timer">{timer} seconds</div>
                     <div className="click-count">Click Count: {clickCount}</div>
-                </div>
-            )}
 
-            {showButtons && (
-                <div className="darkest-mode-buttons-container">
                     {remainingButtons.map((buttonId) => (
                         <button key={buttonId} id={buttonId} onClick={() => handleButtonClick(buttonId)}>
                             {buttonId === "joker-button" && (
@@ -159,4 +156,4 @@ export const DarkestModeModal = ({ triggerDarkestMode, setTriggerDarkestMode }) 
             </button>
         </div>
     );
-};
+}

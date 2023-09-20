@@ -39,31 +39,6 @@
     animation: fadeIn 2s ease-in 2s forwards;
 }
 
-.summary-screen {
-    position: fixed;
-    top: 50%; /* Adjust the top position as needed */
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    background-color: rgba(0, 0, 0, 0.7); /* Background color with some transparency */
-    padding: 20px;
-    border-radius: 10px;
-    color: white; /* Text color */
-    z-index: 999; /* Ensure it's above other content */
-    display: none; /* Initially hidden */
-}
-
-.summary-screen-title {
-    font-size: 24px;
-    margin-bottom: 10px;
-}
-
-/* Summary screen content styling */
-.summary-screen p {
-    font-size: 16px;
-    margin: 5px 0;
-}
-
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -97,6 +72,20 @@
     /* Click count text color */
 }
 
+/* Summary screen */
+.summary-screen {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 10px;
+    color: white;
+    z-index: 999;
+}
+
 /* Style the buttons */
 .flying-button {
     /* White background for buttons */
@@ -116,7 +105,7 @@
     /* Remove padding if needed */
     display: flex;
     /* Ensure the image is a block element */
-    max-width: 5%;
+    max-width: 7%;
     /* Stretch to fill the button */
     height: auto;
     /* Preserve aspect ratio */
@@ -133,7 +122,7 @@
 /* Style the flying button */
 .flying-button.flying {
     position: absolute;
-    animation: flyingAnimation 20s linear infinite;
+    animation: flyingAnimation 10s linear infinite;
 }
 
 /* Style the close button */
@@ -191,7 +180,7 @@
 /* Style the flying button */
 .flying-button2.flying {
     position: absolute;
-    animation: flyingAnimation2 21s linear infinite;
+    animation: flyingAnimation2 11s linear infinite;
 }
 
 /* Style the flying-button3 */
@@ -213,7 +202,7 @@
     /* Remove padding if needed */
     display: block;
     /* Ensure the image is a block element */
-    max-width: 20%;
+    max-width: 25%;
     /* Stretch to fill the button */
     height: auto;
     /* Preserve aspect ratio */
@@ -230,7 +219,7 @@
 /* Style the flying button for flying-button3 */
 .flying-button3.flying {
     position: absolute;
-    animation: flyingAnimation3 22s linear infinite;
+    animation: flyingAnimation3 12s linear infinite;
 }
 
 /* Apply the flying-button class to the Riddler button */
@@ -252,7 +241,7 @@
     /* Remove padding if needed */
     display: block;
     /* Ensure the image is a block element */
-    max-width: 20%;
+    max-width: 15%;
     /* Stretch to fill the button */
     height: auto;
     /* Preserve aspect ratio */
@@ -269,7 +258,7 @@
 /* Style the flying button for flying-button4 */
 .flying-button4.flying {
     position: absolute;
-    animation: flyingAnimation4 23s linear infinite;
+    animation: flyingAnimation4 13s linear infinite;
 }
 
 /* Apply the flying-button class to the Poison Ivy button */
@@ -308,7 +297,7 @@
 /* Style the flying button for flying-button5 */
 .flying-button5.flying {
     position: absolute;
-    animation: flyingAnimation5 24s linear infinite;
+    animation: flyingAnimation5 14s linear infinite;
 }
 
 /* Apply the flying-button class to the Penguin button */
@@ -330,7 +319,7 @@
     /* Remove padding if needed */
     display: block;
     /* Ensure the image is a block element */
-    max-width: 7%;
+    max-width: 9%;
     /* Stretch to fill the button */
     height: auto;
     /* Preserve aspect ratio */
@@ -347,7 +336,7 @@
 /* Style the flying button for flying-button6 */
 .flying-button6.flying {
     position: absolute;
-    animation: flyingAnimation6 25s linear infinite;
+    animation: flyingAnimation6 15s linear infinite;
 }
 
 /* Apply the flying-button class to the Harley Quinn button */
@@ -369,7 +358,7 @@
     /* Remove padding if needed */
     display: flex;
     /* Ensure the image is a block element */
-    max-width: 15%;
+    max-width: 17%;
     /* Stretch to fill the button */
     height: auto;
     /* Preserve aspect ratio */
@@ -386,7 +375,7 @@
 /* Style the flying button for flying-button7 */
 .flying-button7.flying {
     position: absolute;
-    animation: flyingAnimation7 26s linear infinite;
+    animation: flyingAnimation7 12s linear infinite;
 }
 
 /* Hover effect for the close button */
@@ -403,257 +392,261 @@
     }
 
     5% {
-        transform: translateY(-450px) translateX(-550px);
+        transform: translateY(400px) translateX(-725px);
     }
 
     10% {
-        transform: translateY(400px) translateX(875px);
+        transform: translateY(-400px) translateX(725px);
     }
 
     15% {
-        transform: translateY(-250px) translateX(-290px);
+        transform: translateY(-389px) translateX(-472px);
     }
 
     20% {
-        transform: translateY(-500px) translateX(875px);
+        transform: translateY(85px) translateX(638px);
     }
 
     25% {
-        transform: translateY(-200px) translateX(-320px);
+        transform: translateY(-142px) translateX(598px);
     }
 
     30% {
-        transform: translateY(400px) translateX(875px);
+        transform: translateY(368px) translateX(-320px);
     }
 
     35% {
-        transform: translateY(-150px) translateX(-550px);
+        transform: translateY(-355px) translateX(-540px);
     }
 
     40% {
-        transform: translateY(400px) translateX(227px);
+        transform: translateY(-171px) translateX(490px);
     }
 
     45% {
-        transform: translateY(-400px) translateX(-550px);
+        transform: translateY(231px) translateX(-725px);
     }
 
     50% {
-        transform: translateY(400px) translateX(555px);
+        transform: translateY(400px) translateX(725px);
     }
 
     55% {
-        transform: translateY(-350px) translateX(131px);
+        transform: translateY(-74px) translateX(-532px);
     }
 
     60% {
-        transform: translateY(-400px) translateX(-550px);
+        transform: translateY(-397px) translateX(-375px);
     }
 
     65% {
-        transform: translateY(400px) translateX(-320px);
+        transform: translateY(174px) translateX(-725px);
     }
 
     70% {
-        transform: translateY(-300px) translateX(66px);
+        transform: translateY(400px) translateX(562px);
     }
 
     75% {
-        transform: translateY(-400px) translateX(-290px);
+        transform: translateY(-350px) translateX(-302px);
     }
 
     80% {
-        transform: translateY(400px) translateX(375px);
+        transform: translateY(349px) translateX(420px);
     }
 
     85% {
-        transform: translateY(-400px) translateX(414px);
+        transform: translateY(161px) translateX(305px);
     }
 
     90% {
-        transform: translateY(400px) translateX(-95px);
+        transform: translateY(-400px) translateX(-725px);
     }
 
     95% {
-        transform: translateY(0px) translateX(-123px);
+        transform: translateY(-200px) translateX(-725px);
     }
 
     100% {
-        transform: translateY(400px) translateX(40px);
+        transform: translateY(400px) translateX(725px);
     }
 }
+
 
 @keyframes flyingAnimation2 {
     0% {
-        transform: translateY(400px) translateX(-550px);
+        transform: translateY(0px) translateX(0px);
     }
 
     5% {
-        transform: translateY(-400px) translateX(875px);
+        transform: translateY(400px) translateX(-725px);
     }
 
     10% {
-        transform: translateY(203px) translateX(504px);
+        transform: translateY(-159px) translateX(725px);
     }
 
     15% {
-        transform: translateY(-29px) translateX(-303px);
+        transform: translateY(-392px) translateX(347px);
     }
 
     20% {
-        transform: translateY(-137px) translateX(190px);
+        transform: translateY(154px) translateX(-520px);
     }
 
     25% {
-        transform: translateY(-191px) translateX(194px);
+        transform: translateY(-275px) translateX(189px);
     }
 
     30% {
-        transform: translateY(186px) translateX(-86px);
+        transform: translateY(365px) translateX(-506px);
     }
 
     35% {
-        transform: translateY(-112px) translateX(-361px);
+        transform: translateY(-198px) translateX(652px);
     }
 
     40% {
-        transform: translateY(-319px) translateX(70px);
+        transform: translateY(-150px) translateX(126px);
     }
 
     45% {
-        transform: translateY(33px) translateX(-277px);
+        transform: translateY(-400px) translateX(-725px);
     }
 
     50% {
-        transform: translateY(164px) translateX(603px);
+        transform: translateY(400px) translateX(725px);
     }
 
     55% {
-        transform: translateY(29px) translateX(10px);
+        transform: translateY(86px) translateX(405px);
     }
 
     60% {
-        transform: translateY(-400px) translateX(-550px);
+        transform: translateY(-203px) translateX(-676px);
     }
 
     65% {
-        transform: translateY(-43px) translateX(-144px);
+        transform: translateY(-61px) translateX(-79px);
     }
 
     70% {
-        transform: translateY(91px) translateX(256px);
+        transform: translateY(283px) translateX(239px);
     }
 
     75% {
-        transform: translateY(-231px) translateX(-14px);
+        transform: translateY(-179px) translateX(-145px);
     }
 
     80% {
-        transform: translateY(320px) translateX(278px);
+        transform: translateY(303px) translateX(-521px);
     }
 
     85% {
-        transform: translateY(244px) translateX(376px);
+        transform: translateY(245px) translateX(622px);
     }
 
     90% {
-        transform: translateY(-400px) translateX(-550px);
+        transform: translateY(-387px) translateX(-338px);
     }
 
     95% {
-        transform: translateY(400px) translateX(-123px);
+        transform: translateY(48px) translateX(308px);
     }
 
     100% {
-        transform: translateY(400px) translateX(875px);
+        transform: translateY(400px) translateX(-725px);
     }
 }
+
+
 
 @keyframes flyingAnimation3 {
     0% {
-        transform: translateY(400px) translateX(875px);
+        transform: translateY(400px) translateX(-725px);
     }
 
     5% {
-        transform: translateY(223px) translateX(-416px);
+        transform: translateY(-400px) translateX(725px);
     }
 
     10% {
-        transform: translateY(-159px) translateX(641px);
+        transform: translateY(282px) translateX(205px);
     }
 
     15% {
-        transform: translateY(-307px) translateX(-539px);
+        transform: translateY(-261px) translateX(-554px);
     }
 
     20% {
-        transform: translateY(38px) translateX(875px);
+        transform: translateY(195px) translateX(328px);
     }
 
     25% {
-        transform: translateY(-150px) translateX(875px);
+        transform: translateY(-136px) translateX(466px);
     }
 
     30% {
-        transform: translateY(265px) translateX(-307px);
+        transform: translateY(345px) translateX(-425px);
     }
 
     35% {
-        transform: translateY(-256px) translateX(-550px);
+        transform: translateY(-98px) translateX(-648px);
     }
 
     40% {
-        transform: translateY(-400px) translateX(204px);
+        transform: translateY(-383px) translateX(245px);
     }
 
     45% {
-        transform: translateY(400px) translateX(-550px);
+        transform: translateY(400px) translateX(-725px);
     }
 
     50% {
-        transform: translateY(106px) translateX(875px);
+        transform: translateY(368px) translateX(725px);
     }
 
     55% {
-        transform: translateY(23px) translateX(41px);
+        transform: translateY(-52px) translateX(-280px);
     }
 
     60% {
-        transform: translateY(-400px) translateX(-550px);
+        transform: translateY(-400px) translateX(725px);
     }
 
     65% {
-        transform: translateY(-35px) translateX(-486px);
+        transform: translateY(-175px) translateX(-496px);
     }
 
     70% {
-        transform: translateY(158px) translateX(66px);
+        transform: translateY(177px) translateX(646px);
     }
 
     75% {
-        transform: translateY(-240px) translateX(-28px);
+        transform: translateY(-400px) translateX(-725px);
     }
 
     80% {
-        transform: translateY(235px) translateX(671px);
+        transform: translateY(334px) translateX(511px);
     }
 
     85% {
-        transform: translateY(400px) translateX(444px);
+        transform: translateY(400px) translateX(725px);
     }
 
     90% {
-        transform: translateY(-400px) translateX(-95px);
+        transform: translateY(-151px) translateX(-346px);
     }
 
     95% {
-        transform: translateY(320px) translateX(-123px);
+        transform: translateY(400px) translateX(-725px);
     }
 
     100% {
-        transform: translateY(70px) translateX(875px);
+        transform: translateY(400px) translateX(725px);
     }
 }
+
 
 @keyframes flyingAnimation4 {
     0% {
@@ -743,258 +736,259 @@
 
 @keyframes flyingAnimation5 {
     0% {
-        transform: translateY(-356px) translateX(-550px);
+        transform: translateY(400px) translateX(-725px);
     }
 
     5% {
-        transform: translateY(400px) translateX(875px);
+        transform: translateY(388px) translateX(669px);
     }
 
     10% {
-        transform: translateY(-400px) translateX(463px);
+        transform: translateY(-400px) translateX(343px);
     }
 
     15% {
-        transform: translateY(265px) translateX(-394px);
+        transform: translateY(235px) translateX(-576px);
     }
 
     20% {
-        transform: translateY(38px) translateX(875px);
+        transform: translateY(300px) translateX(725px);
     }
 
     25% {
-        transform: translateY(-400px) translateX(595px);
+        transform: translateY(-153px) translateX(-163px);
     }
 
     30% {
-        transform: translateY(400px) translateX(-206px);
+        transform: translateY(320px) translateX(-556px);
     }
 
     35% {
-        transform: translateY(-285px) translateX(-550px);
+        transform: translateY(-300px) translateX(610px);
     }
 
     40% {
-        transform: translateY(-316px) translateX(227px);
+        transform: translateY(100px) translateX(-725px);
     }
 
     45% {
-        transform: translateY(400px) translateX(-550px);
+        transform: translateY(291px) translateX(-27px);
     }
 
     50% {
-        transform: translateY(-400px) translateX(555px);
+        transform: translateY(-275px) translateX(-600px);
     }
 
     55% {
-        transform: translateY(-272px) translateX(131px);
+        transform: translateY(-67px) translateX(-725px);
     }
 
     60% {
-        transform: translateY(400px) translateX(-126px);
+        transform: translateY(246px) translateX(-269px);
     }
 
     65% {
-        transform: translateY(400px) translateX(-570px);
+        transform: translateY(-104px) translateX(725px);
     }
 
     70% {
-        transform: translateY(400px) translateX(66px);
+        transform: translateY(207px) translateX(182px);
     }
 
     75% {
-        transform: translateY(-240px) translateX(-28px);
+        transform: translateY(-400px) translateX(-725px);
     }
 
     80% {
-        transform: translateY(-400px) translateX(375px);
+        transform: translateY(381px) translateX(725px);
     }
 
     85% {
-        transform: translateY(308px) translateX(414px);
+        transform: translateY(-200px) translateX(-400px);
     }
 
     90% {
-        transform: translateY(-400px) translateX(-95px);
+        transform: translateY(-214px) translateX(500px);
     }
 
     95% {
-        transform: translateY(70px) translateX(-123px);
+        transform: translateY(350px) translateX(-500px);
     }
 
     100% {
-        transform: translateY(400px) translateX(875px);
+        transform: translateY(400px) translateX(725px);
     }
 }
 
 @keyframes flyingAnimation6 {
     0% {
-        transform: translateY(-400px) translateX(875px);
+        transform: translateY(0px) translateX(0px);
     }
 
     5% {
-        transform: translateY(-212px) translateX(-552px);
+        transform: translateY(-400px) translateX(725px);
     }
 
     10% {
-        transform: translateY(400px) translateX(466px);
+        transform: translateY(400px) translateX(-725px);
     }
 
     15% {
-        transform: translateY(313px) translateX(-550px);
+        transform: translateY(-277px) translateX(-626px);
     }
 
     20% {
-        transform: translateY(400px) translateX(875px);
+        transform: translateY(133px) translateX(487px);
     }
 
     25% {
-        transform: translateY(-147px) translateX(875px);
+        transform: translateY(-68px) translateX(553px);
     }
 
     30% {
-        transform: translateY(-400px) translateX(-206px);
+        transform: translateY(201px) translateX(-225px);
     }
 
     35% {
-        transform: translateY(400px) translateX(-550px);
+        transform: translateY(-134px) translateX(-657px);
     }
 
     40% {
-        transform: translateY(-378px) translateX(227px);
+        transform: translateY(-294px) translateX(262px);
     }
 
     45% {
-        transform: translateY(400px) translateX(-550px);
+        transform: translateY(22px) translateX(-384px);
     }
 
     50% {
-        transform: translateY(-400px) translateX(555px);
+        transform: translateY(400px) translateX(725px);
     }
 
     55% {
-        transform: translateY(-259px) translateX(131px);
+        transform: translateY(32px) translateX(100px);
     }
 
     60% {
-        transform: translateY(400px) translateX(-126px);
+        transform: translateY(-341px) translateX(-473px);
     }
 
     65% {
-        transform: translateY(400px) translateX(-570px);
+        transform: translateY(-204px) translateX(-530px);
     }
 
     70% {
-        transform: translateY(400px) translateX(66px);
+        transform: translateY(155px) translateX(375px);
     }
 
     75% {
-        transform: translateY(-240px) translateX(-28px);
+        transform: translateY(-332px) translateX(-457px);
     }
 
     80% {
-        transform: translateY(-400px) translateX(375px);
+        transform: translateY(244px) translateX(678px);
     }
 
     85% {
-        transform: translateY(308px) translateX(414px);
+        transform: translateY(399px) translateX(108px);
     }
 
     90% {
-        transform: translateY(-400px) translateX(-95px);
+        transform: translateY(-151px) translateX(-318px);
     }
 
     95% {
-        transform: translateY(400px) translateX(-123px);
+        transform: translateY(306px) translateX(-42px);
     }
 
     100% {
-        transform: translateY(400px) translateX(875px);
+        transform: translateY(400px) translateX(-725px);
     }
 }
 
+
 @keyframes flyingAnimation7 {
     0% {
-        transform: translateY(400px) translateX(-550px);
+        transform: translateY(0px) translateX(0px);
     }
 
     5% {
-        transform: translateY(-117px) translateX(875px);
+        transform: translateY(-400px) translateX(-725px);
     }
 
     10% {
-        transform: translateY(400px) translateX(141px);
+        transform: translateY(400px) translateX(725px);
     }
 
     15% {
-        transform: translateY(400px) translateX(-394px);
+        transform: translateY(320px) translateX(-592px);
     }
 
     20% {
-        transform: translateY(400px) translateX(875px);
+        transform: translateY(-189px) translateX(437px);
     }
 
     25% {
-        transform: translateY(-400px) translateX(595px);
+        transform: translateY(-269px) translateX(657px);
     }
 
     30% {
-        transform: translateY(-400px) translateX(-206px);
+        transform: translateY(251px) translateX(-211px);
     }
 
     35% {
-        transform: translateY(400px) translateX(-550px);
+        transform: translateY(193px) translateX(-650px);
     }
 
     40% {
-        transform: translateY(-169px) translateX(227px);
+        transform: translateY(-163px) translateX(319px);
     }
 
     45% {
-        transform: translateY(400px) translateX(-550px);
+        transform: translateY(400px) translateX(-725px);
     }
 
     50% {
-        transform: translateY(-400px) translateX(555px);
+        transform: translateY(-400px) translateX(725px);
     }
 
     55% {
-        transform: translateY(262px) translateX(131px);
+        transform: translateY(-50px) translateX(131px);
     }
 
     60% {
-        transform: translateY(-400px) translateX(-126px);
+        transform: translateY(200px) translateX(-126px);
     }
 
     65% {
-        transform: translateY(400px) translateX(-570px);
+        transform: translateY(-36px) translateX(-572px);
     }
 
     70% {
-        transform: translateY(-400px) translateX(66px);
+        transform: translateY(250px) translateX(68px);
     }
 
     75% {
-        transform: translateY(-400px) translateX(-28px);
+        transform: translateY(-390px) translateX(-28px);
     }
 
     80% {
-        transform: translateY(400px) translateX(375px);
+        transform: translateY(597px) translateX(375px);
     }
 
     85% {
-        transform: translateY(400px) translateX(414px);
+        transform: translateY(-85px) translateX(414px);
     }
 
     90% {
-        transform: translateY(-400px) translateX(-95px);
+        transform: translateY(135px) translateX(-95px);
     }
 
     95% {
-        transform: translateY(308px) translateX(-123px);
+        transform: translateY(-123px) translateX(-400px);
     }
 
     100% {
-        transform: translateY(-400px) translateX(875px);
+        transform: translateY(400px) translateX(725px);
     }
 }
