@@ -29,14 +29,39 @@
 
 .darkest-mode-modal-subtitle {
     position: fixed;
-    top: 50px;
+    top: 55px;
     /* Adjust the top position as needed */
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
-    font-size: 18px;
+    font-size: 16px;
     opacity: 0;
     animation: fadeIn 2s ease-in 2s forwards;
+}
+
+.summary-screen {
+    position: fixed;
+    top: 50%; /* Adjust the top position as needed */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.7); /* Background color with some transparency */
+    padding: 20px;
+    border-radius: 10px;
+    color: white; /* Text color */
+    z-index: 999; /* Ensure it's above other content */
+    display: none; /* Initially hidden */
+}
+
+.summary-screen-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+/* Summary screen content styling */
+.summary-screen p {
+    font-size: 16px;
+    margin: 5px 0;
 }
 
 @keyframes fadeIn {
@@ -47,6 +72,29 @@
     to {
         opacity: 1;
     }
+}
+
+/* Timer style */
+.timer {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    /* Timer text color */
+}
+
+/* Click count style */
+.click-count {
+    position: absolute;
+    top: 40px;
+    /* Adjust the top position as needed */
+    left: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    /* Click count text color */
 }
 
 /* Style the buttons */
@@ -85,7 +133,7 @@
 /* Style the flying button */
 .flying-button.flying {
     position: absolute;
-    animation: flyingAnimation 16s linear infinite;
+    animation: flyingAnimation 20s linear infinite;
 }
 
 /* Style the close button */
@@ -143,7 +191,7 @@
 /* Style the flying button */
 .flying-button2.flying {
     position: absolute;
-    animation: flyingAnimation2 15s linear infinite;
+    animation: flyingAnimation2 21s linear infinite;
 }
 
 /* Style the flying-button3 */
@@ -182,7 +230,7 @@
 /* Style the flying button for flying-button3 */
 .flying-button3.flying {
     position: absolute;
-    animation: flyingAnimation3 14s linear infinite;
+    animation: flyingAnimation3 22s linear infinite;
 }
 
 /* Apply the flying-button class to the Riddler button */
@@ -221,7 +269,7 @@
 /* Style the flying button for flying-button4 */
 .flying-button4.flying {
     position: absolute;
-    animation: flyingAnimation4 13s linear infinite;
+    animation: flyingAnimation4 23s linear infinite;
 }
 
 /* Apply the flying-button class to the Poison Ivy button */
@@ -260,7 +308,7 @@
 /* Style the flying button for flying-button5 */
 .flying-button5.flying {
     position: absolute;
-    animation: flyingAnimation5 12s linear infinite;
+    animation: flyingAnimation5 24s linear infinite;
 }
 
 /* Apply the flying-button class to the Penguin button */
@@ -299,7 +347,7 @@
 /* Style the flying button for flying-button6 */
 .flying-button6.flying {
     position: absolute;
-    animation: flyingAnimation6 11s linear infinite;
+    animation: flyingAnimation6 25s linear infinite;
 }
 
 /* Apply the flying-button class to the Harley Quinn button */
@@ -338,7 +386,7 @@
 /* Style the flying button for flying-button7 */
 .flying-button7.flying {
     position: absolute;
-    animation: flyingAnimation7 10s linear infinite;
+    animation: flyingAnimation7 26s linear infinite;
 }
 
 /* Hover effect for the close button */
@@ -355,7 +403,7 @@
     }
 
     5% {
-        transform: translateY(-400px) translateX(-550px);
+        transform: translateY(-450px) translateX(-550px);
     }
 
     10% {
@@ -367,7 +415,7 @@
     }
 
     20% {
-        transform: translateY(400px) translateX(875px);
+        transform: translateY(-500px) translateX(875px);
     }
 
     25% {

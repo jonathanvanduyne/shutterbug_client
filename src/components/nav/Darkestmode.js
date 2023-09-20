@@ -8,145 +8,155 @@ import Penguin from "./Penguin.png";
 import HarleyQuinn from "./HarleyQuinn.png";
 import Bane from "./Bane.png";
 
-
 export const DarkestModeModal = ({ triggerDarkestMode, setTriggerDarkestMode }) => {
     const [isFlying, setIsFlying] = useState(false);
+    const [clickCount, setClickCount] = useState(0);
+    const [timer, setTimer] = useState(0);
+    const [timerCopy, setTimerCopy] = useState(0); // Used to store the timer value when the timer is paused
+    const [showButtons, setShowButtons] = useState(false);
+    const [remainingButtons, setRemainingButtons] = useState([
+        "joker-button",
+        "mr-freeze-button",
+        "riddler-button",
+        "poison-ivy-button",
+        "penguin-button",
+        "harley-quinn-button",
+        "bane-button",
+    ]);
 
     const body = document.body;
-
-    const toggleDarkMode = () => {
-        setTriggerDarkestMode(!triggerDarkestMode);
-        if (!triggerDarkestMode) {
-            body.classList.add("darkest-mode");
-        } else {
-            body.classList.remove("darkest-mode");
-        }
-    };
 
     const flyButton = (buttonId) => {
         if (!isFlying) {
             setIsFlying(true);
-            const button = document.getElementById(buttonId);
-            const screenWidth = window.innerWidth;
-            const screenHeight = window.innerHeight;
+        };
+    }
 
-            // Create an array of random positions within the screen boundaries
-            const positions = [];
-            for (let i = 0; i < 100; i++) {
-                const posX = Math.random() * screenWidth;
-                const posY = Math.random() * screenHeight;
-                positions.push({ posX, posY });
-            }
+    const handleButtonClick = (buttonId) => {
+        // Remove the clicked button from the remainingButtons array
+        setRemainingButtons((prevButtons) => prevButtons.filter((id) => id !== buttonId));
 
-            let currentPositionIndex = 0;
-
-            const flyInterval = setInterval(() => {
-                // Get the next random position from the array
-                const { posX, posY } = positions[currentPositionIndex];
-
-                // Create keyframes for random movement
-                const keyframes = [
-                    { transform: `translate(${button.style.left || "0"}, ${button.style.top || "0"})` },
-                    { transform: `translate(${posX}px, ${posY}px)` },
-                ];
-
-                // Define animation options
-                const options = {
-                    duration: 1000, // 1 second
-                    easing: "ease-in-out",
-                    iterations: 1,
-                };
-
-                // Apply the animation
-                button.animate(keyframes, options);
-
-                // Update button position
-                button.style.left = `${posX}px`;
-                button.style.top = `${posY}px`;
-
-                // Move to the next position in the array (loop back to the beginning if needed)
-                currentPositionIndex = (currentPositionIndex + 1) % positions.length;
-            }, 100000); // Change the interval to control the speed of movement
-        }
+        // Increment the click count
+        setClickCount((prevClickCount) => prevClickCount + 1);
     };
 
     useEffect(() => {
-        // Start flying when the component mounts for both buttons
-        flyButton("joker-button");
-        flyButton("mr-freeze-button");
-        flyButton("riddler-button");
-        flyButton("poison-ivy-button");
-        flyButton("penguin-button");
-        flyButton("harley-quinn-button");
-        flyButton("bane-button");
+        // Delay the start of the timer and button appearance for 5 seconds
+        const delayTimeout = setTimeout(() => {
+            setShowButtons(true);
+            flyButton("joker-button");
+            flyButton("mr-freeze-button");
+            flyButton("riddler-button");
+            flyButton("poison-ivy-button");
+            flyButton("penguin-button");
+            flyButton("harley-quinn-button");
+            flyButton("bane-button");
+
+            // Start the timer when Darkest Mode is activated
+            if (triggerDarkestMode) {
+                const interval = setInterval(() => {
+                    setTimer((prevTimer) => prevTimer + 1);
+                }, 1000); // Update the timer every second
+
+                // Clean up the interval when Darkest Mode is closed or remainingButtons is empty
+                return () => {
+                    clearInterval(interval);
+                };
+            }
+        }, 7000); // Delay for 5 seconds
+
+        // Clean up the timeout if the component unmounts
+        return () => clearTimeout(delayTimeout);
+    }, [triggerDarkestMode]); // Include triggerDarkestMode as a dependency
+
+    useEffect(() => {
+        // Start flying when the component mounts for all buttons
+        remainingButtons.forEach((buttonId) => {
+            flyButton(buttonId);
+        });
+    }, [remainingButtons]);
+
+    useEffect(() => {
+        const handleClick = () => {
+            // Increment the click count when a click event occurs
+            setClickCount((prevClickCount) => prevClickCount + 1);
+        };
+
+        // Add a click event listener to the window
+        window.addEventListener("click", handleClick);
+
+        // Clean up the event listener when Darkest Mode is closed
+        return () => {
+            window.removeEventListener("click", handleClick);
+        };
     }, []);
+
+    useEffect(() => {
+        // Check if all buttons are gone, and if so, show the summary screen for 3 seconds
+        if (remainingButtons.length === 0) {
+            setTimerCopy(timer);
+            setTimeout(() => {
+                // Close Darkest Mode after 3 seconds
+                setTriggerDarkestMode(false);
+            }, 5000);
+        }
+    }, [remainingButtons, setTriggerDarkestMode]);
 
     return (
         <div className="darkest-mode-modal-container">
             <h4 className="darkest-mode-modal-title animated fadeInTitle">Darkest Mode</h4>
             <h5 className="darkest-mode-modal-subtitle animated fadeInSubtitle delay-2s">
-                The Night is darkest just before the dawn. Help save the city by catching a villain
+                The night is darkest just before the dawn. Help save Gotham by catching all the villains!
             </h5>
 
-            <button
-                className={`flying-button ${isFlying ? "flying" : ""}`}
-                id="joker-button"
-                onClick={() => setTriggerDarkestMode()}
-            >
-                <img src={Joker} alt="Joker" />
-            </button>
+            {showButtons && (
+                <div>
+                    <div className="timer">{timer} seconds</div>
+                    <div className="click-count">Click Count: {clickCount}</div>
+                </div>
+            )}
 
-            <button
-                className={`flying-button2 ${isFlying ? "flying" : ""}`}
-                id="mr-freeze-button"
-                onClick={() => setTriggerDarkestMode()}
-            >
-                <img src={MrFreeze} alt="Mr. Freeze" />
-            </button>
+            {showButtons && (
+                <div className="darkest-mode-buttons-container">
+                    {remainingButtons.map((buttonId) => (
+                        <button key={buttonId} id={buttonId} onClick={() => handleButtonClick(buttonId)}>
+                            {buttonId === "joker-button" && (
+                                <img src={Joker} alt="Joker" className={`flying-button ${isFlying ? "flying" : ""}`} />
+                            )}
+                            {buttonId === "mr-freeze-button" && (
+                                <img src={MrFreeze} alt="Mr. Freeze" className={`flying-button2 ${isFlying ? "flying" : ""}`} />
+                            )}
+                            {buttonId === "riddler-button" && (
+                                <img src={Riddler} alt="Riddler" className={`flying-button3 ${isFlying ? "flying" : ""}`} />
+                            )}
+                            {buttonId === "poison-ivy-button" && (
+                                <img src={PoisonIvy} alt="Poison Ivy" className={`flying-button4 ${isFlying ? "flying" : ""}`} />
+                            )}
+                            {buttonId === "penguin-button" && (
+                                <img src={Penguin} alt="Penguin" className={`flying-button5 ${isFlying ? "flying" : ""}`} />
+                            )}
+                            {buttonId === "harley-quinn-button" && (
+                                <img src={HarleyQuinn} alt="Harley Quinn" className={`flying-button6 ${isFlying ? "flying" : ""}`} />
+                            )}
+                            {buttonId === "bane-button" && (
+                                <img src={Bane} alt="Bane" className={`flying-button7 ${isFlying ? "flying" : ""}`} />
+                            )}
+                        </button>
+                    ))}
+                </div>
+            )}
 
-            <button
-                className={`flying-button3 ${isFlying ? "flying" : ""}`}
-                id="riddler-button"
-                onClick={() => setTriggerDarkestMode()}
-                >
-                <img src={Riddler} alt="Riddler" />
-            </button>
+            {remainingButtons.length === 0 && (
+                <div className="summary-screen">
+                    <h4 className="summary-screen-title">Congratulations! You saved the city!</h4>
+                    <p>Click Count: {clickCount}</p>
+                    <p>Time taken: {timerCopy} seconds</p>
+                </div>
+            )}
 
-            <button
-                className={`flying-button4 ${isFlying ? "flying" : ""}`}
-                id="poison-ivy-button"
-                onClick={() => setTriggerDarkestMode()}
-                >
-                <img src={PoisonIvy} alt="Poison Ivy" />
+            <button className="close-darkest-mode-button" onClick={() => setTriggerDarkestMode(false)}>
+                Close Darkest Mode #GiveUp
             </button>
-
-            <button
-                className={`flying-button5 ${isFlying ? "flying" : ""}`}
-                id="penguin-button"
-                onClick={() => setTriggerDarkestMode()}
-                >
-                <img src={Penguin} alt="Penguin" />
-            </button>
-
-            <button
-                className={`flying-button6 ${isFlying ? "flying" : ""}`}
-                id="harley-quinn-button"
-                onClick={() => setTriggerDarkestMode()}
-                >
-                <img src={HarleyQuinn} alt="Harley Quinn" />
-            </button>
-
-            <button
-                className={`flying-button7 ${isFlying ? "flying" : ""}`}
-                id="bane-button"
-                onClick={() => setTriggerDarkestMode()}
-                >
-                <img src={Bane} alt="Bane" />
-            </button>
-
-                <button className="close-darkest-mode-button" onClick={() => setTriggerDarkestMode()}>
-                    Close Darkest Mode #GiveUp
-                </button>
         </div>
     );
 };
