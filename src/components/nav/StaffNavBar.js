@@ -48,14 +48,6 @@ export const StaffNavBar = ({ token, setToken }) => {
                         </>
                     ) : (
                         <>
-                            <div className="text-center space-x-4"> {/* Center-align and add spacing */}
-                                <Link to="/register" className="text-white hover:text-black-500">
-                                    Register
-                                </Link>
-                                <Link to="/login" className="text-white hover:text-black-500">
-                                    Login
-                                </Link>
-                            </div>
                         </>
                     )}
                 </div>

@@ -7,7 +7,7 @@ module.exports = {
       // Your light mode styles here
     },
     darkSelector: '.dark-mode', // Specify the dark mode selector
-    darkMode: 'class', // Use the 'class' mode
+    darkMode: ['class', '[data-mode="dark"]'], // Use the 'class' mode
   },
   plugins: [
     require('@tailwindcss/forms'),
