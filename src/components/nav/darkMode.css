@@ -1,8 +1,3 @@
-.dark_mode {
-    margin-top: -20px;
-    margin-left: 10px;
-}
-
 .dark_mode_label {
     width: 65px;
     height: 30px;
@@ -44,22 +39,6 @@
     width: 30px;
 }
 
-.dark_mode_label svg {
-    position: absolute;
-    width: 20px;
-    top: 5px;
-    z-index: 100;
-}
-.dark_mode_label svg.sun {
-    left: 5px;
-    fill: #fff;
-    transition: 0.3s;
-}
-.dark_mode_label svg.moon {
-    left: 40px;
-    fill: #7e7e7e;
-    transition: 0.3s;
-}
 .dark_mode_input:checked + .dark_mode_label svg.sun {
     fill: #7e7e7e;
 }

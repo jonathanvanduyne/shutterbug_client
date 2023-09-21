@@ -35,7 +35,7 @@ export const StaffNavBar = ({ token, setToken }) => {
                     {token ? (
                         <>
                             <div className="text-center flex-grow space-x-4"> {/* Center-align and add spacing */}
-                                <Link to="/posts" isDarkMode={isDarkMode} className="text-white hover:text-black-500">
+                                <Link to="/posts" className="text-white hover:text-black-500">
                                     Posts
                                 </Link>
                                 <Link to="/direct_messages" className="text-white hover:text-black-500">

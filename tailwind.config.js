@@ -1,14 +1,17 @@
+const defaultTheme = require('tailwindcss/defaultTheme');
+
 module.exports = {
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
     extend: {
-      // Your light mode styles here
+      fontFamily: {
+        sans: ['Inter var', ...defaultTheme.fontFamily.sans],
+      },
     },
-    darkSelector: '.dark-mode', // Specify the dark mode selector
-    darkMode: ['class', '[data-mode="dark"]'], // Use the 'class' mode
   },
+  darkMode: 'class', // Use the 'class' mode
   plugins: [
     require('@tailwindcss/forms'),
     function ({ addBase, theme }) {
