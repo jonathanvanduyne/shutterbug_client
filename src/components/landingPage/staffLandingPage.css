@@ -1,59 +1,92 @@
 /* LandingPageGreeting.css */
 
-/* Light mode styles */
-.landing-page.light {
-    color: #333333;
-}
-
-/* Dark mode styles */
-.landing-page.dark {
-    color: #ffffff;
-}
-
-body.light {
-    background-color: #f8f8f8;
-    background-repeat: repeat;
-}
-
-body.dark {
-    background-color: #222222;
-    background-repeat: repeat;
+/* Shared Styles */
+.landing-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+    transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 .landing-page-greeting {
-    padding: 20px;
+    padding: 40px;
+    /* Increased padding for a larger div */
     border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    /* Subtle border */
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    /* Subtle box shadow */
     text-align: center;
-    font-size: 24px;
 }
 
 .landing-page-greeting h1 {
-    font-size: 48px;
-    margin-bottom: 5px;
-}
-
-.landing-page-greeting p {
-    font-size: 20px;
-    margin: 10px 0;
-}
-
-.landing-page-greeting a {
-    text-decoration: none;
-    color: var(--social-media-icon-color); /* Use CSS variable for social media icon color */
+    font-size: 2.5rem;
+    /* Increased font size for the heading */
+    margin-bottom: 10px;
     font-weight: bold;
 }
 
-/* Define CSS variable for social media icon color */
-:root {
-    --social-media-icon-color: #007bff;
+.landing-page-greeting p {
+    font-size: 1.5rem;
+    /* Increased font size for paragraphs */
+    margin: 10px 0;
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+/* Rest of the CSS remains the same */
+
+.nav-links {
+    list-style: none;
+    padding: 0;
+}
+
+.nav-links li {
+    margin: 10px 0;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--link-color);
+    font-weight: bold;
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+}
+
+.logout-button {
+    border: none;
+    background-color: var(--logout-button-color);
+    color: white;
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.logout-button:hover {
+    background-color: var(--logout-button-hover-color);
+    transform: scale(1.05);
+}
+
+/* Light Mode Styles */
+.landing-page.light {
+    background-color: #f8f8f8;
+    color: #333;
+}
+
+/* Dark Mode Styles */
+.landing-page.dark {
+    background-color: #222;
+    color: #fff;
+}
+
+/* Define CSS variables for easy customization */
+:root {
+    --link-color: #007bff;
+    /* Link text color */
+    --logout-button-color: red;
+    /* Logout button color */
+    --logout-button-hover-color: #ff3860;
+    /* Logout button color on hover */
 }

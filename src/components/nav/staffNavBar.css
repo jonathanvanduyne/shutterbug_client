@@ -1,114 +1,147 @@
-/* staffNavBar.css */
-
-/* Navbar styling */
+/* Navbar styles */
 .navbar {
-    background-color: #007bff;
-    /* Change this to your preferred background color */
-    color: #ffffff;
-    /* Change this to your preferred text color */
+    background-color: #333;
+    /* Dark background color */
+    padding: 1rem 1rem;
+    /* Add padding to the navbar */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* Add a subtle shadow */
+    transition: background-color 0.5s ease;
+    /* Smooth background color transition */
 }
 
-.navbar a.navbar-item {
-    color: #ffffff;
-    /* Text color for navbar items */
-}
-
-.navbar a.navbar-item:hover {
-    background-color: #0056b3;
-    /* Background color on hover */
-}
-
-/* Hamburger icon styling */
-.navbar-burger {
-    color: #ffffff;
-    /* Hamburger icon color */
-    display: block; /* Ensure the hamburger icon is always visible */
-}
-
-/* Mobile menu styling */
-.navbar-menu {
-    background-color: #007bff;
-    /* Mobile menu background color */
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    transition: opacity 0.3s, visibility 0.3s, top 0.3s;
-    opacity: 0;
-    z-index: 10;
-}
-
-.navbar.is-active .navbar-menu {
-    display: block;
-    opacity: 1;
-    top: 3.5rem; /* Adjust the distance from the top as needed */
-}
-
-/* Mobile menu item styling */
-.navbar-menu .navbar-item {
-    padding: 1rem;
-    color: #ffffff;
-    /* Text color for mobile menu items */
-    text-align: center;
-}
-
-/* Add other styles as needed */
-
-/* Auto-close mobile menu after 3 seconds of inactivity */
-.navbar:hover .navbar-menu {
-    opacity: 1;
-    top: 3.5rem; /* Adjust the distance from the top as needed */
-}
-
-.navbar:not(:hover) .navbar-menu {
-    opacity: 0;
-    top: 100%;
-    visibility: hidden;
-    pointer-events: none;
-    transition: opacity 0.3s, visibility 0.3s, top 0.3s;
-}
-
-.dark-mode-toggle {
+/* Navbar logo styles */
+.logo {
     display: flex;
     align-items: center;
-    margin-right: 1rem; /* Add some spacing to the right of the toggle */
+    /* Vertically center the logo and text */
+    color: #fff;
+    /* Text color for the logo */
+    transition: color 0.3s ease;
+    /* Smooth color transition */
 }
 
-/* Flex container for dark mode toggle and Batman logo */
-.dark-mode-container {
+.logo img {
+    margin-right: 5px;
+    /* Add space to the right of the logo */
+}
+
+.title {
+    color: white;
+}
+
+/* Mobile burger menu styles */
+.navbar-burger {
+    color: #fff;
+    /* Color of the burger menu icon */
+}
+
+/* Navbar links styles */
+.navbar-menu {
     display: flex;
-    align-items: center; /* Vertically center items */
-    justify-content: flex-end; /* Push items to the right */
-    margin-right: 1rem; /* Add some spacing to the right of the toggle */
+    justify-content: center; /* Horizontally center the navbar items */
+    align-items: center; /* Vertically center the navbar items */
 }
 
-/* Custom Red Background Button */
-.custom-red-background {
-    background-color: #ff3860;
-    /* Red background color */
-    color: #ffffff;
-    /* White text color */
-}
-
-.custom-red-background:hover {
-    background-color: #e31a45;
-    /* Darker red background color on hover */
-}
-
-/* Batman Logo */
-.batman-logo {
+.navbar-links {
+    color: #fff;
+    /* Text color for links */
+    margin-right: 1rem;
+    /* Add space between links */
+    transition: color 0.3s ease; /* Smooth color transition */
+    font-size: 1.2rem; /* Increase font size */
     display: flex;
-    margin-left: 10px; /* Adjust the margin as needed */
-    height: fit-content;
-    width: 50px;
+    align-items: center; /* Vertically center the navbar links */
+}
+
+.navbar-item {
+    color: #fff;
+    /* Text color for links */
+    margin-right: 1rem;
+    /* Add space between links */
+    transition: color 0.3s ease; /* Smooth color transition */
+    font-size: 1.2rem; /* Increase font size */
     justify-content: center;
-    background-color: transparent; /* Initial background color (transparent) */
-    transition: background-color 0.3s; /* Add transition for smooth effect */
-    background-size: 100%;
+    align-items: center;
 }
 
-/* Add fade-in background color effect on hover */
+.navbar-item:hover {
+    color: #ffcc29;
+    /* Text color on hover */
+    opacity: 1; /* Restore full opacity on hover */
+}
+
+/* Dark Mode and Batman Logo styles */
+.dark-mode-container,
+.dark-mode-toggle-container {
+    display: flex;
+    align-items: center;
+    /* Vertically center content */
+    cursor: pointer;
+    margin-right: 10px;
+    /* Add space between elements */
+    transition: color 0.3s ease, background-color 0.3s ease;
+    /* Smooth color and background color transition */
+    /* Add padding to the container */
+    border-radius: 4px;
+    /* Add rounded corners */
+}
+
+.batman-logo {
+    width: 5rem;
+    /* Set width of the logo */
+    margin-right: 10px;
+    /* Add space to the right of the logo */
+    transition: background-color 0.3s ease;
+    /* Smooth background color transition */
+}
+
+.darkest-mode-text {
+    color: white;
+    font-size: 1.2rem;
+    padding: 1rem;
+    /* Increase font size */
+}
+
+.darkest-mode-text:hover {
+    color: black;
+    /* Text color on hover */
+}
+
+.dark-mode-toggle-container:hover,
 .batman-logo:hover {
-    background-color: goldenrod; /* Adjust the color and opacity as needed */
-    background-size: 300%;
+    color: black;
+    /* Text color on hover */
+    background-color: yellow;
+    /* Yellow background on hover */
+}
+
+/* Logout button styles */
+.logout-button {
+    border: none;
+    background-color: red;
+    color: white;
+    /* Text color for the button */
+    cursor: pointer;
+    transition: color 0.3s ease, background-color 0.3s ease;
+    /* Smooth color transition */
+    font-size: 1.2rem;
+    /* Increase font size */
+    padding: 0.5rem 1rem;
+    /* Add padding to the button */
+    border-radius: 4px;
+    /* Add rounded corners */
+    text-transform: uppercase;
+    /* Uppercase text */
+    letter-spacing: 1px;
+    /* Add letter spacing */
+}
+
+.logout-button:hover {
+    color: white;
+    /* Text color on hover */
+    background-color: #ff3860;
+    /* Change background color on hover */
+    box-shadow: 0 4px 6px rgba(0, 0, 0);
+    /* Add a subtle shadow on hover */
 }
