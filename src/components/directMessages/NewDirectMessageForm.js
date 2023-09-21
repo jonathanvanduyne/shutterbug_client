@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { getCurrentUser, getUsers } from "../../managers/users.js";
 import { createDirectMessage } from "../../managers/directMessages.js";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { useNavigate } from "react-router-dom";
+import "./newDM.css";
 
 export const NewDMForm = () => {
     const [directMessageForm, setDirectMessageForm] = useState({
@@ -12,7 +13,7 @@ export const NewDMForm = () => {
     const [users, setUsers] = useState([]);
     const [currentUserArray, setCurrentUserArray] = useState([]);
     const currentUser = currentUserArray[0];
-    const navigate = useNavigate(); // Initialize navigate
+    const navigate = useNavigate();
 
     const getData = async () => {
         const currentUser = await getCurrentUser();
@@ -40,24 +41,25 @@ export const NewDMForm = () => {
             content: directMessageForm.content
         };
 
-        // Perform the createDirectMessage action and then navigate
         createDirectMessage(newDirectMessage).then(() => {
-            navigate("/direct_messages"); // Use navigate to change the route
+            navigate("/direct_messages");
         });
     };
 
     return (
-        <>
-            <form className="form--login" onSubmit={handleSaveDirectMessage}>
-                <h1 className="h3 mb-3 font-weight-normal">Send a Direct Message</h1>
-                <fieldset>
-                    <label htmlFor="recipient">Recipient: </label>
+        <div className="dm-form-container">
+            <form className="dm-form" onSubmit={handleSaveDirectMessage}>
+                <h1 className="dm-form-title">Send a Direct Message</h1>
+                <div className="dm-form-field">
+                    <label htmlFor="recipient" className="dm-form-label">
+                        Recipient:
+                    </label>
                     <select
                         id="recipient_id"
                         onChange={handleControlledInputChange}
                         required
                         autoFocus
-                        className="form-control"
+                        className="dm-form-select"
                         value={directMessageForm.recipient_id}
                     >
                         <option value="0">Select a recipient</option>
@@ -69,25 +71,27 @@ export const NewDMForm = () => {
                                 </option>
                             ))}
                     </select>
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="content">Message: </label>
+                </div>
+                <div className="dm-form-field">
+                    <label htmlFor="content" className="dm-form-label">
+                        Message:
+                    </label>
                     <textarea
                         type="text"
                         id="content"
                         onChange={handleControlledInputChange}
                         required
                         autoFocus
-                        className="form-control"
+                        className="dm-form-textarea"
                         value={directMessageForm.content}
                     />
-                </fieldset>
-                <fieldset>
-                    <button className="btn btn-1 btn-sep icon-send" type="submit">
+                </div>
+                <div className="dm-form-field">
+                    <button className="dm-form-button" type="submit">
                         Send
                     </button>
-                </fieldset>
+                </div>
             </form>
-        </>
+        </div>
     );
 };

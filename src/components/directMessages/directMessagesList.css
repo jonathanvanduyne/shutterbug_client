@@ -1,8 +1,4 @@
 
-
-/* Global Styles */
-
-
 /* Container Styles */
 .direct-messages-container {
     max-width: 800px;
@@ -11,11 +7,6 @@
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.direct-messages-container .dark {
-    background-color: #333;
-    color: #fff;
 }
 
 /* Title Styles */
@@ -100,4 +91,13 @@
 
 .create-new-thread-button:hover {
     background-color: #0056b3;
+}
+
+.direct-messages-container .dark {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #000000;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }

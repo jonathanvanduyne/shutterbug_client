@@ -1,107 +1,198 @@
-/* FlaggedAndUnapprovedPostList.css */
-
-/* Container styles */
-.post-list-container {
-    width: 100%;
-    max-width: 800px;
-    /* Adjust to your desired maximum width */
-    margin: 0 auto;
+/* Light Mode */
+.flagged-unapproved-post-list-container {
+    background-color: #ffffff;
+    color: #333333;
     padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-/* Header links */
 .header-links {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    width: 66%; /* 2/3 of the width */
     margin-bottom: 20px;
 }
 
-.user-list-link,
-.flagged-posts-link {
-    text-decoration: none;
-    color: #0077b6;
-    /* Adjust to your color preferences */
-    font-weight: bold;
-}
-
-/* Filter form styles (customize as needed) */
 .filter-form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
     margin-bottom: 20px;
+}
+
+.filter-group {
+    margin-right: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
 }
 
 .filter-label {
     font-weight: bold;
 }
 
-.filter-select,
+.filter-select {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
 .filter-input {
     width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    margin-bottom: 15px;
+    padding: 5px;
     border: 1px solid #ccc;
-    /* Adjust border styles */
     border-radius: 5px;
 }
 
 .reset-filters-container {
-    text-align: right;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
 }
 
 .reset-filters-button {
-    background-color: #0077b6;
-    color: white;
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: #ffffff;
     border: none;
     border-radius: 5px;
-    padding: 10px 20px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-/* Post styles (customize as needed) */
+.reset-filters-button:hover {
+    background-color: #2980b9;
+}
+
 .posts {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    justify-content: space-between;
 }
 
 .post {
-    width: calc(50% - 10px);
-    /* Two posts per row with gap */
-    padding: 15px;
-    border: 1px solid #ccc;
+    background-color: #f7f7f7;
+    color: #333333;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    width: calc(33.33% - 20px);
+    transition: transform 0.3s ease;
+}
+
+.flag-post-button,
+.approve-post-button {
+    margin-bottom: 10px;
+}
+
+.flag-button,
+.approve-button {
+    padding: 5px 10px;
+    background-color: #e74c3c;
+    color: #ffffff;
+    border: none;
     border-radius: 5px;
-    background-color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.approve-button {
+    background-color: #2ecc71;
+}
+
+.flagged,
+.approved {
+    background-color: #3498db;
+}
+
+.flag-button:hover,
+.approve-button:hover {
+    background-color: #c0392b;
+}
+
+.post-divider {
+    margin: 10px 0;
+    border-top: 1px solid #ccc;
 }
 
 .post-title {
     font-size: 18px;
     font-weight: bold;
-    margin-bottom: 10px;
-    color: #333;
-    /* Adjust text color */
+    margin: 10px 0;
 }
 
-/* ... (customize post details styling as needed) */
-
-.flag-button {
-    /* Customize flag button styles */
+.post-link {
+    text-decoration: none;
+    color: #333333;
+    transition: color 0.3s ease;
 }
 
-.approve-button {
-    /* Customize approve button styles */
+.post-link:hover {
+    color: #2980b9;
 }
 
-/* Add more styles as needed */
-/* Green for approved */
-.approved {
-    background-color: green;
-    color: white;
-    /* White text for better visibility on green */
+.post-shutterbug {
+    font-style: italic;
+    margin: 10px 0;
 }
 
-/* Red for disapproved */
-.disapproved {
-    background-color: red;
-    color: white;
-    /* White text for better visibility on red */
+.user-link {
+    text-decoration: none;
+    color: #3498db;
+    transition: color 0.3s ease;
 }
+
+.user-link:hover {
+    color: #2980b9;
+}
+
+.post-image {
+    max-width: 100%;
+    height: auto;
+    margin: 10px 0;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+}
+
+.reactions {
+    display: flex;
+    margin: 10px 0;
+}
+
+.reaction-icon {
+    max-width: 24px;
+    height: auto;
+    margin-right: 5px;
+}
+
+.post-content {
+    margin: 10px 0;
+}
+
+.post-published {
+    margin: 10px 0;
+    font-style: italic;
+}
+
+.post-tags {
+    margin: 10px 0;
+}
+
+.post-comments {
+    margin-top: 10px;
+}
+
+.comment {
+    margin: 5px 0;
+}
+
+/* Dark Mode (Add Dark Mode Styles Below) */

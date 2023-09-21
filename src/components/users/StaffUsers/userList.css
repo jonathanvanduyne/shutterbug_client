@@ -1,73 +1,159 @@
-/* userList.css */
-
-/* Container styles */
+/* Light Mode */
 .user-list-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-  
-  .header-links {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 20px;
-  }
-  
-  .user-list-link,
-  .flagged-posts-link {
-    font-size: 20px;
-    text-decoration: none;
-    color: #333;
-  }
-  
-  /* User card styles */
-  .user-card {
-    background-color: #fff;
-    border: 1px solid #e0e0e0;
-    margin-bottom: 20px;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .divider-line {
-    margin: 10px 0;
-    border: 0;
-    border-top: 1px solid #e0e0e0;
-  }
-  
-  /* User info styles */
-  .user-info {
-    margin-bottom: 20px;
-  }
-  
-  .user-username {
-    font-weight: bold;
-  }
-  
-  .user-fullname .user-link {
-    text-decoration: none;
-    color: #333;
-  }
-  
-  .user-email {
-    color: #777;
-  }
-  
-  /* User action styles */
-  .user-active {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-  }
-  
-  .user-role input[type="radio"] {
-    margin-right: 10px;
-  }
-  
-  /* Styling for checked radio buttons */
-  .user-role input[type="radio"]:checked + label {
-    font-weight: bold;
-    color: #007bff;
-  }
-  
+  background-color: #ffffff;
+  color: #333333;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-links {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 66%; /* 2/3 of the width */
+  margin-bottom: 20px;
+}
+
+.user-list-link,
+.flagged-posts-link {
+  font-size: 18px;
+  text-decoration: none;
+  color: #007bff;
+  transition: color 0.3s ease;
+}
+
+.user-list-link:hover,
+.flagged-posts-link:hover {
+  color: #0056b3;
+}
+
+.user-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.user-card {
+  width: calc(33.33% - 20px);
+  margin-right: 20px;
+  margin-bottom: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #ffffff;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.user-card:hover {
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.3);
+}
+
+.divider-line {
+  border: 0;
+  height: 1px;
+  background-color: #ccc;
+  margin: 10px 0;
+}
+
+.user-info {
+  margin-top: 10px;
+}
+
+.user-username {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.user-fullname {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.user-link {
+  text-decoration: none;
+  color: #007bff;
+  transition: color 0.3s ease;
+}
+
+.user-link:hover {
+  color: #0056b3;
+}
+
+.user-email {
+  font-size: 16px;
+}
+
+.user-active {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.user-active span {
+  margin-right: 5px;
+}
+
+.user-role {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.user-role label {
+  margin-right: 10px;
+}
+
+/* Dark Mode */
+.dark .user-list-container {
+  background-color: #333333;
+  color: #ffffff;
+  box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.1);
+}
+
+.dark .header-links {
+  color: #ffffff;
+}
+
+.dark .user-list-link,
+.dark .flagged-posts-link {
+  color: #007bff;
+}
+
+.dark .user-list-link:hover,
+.dark .flagged-posts-link:hover {
+  color: #0056b3;
+}
+
+.dark .user-card {
+  background-color: #333333;
+  border: 1px solid #555555;
+  box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.1);
+}
+
+.dark .user-card:hover {
+  box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.3);
+}
+
+.dark .divider-line {
+  background-color: #555555;
+}
+
+.dark .user-username,
+.dark .user-email {
+  color: #ffffff;
+}
+
+.dark .user-link {
+  color: #007bff;
+}
+
+.dark .user-link:hover {
+  color: #0056b3;
+}

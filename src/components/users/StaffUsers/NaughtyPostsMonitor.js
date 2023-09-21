@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import {
-    UnapprovePost, deletePost, flagPost, getFlaggedPosts, getPosts, getUnapprovedPosts,
+    UnapprovePost,
+    deletePost,
+    flagPost,
+    getFlaggedPosts,
+    getPosts,
+    getUnapprovedPosts,
 } from "../../../managers/posts.js";
 import { getCurrentUser, getUsers } from "../../../managers/users.js";
 import { getTags } from "../../../managers/TagManager.js";
@@ -53,7 +58,6 @@ export const FlaggedAndUnapprovedPostList = () => {
             console.error("Error fetching data:", error);
         }
     };
-
 
     useEffect(() => {
         getData();
@@ -133,15 +137,12 @@ export const FlaggedAndUnapprovedPostList = () => {
         return (
             <div>
                 <button
-                    className={`material-symbols-outlined flag-button ${isFlagged ? "flagged" : ""
+                    className={`flag-button ${isFlagged ? "flagged" : ""
                         }`}
                     onClick={() => flagPost(post).then(() => getData())}
                 >
-                    Flag
-                </button>
-                <p className="flag-post-text">
                     {!isFlagged ? "Flag this post" : "Unflag this post"}
-                </p>
+                </button>
             </div>
         );
     };
@@ -153,7 +154,7 @@ export const FlaggedAndUnapprovedPostList = () => {
         return (
             <div>
                 <button
-                    className={`material-symbols-outlined approve-button ${isApproved ? "approved" : "disapproved"
+                    className={`approve-button ${isApproved ? "approved" : "disapproved"
                         }`}
                     onClick={() => UnapprovePost(post).then(() => getData())}
                 >
@@ -163,9 +164,8 @@ export const FlaggedAndUnapprovedPostList = () => {
         );
     };
 
-
     return (
-        <div className="post-list-container">
+        <div className="flagged-unapproved-post-list-container">
             <div className="header-links">
                 <Link to="/users" className="user-list-link">
                     List of Users
@@ -240,7 +240,6 @@ export const FlaggedAndUnapprovedPostList = () => {
                     />
                 </div>
             </div>
-
 
             <div className="reset-filters-container">
                 <button onClick={resetFilters} className="reset-filters-button">
@@ -317,4 +316,4 @@ export const FlaggedAndUnapprovedPostList = () => {
             </article>
         </div>
     );
-}      
+};
