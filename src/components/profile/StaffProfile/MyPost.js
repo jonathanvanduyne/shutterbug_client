@@ -29,7 +29,6 @@ export const MyPosts = ({ currentUser }) => {
     });
     const [activeCommentInputPost, setActiveCommentInputPost] = useState(0);
 
-
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // UseEffect to get all posts, users, categories, and tags
     const getData = () => {
@@ -110,7 +109,7 @@ export const MyPosts = ({ currentUser }) => {
     const ShowOnlyCurrentUserPosts = () => {
         const currentUserPosts = filteredPosts.filter((post) => post?.shutterbug_user?.id === currentUser.id);
         setFilteredPosts(currentUserPosts);
-    }
+    };
 
     const resetFilters = () => {
         setFilters({
@@ -137,13 +136,16 @@ export const MyPosts = ({ currentUser }) => {
         };
 
         return currentUser.id === post?.shutterbug_user?.id ? (
-            <button onClick={handleDelete}>Delete Post</button>
+            <button className="delete-post-button" onClick={handleDelete}>
+                Delete Post
+            </button>
         ) : null;
     };
 
     const editButton = (post) => {
         return currentUser.id === post?.shutterbug_user?.id ? (
             <button
+                className="edit-post-button"
                 onClick={() => {
                     navigate(`/my-posts/${post.id}/edit`);
                 }}
@@ -156,10 +158,12 @@ export const MyPosts = ({ currentUser }) => {
     const isUnnapproved = (post) => {
         if (post.approved === false) {
             return (
-                <p className="unapproved-post">Post is unnapproved by Admin and cannot be seen on Shutterbug, please revise or delete.</p>
-            )
+                <p className="unapproved-post">
+                    Post is unapproved by Admin and cannot be seen on Shutterbug, please revise or delete.
+                </p>
+            );
         }
-    }
+    };
 
     const flagButton = (post) => {
         const isFlagged = post?.flagged;
@@ -168,8 +172,7 @@ export const MyPosts = ({ currentUser }) => {
             <div>
                 <button
                     className={`material-symbols-outlined flag-button ${isFlagged ? 'flagged' : ''}`}
-                    onClick={() =>
-                        flagPost(post).then(() => getData())}
+                    onClick={() => flagPost(post).then(() => getData())}
                 >
                     Flag
                 </button>
@@ -178,7 +181,6 @@ export const MyPosts = ({ currentUser }) => {
         ) : null;
     };
 
-
     const addCommentButton = (post) => {
         // Hide the add comment button if in comment input mode
         if (activeCommentInputPost === post.id) {
@@ -186,6 +188,7 @@ export const MyPosts = ({ currentUser }) => {
         }
         return (
             <button
+                className="add-comment-button"
                 onClick={() => {
                     setCommentForm({ post: post.id, content: "" }); // Clear the comment form
                     setActiveCommentInputPost(post.id);
@@ -201,7 +204,6 @@ export const MyPosts = ({ currentUser }) => {
         if (activeCommentInputPost !== post.id) {
             return null;
         }
-
 
         return (
             <form className="comment-form">
@@ -225,7 +227,7 @@ export const MyPosts = ({ currentUser }) => {
                     </div>
                 </fieldset>
                 <button
-                    className="btn btn-primary"
+                    className="btn btn-primary save-comment-button"
                     onClick={(evt) => {
                         evt.preventDefault();
                         postComment(commentForm).then(() => {
@@ -255,7 +257,9 @@ export const MyPosts = ({ currentUser }) => {
         };
 
         return currentUser?.id === comment?.shutterbug_user?.id ? (
-            <button onClick={handleDelete}>Delete Comment</button>
+            <button className="delete-comment-button" onClick={handleDelete}>
+                Delete Comment
+            </button>
         ) : null;
     };
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -264,7 +268,10 @@ export const MyPosts = ({ currentUser }) => {
         <div className="post-list-container">
             <h1 className="page-title">Your Posts</h1>
 
-            <button onClick={() => navigate("/postform")} className="button is-link">
+            <button
+                onClick={() => navigate("/postform")}
+                className="add-post-button"
+            >
                 Add New Post
             </button>
 
@@ -280,7 +287,10 @@ export const MyPosts = ({ currentUser }) => {
                     >
                         <option value={0}>Select a Category</option>
                         {categories.map((category) => (
-                            <option key={`catFilter--${category.id}`} value={category.id}>
+                            <option
+                                key={`catFilter--${category.id}`}
+                                value={category.id}
+                            >
                                 {category.label}
                             </option>
                         ))}
@@ -298,7 +308,10 @@ export const MyPosts = ({ currentUser }) => {
                     >
                         <option value={0}>Filter By Shutterbug</option>
                         {users.map((user) => (
-                            <option key={`userFilter--${user.id}`} value={user.id}>
+                            <option
+                                key={`userFilter--${user.id}`}
+                                value={user.id}
+                            >
                                 {user.full_name}
                             </option>
                         ))}
@@ -309,10 +322,17 @@ export const MyPosts = ({ currentUser }) => {
                     <label htmlFor="tag" className="filter-label">
                         Tag:
                     </label>
-                    <select name="tag" className="filter-select" onChange={handleTagChange}>
+                    <select
+                        name="tag"
+                        className="filter-select"
+                        onChange={handleTagChange}
+                    >
                         <option value={0}>Select a tag</option>
                         {tags.map((tag) => (
-                            <option key={`tagFilter--${tag.id}`} value={tag.id}>
+                            <option
+                                key={`tagFilter--${tag.id}`}
+                                value={tag.id}
+                            >
                                 {tag.label}
                             </option>
                         ))}
@@ -325,12 +345,13 @@ export const MyPosts = ({ currentUser }) => {
                         value={titleInput}
                         placeholder="Search by Post Title"
                         onChange={handleTitleChange}
+                        className="title-filter-input"
                     />
                 </div>
             </div>
 
             <div className="reset-filters-container">
-                <button onClick={resetFilters} className="button reset-filters">
+                <button onClick={resetFilters} className="reset-filters-button">
                     Reset Filters
                 </button>
             </div>
@@ -341,11 +362,13 @@ export const MyPosts = ({ currentUser }) => {
                         <div className="post-card" key={`postList--${post.id}`}>
                             {isUnnapproved(post)}
                             <div className="post-title">
-                                <Link to={`/posts/${post.id}`}>{post.title}</Link>
+                                <Link to={`/posts/${post.id}`} className="post-link">
+                                    {post.title}
+                                </Link>
                             </div>
                             <div className="post-actions">
                                 {editButton(post)}
-
+                                {deleteButton(post)}
                             </div>
                             <div className="post-details">
                                 <div className="post-image">
@@ -354,7 +377,10 @@ export const MyPosts = ({ currentUser }) => {
                                 <div className="post-info">
                                     <div className="post-shutterbug">
                                         By{" "}
-                                        <Link to={`/users/${post?.shutterbug_user?.id}`}>
+                                        <Link
+                                            to={`/users/${post?.shutterbug_user?.id}`}
+                                            className="shutterbug-link"
+                                        >
                                             {post?.user_full_name}
                                         </Link>
                                     </div>
@@ -368,25 +394,33 @@ export const MyPosts = ({ currentUser }) => {
                                             />
                                         ))}
                                     </div>
-                                    <div className="post-content">"{post?.content}"</div>
+                                    <div className="post-content">
+                                        "{post?.content}"
+                                    </div>
                                     <div className="post-published">
                                         Published: {post?.published_on}
                                     </div>
                                     <div className="post-tags">
-                                        Tags: {post.tags.map((tag) => tag.label).join(", ")}
+                                        Tags:{" "}
+                                        {post.tags.map((tag) => tag.label).join(", ")}
                                     </div>
                                 </div>
                             </div>
                             <div className="post-comments">
-                                Comments: {comments
+                                Comments:{" "}
+                                {comments
                                     .filter((comment) => comment?.post?.id === post.id)
                                     .map((comment) => (
-                                        <div key={`comment-${comment.id}`} className="comment">
+                                        <div
+                                            key={`comment-${comment.id}`}
+                                            className="comment"
+                                        >
                                             <Link
                                                 to={`/users/${comment?.shutterbug_user?.id}`}
                                                 className="user-link"
                                             >
-                                                {comment?.shutterbug_user?.full_name + ": "}
+                                                {comment?.shutterbug_user?.full_name +
+                                                    ": "}
                                             </Link>
                                             {comment.content}
                                             {deleteCommentButton(comment)}
@@ -395,7 +429,7 @@ export const MyPosts = ({ currentUser }) => {
                                 {addCommentButton(post)}
                                 {commentInput(post)}
                             </div>
-                            {deleteButton(post)}
+                            {flagButton(post)}
                         </div>
                     ))
                 ) : (
@@ -406,4 +440,4 @@ export const MyPosts = ({ currentUser }) => {
             </div>
         </div>
     );
-}
+};

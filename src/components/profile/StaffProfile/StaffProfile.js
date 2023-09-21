@@ -36,25 +36,27 @@ export const StaffProfile = () => {
                 src={currentUser?.profile_image_url}
                 alt="Profile Picture"
             />
-            <p className="profile-info">
-                <span className="profile-info-label">First Name:</span>{" "}
-                {currentUser?.user?.first_name}
-            </p>
-            <p className="profile-info">
-                <span className="profile-info-label">Last Name:</span>{" "}
-                {currentUser?.user?.last_name}
-            </p>
-            <p className="profile-info">
-                <span className="profile-info-label">Email:</span>{" "}
-                {currentUser?.user?.email}
-            </p>
-            <p className="profile-info">
-                <span className="profile-info-label">Username:</span>{" "}
-                {currentUser?.user?.username}
-            </p>
-            <p className="profile-bio">
-                <span className="profile-info-label">Bio:</span> {currentUser?.bio}
-            </p>
+            <div className="profile-details">
+                <p className="profile-info">
+                    <span className="profile-info-label">First Name:</span>{" "}
+                    {currentUser?.user?.first_name}
+                </p>
+                <p className="profile-info">
+                    <span className="profile-info-label">Last Name:</span>{" "}
+                    {currentUser?.user?.last_name}
+                </p>
+                <p className="profile-info">
+                    <span className="profile-info-label">Email:</span>{" "}
+                    {currentUser?.user?.email}
+                </p>
+                <p className="profile-info">
+                    <span className="profile-info-label">Username:</span>{" "}
+                    {currentUser?.user?.username}
+                </p>
+                <p className="profile-bio">
+                    <span className="profile-info-label">Bio:</span> {currentUser?.bio}
+                </p>
+            </div>
         </div>
     );
 };

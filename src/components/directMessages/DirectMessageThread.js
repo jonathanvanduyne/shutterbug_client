@@ -56,6 +56,11 @@ export const DirectMessageThread = () => {
             <div className="direct-message-list">
                 {threadMessages.map((message, index) => (
                     <div className="direct-message-card" key={message.id}>
+                            {index === 0 && ( // Render the form only for the first message
+                                <div className="direct-message-reply-function">
+                                    <ReplyToDirectMessageForm currentUser={currentUser} sender={sender} threadMessages={threadMessages} message={message} getData={getData} />
+                                </div>
+                            )}
                         <div className="profile-picture">
                             <img src={message.sender.profile_image_url} alt="Profile" />
                         </div>
@@ -69,11 +74,6 @@ export const DirectMessageThread = () => {
                             <div className="direct-message-created-on">
                                 {message.created_on}
                             </div>
-                            {index === 0 && ( // Render the form only for the first message
-                                <div className="direct-message-reply-function">
-                                    <ReplyToDirectMessageForm currentUser={currentUser} sender={sender} threadMessages={threadMessages} message={message} getData={getData} />
-                                </div>
-                            )}
                         </div>
                     </div>
                 ))}

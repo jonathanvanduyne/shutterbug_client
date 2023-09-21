@@ -18,7 +18,7 @@ export const ReplyToDirectMessageForm = ({ currentUser, getData, message }) => {
 
         const messageToSendToAPI = {
             content: reply.content,
-            recipient: reply.recipient,
+            recipient_id: reply.recipient,
         };
 
         fetch("http://localhost:8000/direct_messages", {
