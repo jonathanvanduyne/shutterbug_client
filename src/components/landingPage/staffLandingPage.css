@@ -16,8 +16,7 @@
     border-radius: 8px;
     border: 1px solid rgba(0, 0, 0, 0.1);
     /* Subtle border */
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-    /* Subtle box shadow */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* More defined box shadow */
     text-align: center;
 }
 
@@ -32,6 +31,12 @@
     font-size: 1.5rem;
     /* Increased font size for paragraphs */
     margin: 10px 0;
+}
+
+/* Subtle dark mode border and silver shadow */
+.landing-page.dark .landing-page-greeting {
+    border: 1px solid white; /* Subtle white border for dark mode */
+    box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.1); /* More defined box shadow for dark mode */
 }
 
 /* Rest of the CSS remains the same */

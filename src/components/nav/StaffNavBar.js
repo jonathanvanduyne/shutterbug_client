@@ -27,7 +27,7 @@ export const StaffNavBar = ({ token, setToken }) => {
             <div className="navbar-brand">
                 <Link to="/" className="navbar-item logo">
                     <img src={Logo} height="3rem" alt="Shutterbug Logo" />
-                    <h1 className="title">ShutterBug</h1>
+                    <h1 className="navbar-title">ShutterBug</h1>
                 </Link>
 
                 <a

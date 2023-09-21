@@ -41,17 +41,6 @@ export const StaffLandingPageGreeting = ({ token, setToken }) => {
                         <Link to={`/profile`}>My Profile</Link>
                     </li>
                 </ul>
-                {token && (
-                    <button
-                        className="logout-button"
-                        onClick={() => {
-                            setToken("");
-                            navigate("/login");
-                        }}
-                    >
-                        Logout
-                    </button>
-                )}
             </div>
         </div>
     );

@@ -111,18 +111,10 @@
     /* Preserve aspect ratio */
 }
 
-/* Hover effect for buttons */
-.flying-button:hover {
-    background-color: #000;
-    /* Black background on hover */
-    color: #fff;
-    /* White text color on hover */
-}
-
 /* Style the flying button */
 .flying-button.flying {
     position: absolute;
-    animation: flyingAnimation 10s linear infinite;
+    animation: flyingAnimation 20s linear infinite;
 }
 
 /* Style the close button */
@@ -169,18 +161,10 @@
     /* Preserve aspect ratio */
 }
 
-/* Hover effect for the Mr. Freeze button */
-.flying-button2:hover {
-    background-color: #000;
-    /* Black background on hover */
-    color: #fff;
-    /* White text color on hover */
-}
-
 /* Style the flying button */
 .flying-button2.flying {
     position: absolute;
-    animation: flyingAnimation2 11s linear infinite;
+    animation: flyingAnimation2 21s linear infinite;
 }
 
 /* Style the flying-button3 */
@@ -208,18 +192,10 @@
     /* Preserve aspect ratio */
 }
 
-/* Hover effect for flying-button3 */
-.flying-button3:hover {
-    background-color: #000;
-    /* Black background on hover */
-    color: #fff;
-    /* White text color on hover */
-}
-
 /* Style the flying button for flying-button3 */
 .flying-button3.flying {
     position: absolute;
-    animation: flyingAnimation3 12s linear infinite;
+    animation: flyingAnimation3 22s linear infinite;
 }
 
 /* Apply the flying-button class to the Riddler button */
@@ -247,18 +223,10 @@
     /* Preserve aspect ratio */
 }
 
-/* Hover effect for the Riddler button */
-.flying-button4:hover {
-    background-color: #000;
-    /* Black background on hover */
-    color: #fff;
-    /* White text color on hover */
-}
-
 /* Style the flying button for flying-button4 */
 .flying-button4.flying {
     position: absolute;
-    animation: flyingAnimation4 13s linear infinite;
+    animation: flyingAnimation4 23s linear infinite;
 }
 
 /* Apply the flying-button class to the Poison Ivy button */
@@ -286,18 +254,10 @@
     /* Preserve aspect ratio */
 }
 
-/* Hover effect for the Poison Ivy button */
-.flying-button5:hover {
-    background-color: #000;
-    /* Black background on hover */
-    color: #fff;
-    /* White text color on hover */
-}
-
 /* Style the flying button for flying-button5 */
 .flying-button5.flying {
     position: absolute;
-    animation: flyingAnimation5 14s linear infinite;
+    animation: flyingAnimation5 24s linear infinite;
 }
 
 /* Apply the flying-button class to the Penguin button */
@@ -325,18 +285,10 @@
     /* Preserve aspect ratio */
 }
 
-/* Hover effect for the Penguin button */
-.flying-button6:hover {
-    background-color: #000;
-    /* Black background on hover */
-    color: #fff;
-    /* White text color on hover */
-}
-
 /* Style the flying button for flying-button6 */
 .flying-button6.flying {
     position: absolute;
-    animation: flyingAnimation6 15s linear infinite;
+    animation: flyingAnimation6 25s linear infinite;
 }
 
 /* Apply the flying-button class to the Harley Quinn button */
@@ -364,18 +316,10 @@
     /* Preserve aspect ratio */
 }
 
-/* Hover effect for the Harley Quinn button */
-.flying-button7:hover {
-    background-color: #000;
-    /* Black background on hover */
-    color: #fff;
-    /* White text color on hover */
-}
-
 /* Style the flying button for flying-button7 */
 .flying-button7.flying {
     position: absolute;
-    animation: flyingAnimation7 12s linear infinite;
+    animation: flyingAnimation7 22s linear infinite;
 }
 
 /* Hover effect for the close button */

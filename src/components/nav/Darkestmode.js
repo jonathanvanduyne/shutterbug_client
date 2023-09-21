@@ -24,14 +24,11 @@ export const DarkestModeModal = ({ triggerDarkestMode, setTriggerDarkestMode }) 
         "bane-button",
     ]);
 
-    const body = document.body;
-
     const flyButton = (buttonId) => {
         if (!isFlying) {
             setIsFlying(true);
         };
     }
-        
 
     const handleButtonClick = (buttonId) => {
         // Remove the clicked button from the remainingButtons array

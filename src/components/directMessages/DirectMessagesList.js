@@ -1,7 +1,10 @@
+// DirectMessagesList.js
+
 import React, { useState, useEffect } from "react";
 import { getDirectMessages } from "../../managers/directMessages.js";
 import { getCurrentUser } from "../../managers/users.js";
 import { Link, useNavigate } from "react-router-dom";
+import "./directMessagesList.css"; // Import your CSS file
 
 export const DirectMessagesList = () => {
     const [currentUserArray, setCurrentUserArray] = useState([]);
@@ -78,22 +81,27 @@ export const DirectMessagesList = () => {
     };
 
     return (
-        <div>
-            <div className="Title block">
+        <div className="direct-messages-container">
+            <div className="title-block">
                 <h1 className="title">{currentUser?.user?.first_name}'s Threads</h1>
             </div>
             <div className="direct-message-list">
                 {filteredThreads.map((thread) => (
-                    <div className="direct-message" key={thread.id}>
-                        <Link to={`/direct_messages_thread/${thread.otherUser.id}`}>
-                            <div className="direct-message__sender">
-                                {thread.otherUser.first_name} {thread.otherUser.last_name}
+                    <div className="direct-message-card" key={thread.id}>
+                        <Link to={`/direct_messages_thread/${thread.otherUser.id}`} className="message-link">
+                            <div className="profile-picture">
+                                <img src={thread?.latestMessage?.sender?.profile_image_url} alt="profile" />
                             </div>
-                            <div className="direct-message__profile_picture">
-                                "{thread.latestMessage.content}""
-                            </div>
-                            <div className="direct-message__created_on">
-                                {thread.latestMessage.created_on}
+                            <div className="message-details">
+                                <div className="direct-message-sender">
+                                    {thread.otherUser.first_name} {thread.otherUser.last_name}
+                                </div>
+                                <div className="direct-message-content">
+                                    "{thread.latestMessage.content}"
+                                </div>
+                                <div className="direct-message-created-on">
+                                    {thread.latestMessage.created_on}
+                                </div>
                             </div>
                         </Link>
                     </div>

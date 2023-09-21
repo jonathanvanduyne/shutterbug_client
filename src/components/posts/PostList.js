@@ -60,7 +60,7 @@ export const PostList = () => {
 
     filteredResults = filteredResults.filter((post) => post.approved === true);
     filteredResults = filteredResults.filter((post) => post.user_is_active === true);
-    
+
     if (filters.categoryId !== 0) {
       filteredResults = filteredResults.filter(
         (post) => post?.category?.id === filters.categoryId
@@ -123,7 +123,6 @@ export const PostList = () => {
     });
     setTitleInput("");
   };
-
   const deleteButton = (postId) => {
     const handleDelete = () => {
       const shouldDelete = window.confirm(
@@ -137,13 +136,16 @@ export const PostList = () => {
     };
 
     return currentUser.id === postId ? (
-      <button onClick={handleDelete}>Delete Post</button>
+      <button className="delete-post-button" onClick={handleDelete}>
+        Delete Post
+      </button>
     ) : null;
   };
 
   const editButton = (post) => {
     return currentUser.id === post?.shutterbug_user?.id ? (
       <button
+        className="edit-post-button"
         onClick={() => {
           navigate(`/my-posts/${post.id}/edit`);
         }}
@@ -155,21 +157,19 @@ export const PostList = () => {
 
   const flagButton = (post) => {
     const isFlagged = post?.flagged;
-  
+
     return currentUser.id !== post?.shutterbug_user?.id ? (
       <div>
         <button
-          className={`material-symbols-outlined flag-button ${isFlagged ? 'flagged' : ''}`}
-          onClick={() => 
-            flagPost(post).then(() => getData())}
+          className={`flag-post-button ${isFlagged ? 'flagged' : ''
+            }`}
+          onClick={() => flagPost(post).then(() => getData())}
         >
-          Flag
+          {isFlagged ? "Post is Flagged" : "Flag this Post"}
         </button>
-        <p className="flag-post-text">{!isFlagged ? "Flag this post" : "Unflag this post"}</p>
       </div>
     ) : null;
   };
-
 
   const addCommentButton = (post) => {
     // Hide the add comment button if in comment input mode
@@ -178,6 +178,7 @@ export const PostList = () => {
     }
     return (
       <button
+        className="add-comment-button"
         onClick={() => {
           setCommentForm({ post: post.id, content: "" }); // Clear the comment form
           setActiveCommentInputPost(post.id);
@@ -189,69 +190,71 @@ export const PostList = () => {
   };
 
   const commentInput = (post) => {
-  // Show the comment input and submit button only for the active comment input post
-  if (activeCommentInputPost !== post.id) {
-    return null;
-  }
-  
-  return (
-    <form className="comment-form">
-      <fieldset>
-        <div className="form-group">
-          <label htmlFor="content">Comment:</label>
-          <input
-            type="text"
-            name="content"
-            required
-            autoFocus
-            className="form-control"
-            placeholder={`Let ${post?.user_first_name} know what you think...`}
-            value={commentForm.content}
-            onChange={(evt) => {
-              const copy = { ...commentForm };
-              copy.content = evt.target.value;
-              setCommentForm(copy);
-            }}
-          />
-        </div>
-      </fieldset>
-      <button
-        className="btn btn-primary"
-        onClick={(evt) => {
-          evt.preventDefault();
-          postComment(commentForm).then(() => {
-            // Reset the comment input and hide it
-            setCommentForm({ post: 0, content: "" });
-            setActiveCommentInputPost(0);
-            getData();
-          });
-        }}
-      >
-        Save Comment
-      </button>
-    </form>
-  );
-};
-
-const deleteCommentButton = (comment) => {
-  const handleDelete = () => {
-    const shouldDelete = window.confirm(
-      "Are you sure you want to delete this comment?"
-    );
-    if (shouldDelete) {
-      deleteComment(comment.id).then(() => {
-        getAllComments().then((commentsData) => setComments(commentsData));
-      });
+    // Show the comment input and submit button only for the active comment input post
+    if (activeCommentInputPost !== post.id) {
+      return null;
     }
+
+    return (
+      <form className="comment-form">
+        <fieldset>
+          <div className="form-group">
+            <label htmlFor="content">Comment:</label>
+            <input
+              type="text"
+              name="content"
+              required
+              autoFocus
+              className="comment-input"
+              placeholder={`Let ${post?.user_first_name} know what you think...`}
+              value={commentForm.content}
+              onChange={(evt) => {
+                const copy = { ...commentForm };
+                copy.content = evt.target.value;
+                setCommentForm(copy);
+              }}
+            />
+          </div>
+        </fieldset>
+        <button
+          className="comment-submit-button"
+          onClick={(evt) => {
+            evt.preventDefault();
+            postComment(commentForm).then(() => {
+              // Reset the comment input and hide it
+              setCommentForm({ post: 0, content: "" });
+              setActiveCommentInputPost(0);
+              getData();
+            });
+          }}
+        >
+          Save Comment
+        </button>
+      </form>
+    );
   };
 
-  return currentUser.id === comment?.shutterbug_user?.id ? (
-    <button onClick={handleDelete}>Delete Comment</button>
-  ) : null;
-};
+  const deleteCommentButton = (comment) => {
+    const handleDelete = () => {
+      const shouldDelete = window.confirm(
+        "Are you sure you want to delete this comment?"
+      );
+      if (shouldDelete) {
+        deleteComment(comment.id).then(() => {
+          getAllComments().then((commentsData) => setComments(commentsData));
+        });
+      }
+    };
+
+    return currentUser.id === comment?.shutterbug_user?.id ? (
+      <button className="delete-comment-button" onClick={handleDelete}>
+        Delete Comment
+      </button>
+    ) : null;
+  };
 
 
-  return (
+  return (<>
     <div className="post-list-container">
       <h1 className="page-title">Posts</h1>
 
@@ -344,19 +347,23 @@ const deleteCommentButton = (comment) => {
               <div className="post-divider">
                 <hr className="divider-line" />
               </div>
-              <div className="post-title">
-                <Link to={`/posts/${post.id}`} className="post-link">
-                  {post.title}
-                </Link>
+              <div className="post-title-author">
+                <div className="post-title">
+                  <Link to={`/posts/${post.id}`} className="post-link">
+                    {post.title}
+                  </Link>
+                </div>
+                <div className="post-shutterbug">
+                  By{" "}
+                  <Link to={`/users/${post?.shutterbug_user?.id}`} className="user-link">
+                    {post?.user_full_name}
+                  </Link>
+                </div>
               </div>
-              <div className="flag-post-button">{flagButton(post)}</div>
-              <div className="edit-post-button">{editButton(post)}</div>
-              <div className="delete-post-button">{deleteButton(post.id)}</div>
-              <div className="post-shutterbug">
-                By{" "}
-                <Link to={`/users/${post?.shutterbug_user?.id}`} className="user-link">
-                  {post?.user_full_name}
-                </Link>
+              <div className="button-container">
+                <div>{flagButton(post)}</div>
+                <div>{editButton(post)}</div>
+                <div>{deleteButton(post.id)}</div>
               </div>
               <img
                 className="post-image"
@@ -395,13 +402,14 @@ const deleteCommentButton = (comment) => {
                       {deleteCommentButton(comment)}
                     </div>
                   ))}
-                  {addCommentButton(post)}
-                  {commentInput(post)} 
+                {addCommentButton(post)}
+                {commentInput(post)}
               </div>
             </section>
           );
         })}
       </article>
     </div>
+  </>
   );
 }

@@ -1,17 +1,29 @@
 /* PostList.css */
-
-/* Container for the entire post list */
+/* Shared Styles */
 .post-list-container {
-    max-width: 800px;
+    max-width: auto;
     margin: 0 auto;
     padding: 20px;
-    background-color: #f0f0f0;
+    background-color: white;
+    color: #333;
+    /* Default text color in light mode */
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+/* Dark Mode Styles */
+.post-list-container .dark {
+    background-color: #222222;
+    /* Dark background color */
+    color: #fff;
+    /* Text color in dark mode */
 }
 
 /* Page title */
 .page-title {
     font-size: 24px;
     margin-bottom: 20px;
+    color: blue;
+    /* Green color for page title */
 }
 
 /* Button to add a new post */
@@ -79,10 +91,40 @@
     background-color: #ddd;
 }
 
+/* Add these styles to your PostList.css file */
+.edit-post-button,
+.delete-post-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 10px 20px;
+    margin-right: 10px;
+}
+
+.delete-post-button {
+    background-color: red;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 10px 20px;
+    margin-right: 10px;
+}
+
+/* Hover effect for edit and delete buttons */
+.edit-post-button:hover,
+.delete-post-button:hover {
+    filter: brightness(1.2);
+}
+
 /* Post items */
 .posts {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    width: auto;
 }
 
 /* Individual post */
@@ -117,13 +159,116 @@
         'wght' 400,
         'GRAD' 0,
         'opsz' 24;
-    color: red; /* Default color */
+    color: red;
+    /* Default color for flag button */
     background-color: #fff;
-    transition: color 0.3s ease; /* Add a transition for smooth color change */
+    transition: color 0.3s ease;
+    /* Add a transition for smooth color change */
 }
 
 /* Styles for the flagged state */
 .material-symbols-outlined.flag-button.flagged {
-    color: red; /* Change color to red for flagged posts */
+    color: red;
+    /* Keep color red for flagged posts */
     background-color: yellow;
+}
+
+/* Delete and Edit button container */
+.button-container {
+    display: flex;
+    flex-direction: column; /* Stack buttons vertically */
+    align-items: flex-start; /* Align buttons to the start (left) of the container */
+    margin-top: 10px; /* Add margin to separate buttons from post content */
+}
+
+/* Delete button */
+button.delete-button,
+button.delete-comment-button {
+    background-color: red;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 10px 20px;
+    margin-right: 5px;
+    margin-bottom: 5px; /* Add margin between buttons */
+}
+
+/* Edit button */
+.edit-button {
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+}
+
+/* Add Comment button */
+.add-comment-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 10px 20px;
+}
+
+/* Comment input field */
+.comment-input {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Comment submit button */
+.comment-submit-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 10px 20px;
+}
+
+/* Author name (make it green) */
+.post-shutterbug .user-link {
+    color: #007bff;
+    /* Green color for author name */
+    text-decoration: none;
+}
+
+/* Hover effect for buttons */
+button:hover {
+    filter: brightness(1.2);
+    /* Slight increase in brightness on hover */
+}
+
+/* Dark mode styling */
+.dark {
+    background-color: #121212;
+    color: #fff;
+}
+
+.dark .post {
+    background-color: #333;
+    border: 1px solid #555;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+}
+
+.dark .post-link {
+    color: #4CAF50;
+}
+
+.dark .add-post-button,
+.dark .current-user-posts-button,
+.dark .reset-filters-button,
+.dark .edit-button,
+.dark .add-comment-button,
+.dark .comment-submit-button,
+.dark .delete-button,
+.dark .delete-comment-button {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.dark button:hover {
+    filter: brightness(1.2);
 }
