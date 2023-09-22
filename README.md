@@ -61,7 +61,7 @@ npm start
 ```
 3. Login credentials: (Admin = Belle, User = Daniel)
 ```txt
-username: 	belle_gen_z_queen (default)
+username: belle_gen_z_queen (default)
 password: shutterbug (default)
 ```
 ```txt
