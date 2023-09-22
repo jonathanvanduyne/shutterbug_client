@@ -12,7 +12,6 @@ To add a spice of fun to the application, I also created darkEST mode. When dark
 [![Python](https://img.shields.io/badge/Python%20-%233776AB.svg?&style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/) 
 ![Visual Studio Code](https://img.shields.io/badge/VSCode%20-%23007ACC.svg?&style=for-the-badge&logo=visual-studio-code&logoColor=white)
 
- 
 ## To Get Started
 
 ### Server Side
@@ -32,9 +31,11 @@ pipenv shell
 pipenv install django autopep8 pylint djangorestframework django-cors-headers pylint-django
 ```
 
-4. Migrate and seed database (DO WE NEED THIS??????)
+4. Migrate and seed database
 ```sh
 chmod u+x ./seed_database.sh
+```
+```sh
 ./seed_database.sh
 ```
 
