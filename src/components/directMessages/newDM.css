@@ -1,0 +1,77 @@
+/* Add this CSS to your dark mode stylesheet */
+.dm-form-container {
+    background-color: white;
+    color: black;
+    padding: 20px;
+}
+
+.dm-form {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.dm-form-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.dm-form-label {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.dm-form-select,
+.dm-form-textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    background-color: #333333;
+    border: 1px solid #555555;
+    color: #ffffff;
+}
+
+.dm-form-textarea {
+    height: 150px;
+}
+
+.dm-form-button {
+    background-color: #007bff;
+    color: #ffffff;
+    font-size: 16px;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.dm-form-button:hover {
+    background-color: #0056b3;
+}
+
+/* Add more styles as needed to match your design preferences */
+/* Dark Class for NewDMForm Module */
+
+.dark .dm-form-container {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+.dark .dm-form-label {
+    color: #ffffff;
+}
+
+.dark .dm-form-select,
+.dark .dm-form-textarea {
+    background-color: #333333;
+    border: 1px solid #555555;
+    color: #ffffff;
+}
+
+.dark .dm-form-button {
+    background-color: #007bff;
+    color: #ffffff;
+}
+
+.dark .dm-form-button:hover {
+    background-color: #0056b3;
+}

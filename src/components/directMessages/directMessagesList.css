@@ -1,0 +1,103 @@
+
+/* Container Styles */
+.direct-messages-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Title Styles */
+.title-block {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Direct Message List Styles */
+.direct-message-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Direct Message Card Styles */
+.direct-message-card {
+    background-color: #f5f5f5;
+    padding: 15px;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+.direct-message-card:hover {
+    background-color: #ddd;
+}
+
+/* Link Styles */
+.message-link {
+    text-decoration: none;
+    color: #333;
+    display: flex;
+    align-items: center;
+}
+
+/* Profile Picture Styles */
+.profile-picture img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+/* Message Details Styles */
+.message-details {
+    flex-grow: 1;
+}
+
+/* Direct Message Sender Styles */
+.direct-message-sender {
+    font-weight: bold;
+}
+
+/* Direct Message Content Styles */
+.direct-message-content {
+    margin-top: 5px;
+}
+
+/* Direct Message Created On Styles */
+.direct-message-created-on {
+    font-size: 12px;
+    color: #888;
+}
+
+/* Create New Thread Button Styles */
+.create-new-thread-button {
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+}
+
+.create-new-thread-button:hover {
+    background-color: #0056b3;
+}
+
+.direct-messages-container .dark {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #000000;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}

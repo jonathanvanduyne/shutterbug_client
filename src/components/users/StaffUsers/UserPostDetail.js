@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { deletePost, getPosts, getPostsByUser, viewUserPost } from "../../../managers/posts.js";
-import { getUsers } from "../../../managers/users.js";
+import { deletePost, flagPost, getPosts, getPostsByUser, viewUserPost } from "../../../managers/posts.js";
+import { getCurrentUser, getUsers } from "../../../managers/users.js";
 import { getCategories } from "../../../managers/categories.js";
 import { getTags } from "../../../managers/TagManager.js";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { getAllComments } from "../../../managers/comments.js";
+import { deleteComment, getAllComments, postComment } from "../../../managers/comments.js";
 
 export const UserDetailPosts = ({ user, updateData }) => {
     const [posts, setPosts] = useState([]);
@@ -22,6 +22,14 @@ export const UserDetailPosts = ({ user, updateData }) => {
     const [titleInput, setTitleInput] = useState("");
     const navigate = useNavigate();
     const { Id } = useParams();
+    const [currentUserArray, setCurrentUserArray] = useState([]);
+    const currentUser = currentUserArray[0];
+    const [commentForm, setCommentForm] = useState({
+        post: 0,
+        content: "",
+    });
+    const [activeCommentInputPost, setActiveCommentInputPost] = useState(0);
+
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // UseEffect to get all posts, users, categories, and tags
@@ -30,6 +38,7 @@ export const UserDetailPosts = ({ user, updateData }) => {
         getCategories().then((categoriesData) => setCategories(categoriesData));
         getTags().then((tagData) => setTags(tagData));
         getAllComments().then((commentsData) => setComments(commentsData));
+        getCurrentUser().then((currentUserArray) => setCurrentUserArray(currentUserArray));
     }
 
     useEffect(() => {
@@ -109,10 +118,143 @@ export const UserDetailPosts = ({ user, updateData }) => {
             tagId: 0,
         });
         setTitleInput("");
-    };
-                
+    }; 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    const deleteButton = (post) => {
+        if (post?.shutterbug_user?.id === currentUser?.id) {
+            return (
+                <button
+                    onClick={async () => {
+                        const shouldDelete = window.confirm("Are you sure you want to delete this post?");
+                        if (shouldDelete) {
+                            try {
+                                await deletePost(post?.id);
+                                navigate(`/posts`);
+                            } catch (error) {
+                                console.error("Error deleting post:", error);
+                            }
+                        }
+                    }}
+                    className="post-details__delete-button"
+                >
+                    Delete Post
+                </button>
+            );
+        }
 
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        return null;
+    };
+
+    const editButton = (post) => {
+        return currentUser?.id === post?.shutterbug_user?.id ? (
+            <button
+                onClick={() => {
+                    navigate(`/my-posts/${post.id}/edit`);
+                }}
+            >
+                Edit Post
+            </button>
+        ) : null;
+    };
+
+    const flagButton = (post) => {
+        const isFlagged = post?.flagged;
+
+        return currentUser?.id !== post?.shutterbug_user?.id ? (
+            <div>
+                <button
+                    className={`material-symbols-outlined flag-button ${isFlagged ? 'flagged' : ''}`}
+                    onClick={() =>
+                        flagPost(post).then(() => getData())}
+                >
+                    Flag
+                </button>
+                <p className="flag-post-text">{!isFlagged ? "Flag this post" : "Unflag this post"}</p>
+            </div>
+        ) : null;
+    };
+
+
+    const addCommentButton = (post) => {
+        // Hide the add comment button if in comment input mode
+        if (activeCommentInputPost === post.id) {
+            return null;
+        }
+        return (
+            <button
+                onClick={() => {
+                    setCommentForm({ post: post.id, content: "" }); // Clear the comment form
+                    setActiveCommentInputPost(post.id);
+                }}
+            >
+                Add Comment
+            </button>
+        );
+    };
+
+    const commentInput = (post) => {
+        // Show the comment input and submit button only for the active comment input post
+        if (activeCommentInputPost !== post.id) {
+            return null;
+        }
+
+
+        return (
+            <form className="comment-form">
+                <fieldset>
+                    <div className="form-group">
+                        <label htmlFor="content">Comment:</label>
+                        <input
+                            type="text"
+                            name="content"
+                            required
+                            autoFocus
+                            className="form-control"
+                            placeholder={`Let ${post?.user_first_name} know what you think!`}
+                            value={commentForm.content}
+                            onChange={(evt) => {
+                                const copy = { ...commentForm };
+                                copy.content = evt.target.value;
+                                setCommentForm(copy);
+                            }}
+                        />
+                    </div>
+                </fieldset>
+                <button
+                    className="btn btn-primary"
+                    onClick={(evt) => {
+                        evt.preventDefault();
+                        postComment(commentForm).then(() => {
+                            // Reset the comment input and hide it
+                            setCommentForm({ post: 0, content: "" });
+                            setActiveCommentInputPost(0);
+                            getData();
+                        });
+                    }}
+                >
+                    Save Comment
+                </button>
+            </form>
+        );
+    };
+
+    const deleteCommentButton = (comment) => {
+        const handleDelete = () => {
+            const shouldDelete = window.confirm(
+                "Are you sure you want to delete this comment?"
+            );
+            if (shouldDelete) {
+                deleteComment(comment.id).then(() => {
+                    getAllComments().then((commentsData) => setComments(commentsData));
+                });
+            }
+        };
+
+        return currentUser?.id === comment?.shutterbug_user?.id ? (
+            <button onClick={handleDelete}>Delete Comment</button>
+        ) : null;
+    };
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     return (
         <div className="post-list-container">
@@ -205,6 +347,8 @@ export const UserDetailPosts = ({ user, updateData }) => {
                                             {post?.user_full_name}
                                         </Link>
                                     </div>
+                                    <div className="flag-post-button">{flagButton(post)}</div>
+                                    <div className="edit-post-button">{editButton(post)}</div>
                                     <div className="reactions">
                                         {post.reactions.map((reaction, index) => (
                                             <img
@@ -234,11 +378,15 @@ export const UserDetailPosts = ({ user, updateData }) => {
                                                         {comment?.shutterbug_user?.full_name + ": "}
                                                     </Link>
                                                     {comment.content}
+                                                    {deleteCommentButton(comment)}
                                                 </div>
                                             ))}
+                                            {addCommentButton(post)}
+                                            {commentInput(post)}
                                     </div>
                                 </div>
                             </div>
+                            {deleteButton(post)}
                         </div>
                     ))
                 ) : (

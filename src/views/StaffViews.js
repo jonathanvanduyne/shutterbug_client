@@ -13,11 +13,12 @@ import { UserProfileWithPosts } from "../components/profile/staffProfile/Complet
 import { FlaggedAndUnapprovedPostList} from "../components/users/StaffUsers/NaughtyPostsMonitor.js"
 import { DirectMessagesList } from "../components/directMessages/DirectMessagesList.js"
 import { DirectMessageThread } from "../components/directMessages/DirectMessageThread.js"
+import { NewDMForm } from "../components/directMessages/NewDirectMessageForm.js"
 
 export const StaffViews = ({ token, setToken}) => {
   return <>
     <Routes>
-        <Route path="/" element={<StaffLandingPageGreeting/>}  />
+        <Route path="/" element={<StaffLandingPageGreeting token={token} setToken={setToken}/>}  />
         
         <Route path="/posts" element={<PostList />}  />
         <Route path="/postform" element={<PostForm token={token}/>}  />
@@ -33,6 +34,8 @@ export const StaffViews = ({ token, setToken}) => {
         
         <Route path="/direct_messages" element={<DirectMessagesList />} />
         <Route path="/direct_messages_thread/:userId" element={<DirectMessageThread />} />
+        <Route path="/newDM" element={<NewDMForm />} />
+
 
         <Route path="/profile" element={<UserProfileWithPosts />} />
         <Route path="/profile/editForm" element={<StaffEditProfile />} />

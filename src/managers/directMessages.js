@@ -17,3 +17,15 @@ export const getDirectMessages = async () => {
         throw error;
     }
 };
+
+export const createDirectMessage = async (message) => {
+    return fetch(`http://localhost:8000/direct_messages`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Token ${localStorage.getItem("auth_token")}`
+        },
+        body: JSON.stringify(message)
+    })
+        .then(response => response.json())
+}

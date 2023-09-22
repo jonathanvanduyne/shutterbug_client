@@ -1,0 +1,995 @@
+.darkest-mode-modal-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://cdn.wallpapersafari.com/48/14/vHdKBX.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    /* Ensure it's above other content */
+}
+
+.darkest-mode-modal-title {
+    position: fixed;
+    top: 20px;
+    /* Adjust the top position as needed */
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    font-size: 24px;
+    opacity: 0;
+    animation: fadeIn 2s ease-in .5s forwards;
+    /* Fade in over 10 seconds with a 2-second delay */
+}
+
+.darkest-mode-modal-subtitle {
+    position: fixed;
+    top: 55px;
+    /* Adjust the top position as needed */
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    font-size: 16px;
+    opacity: 0;
+    animation: fadeIn 2s ease-in 2s forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* Timer style */
+.timer {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    /* Timer text color */
+}
+
+/* Click count style */
+.click-count {
+    position: absolute;
+    top: 40px;
+    /* Adjust the top position as needed */
+    left: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    /* Click count text color */
+}
+
+/* Summary screen */
+.summary-screen {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 10px;
+    color: white;
+    z-index: 999;
+}
+
+/* Style the buttons */
+.flying-button {
+    /* White background for buttons */
+    color: #000;
+    /* Black text color */
+    border: none;
+    cursor: pointer;
+
+    background: none;
+    /* Remove the background */
+    border: none;
+    /* Remove the border */
+    outline: none;
+    /* Remove the outline */
+    padding: 0;
+    overflow: hidden;
+    /* Remove padding if needed */
+    display: flex;
+    /* Ensure the image is a block element */
+    max-width: 7%;
+    /* Stretch to fill the button */
+    height: auto;
+    /* Preserve aspect ratio */
+}
+
+/* Hover effect for buttons */
+.flying-button:hover {
+    background-color: #000;
+    /* Black background on hover */
+    color: #fff;
+    /* White text color on hover */
+    z-index: 999;
+}
+
+/* Style the flying button */
+.flying-button.flying {
+    position: absolute;
+    animation: flyingAnimation 30s linear infinite;
+}
+
+/* Style the close button */
+.close-darkest-mode-button {
+    position: fixed;
+    top: 10px;
+    /* Adjust the top distance as needed */
+    right: 10px;
+    /* Adjust the right distance as needed */
+    background-color: black;
+    /* Button background color */
+    color: white;
+    /* Button text color */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 1000;
+    /* Ensure it's above other content */
+}
+
+/* Apply the flying-button class to the Mr. Freeze button */
+.flying-button2 {
+    /* White background for buttons */
+    color: #000;
+    /* Black text color */
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+    background: none;
+    /* Remove the background */
+    border: none;
+    /* Remove the border */
+    outline: none;
+    /* Remove the outline */
+    padding: 0;
+    /* Remove padding if needed */
+    display: block;
+    /* Ensure the image is a block element */
+    max-width: 10%;
+    /* Stretch to fill the button */
+    height: auto;
+    /* Preserve aspect ratio */
+}
+
+/* Hover effect for the Mr. Freeze button */
+.flying-button2:hover {
+    background-color: #000;
+    /* Black background on hover */
+    color: #fff;
+    /* White text color on hover */
+}
+
+/* Style the flying button */
+.flying-button2.flying {
+    position: absolute;
+    animation: flyingAnimation2 29s linear infinite;
+}
+
+/* Style the flying-button3 */
+.flying-button3 {
+    /* White background for buttons */
+    color: #000;
+    /* Black text color */
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+    background: none;
+    /* Remove the background */
+    border: none;
+    /* Remove the border */
+    outline: none;
+    /* Remove the outline */
+    padding: 0;
+    /* Remove padding if needed */
+    display: block;
+    /* Ensure the image is a block element */
+    max-width: 25%;
+    /* Stretch to fill the button */
+    height: auto;
+    /* Preserve aspect ratio */
+}
+
+/* Hover effect for flying-button3 */
+.flying-button3:hover {
+    background-color: #000;
+    /* Black background on hover */
+    color: #fff;
+    /* White text color on hover */
+}
+
+/* Style the flying button for flying-button3 */
+.flying-button3.flying {
+    position: absolute;
+    animation: flyingAnimation3 28s linear infinite;
+}
+
+/* Apply the flying-button class to the Riddler button */
+.flying-button4 {
+    /* White background for buttons */
+    color: #000;
+    /* Black text color */
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+    background: none;
+    /* Remove the background */
+    border: none;
+    /* Remove the border */
+    outline: none;
+    /* Remove the outline */
+    padding: 0;
+    /* Remove padding if needed */
+    display: block;
+    /* Ensure the image is a block element */
+    max-width: 15%;
+    /* Stretch to fill the button */
+    height: auto;
+    /* Preserve aspect ratio */
+}
+
+/* Hover effect for the Riddler button */
+.flying-button4:hover {
+    background-color: #000;
+    /* Black background on hover */
+    color: #fff;
+    /* White text color on hover */
+}
+
+/* Style the flying button for flying-button4 */
+.flying-button4.flying {
+    position: absolute;
+    animation: flyingAnimation4 27s linear infinite;
+}
+
+/* Apply the flying-button class to the Poison Ivy button */
+.flying-button5 {
+    /* White background for buttons */
+    color: #000;
+    /* Black text color */
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+    background: none;
+    /* Remove the background */
+    border: none;
+    /* Remove the border */
+    outline: none;
+    /* Remove the outline */
+    padding: 0;
+    /* Remove padding if needed */
+    display: block;
+    /* Ensure the image is a block element */
+    max-width: 15%;
+    /* Stretch to fill the button */
+    height: auto;
+    /* Preserve aspect ratio */
+}
+
+/* Hover effect for the Poison Ivy button */
+.flying-button5:hover {
+    background-color: #000;
+    /* Black background on hover */
+    color: #fff;
+    /* White text color on hover */
+}
+
+/* Style the flying button for flying-button5 */
+.flying-button5.flying {
+    position: absolute;
+    animation: flyingAnimation5 26s linear infinite;
+}
+
+/* Apply the flying-button class to the Penguin button */
+.flying-button6 {
+    /* White background for buttons */
+    color: #000;
+    /* Black text color */
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+    background: none;
+    /* Remove the background */
+    border: none;
+    /* Remove the border */
+    outline: none;
+    /* Remove the outline */
+    padding: 0;
+    /* Remove padding if needed */
+    display: block;
+    /* Ensure the image is a block element */
+    max-width: 9%;
+    /* Stretch to fill the button */
+    height: auto;
+    /* Preserve aspect ratio */
+}
+
+/* Hover effect for the Penguin button */
+.flying-button6:hover {
+    background-color: #000;
+    /* Black background on hover */
+    color: #fff;
+    /* White text color on hover */
+}
+
+/* Style the flying button for flying-button6 */
+.flying-button6.flying {
+    position: absolute;
+    animation: flyingAnimation6 25s linear infinite;
+}
+
+/* Apply the flying-button class to the Harley Quinn button */
+.flying-button7 {
+    /* White background for buttons */
+    color: #000;
+    /* Black text color */
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+    background: none;
+    /* Remove the background */
+    border: none;
+    /* Remove the border */
+    outline: none;
+    /* Remove the outline */
+    padding: 0;
+    /* Remove padding if needed */
+    display: flex;
+    /* Ensure the image is a block element */
+    max-width: 17%;
+    /* Stretch to fill the button */
+    height: auto;
+    /* Preserve aspect ratio */
+}
+
+/* Hover effect for the Harley Quinn button */
+.flying-button7:hover {
+    background-color: #000;
+    /* Black background on hover */
+    color: #fff;
+    /* White text color on hover */
+}
+
+/* Style the flying button for flying-button7 */
+.flying-button7.flying {
+    position: absolute;
+    animation: flyingAnimation7 24s linear infinite;
+}
+
+/* Hover effect for the close button */
+.close-darkest-mode-button:hover {
+    background-color: white;
+    /* Background color on hover */
+    color: black;
+    /* Text color on hover */
+}
+
+@keyframes flyingAnimation {
+    0% {
+        transform: translateY(0px) translateX(0px);
+    }
+
+    5% {
+        transform: translateY(400px) translateX(-725px);
+    }
+
+    10% {
+        transform: translateY(-400px) translateX(725px);
+    }
+
+    15% {
+        transform: translateY(-389px) translateX(-472px);
+    }
+
+    20% {
+        transform: translateY(85px) translateX(638px);
+    }
+
+    25% {
+        transform: translateY(-142px) translateX(598px);
+    }
+
+    30% {
+        transform: translateY(368px) translateX(-320px);
+    }
+
+    35% {
+        transform: translateY(-355px) translateX(-540px);
+    }
+
+    40% {
+        transform: translateY(-171px) translateX(490px);
+    }
+
+    45% {
+        transform: translateY(231px) translateX(-725px);
+    }
+
+    50% {
+        transform: translateY(400px) translateX(725px);
+    }
+
+    55% {
+        transform: translateY(-74px) translateX(-532px);
+    }
+
+    60% {
+        transform: translateY(-397px) translateX(-375px);
+    }
+
+    65% {
+        transform: translateY(174px) translateX(-725px);
+    }
+
+    70% {
+        transform: translateY(400px) translateX(562px);
+    }
+
+    75% {
+        transform: translateY(-350px) translateX(-302px);
+    }
+
+    80% {
+        transform: translateY(349px) translateX(420px);
+    }
+
+    85% {
+        transform: translateY(161px) translateX(305px);
+    }
+
+    90% {
+        transform: translateY(-400px) translateX(-725px);
+    }
+
+    95% {
+        transform: translateY(-200px) translateX(-725px);
+    }
+
+    100% {
+        transform: translateY(400px) translateX(725px);
+    }
+}
+
+
+@keyframes flyingAnimation2 {
+    0% {
+        transform: translateY(0px) translateX(0px);
+    }
+
+    5% {
+        transform: translateY(400px) translateX(-725px);
+    }
+
+    10% {
+        transform: translateY(-159px) translateX(725px);
+    }
+
+    15% {
+        transform: translateY(-392px) translateX(347px);
+    }
+
+    20% {
+        transform: translateY(154px) translateX(-520px);
+    }
+
+    25% {
+        transform: translateY(-275px) translateX(189px);
+    }
+
+    30% {
+        transform: translateY(365px) translateX(-506px);
+    }
+
+    35% {
+        transform: translateY(-198px) translateX(652px);
+    }
+
+    40% {
+        transform: translateY(-150px) translateX(126px);
+    }
+
+    45% {
+        transform: translateY(-400px) translateX(-725px);
+    }
+
+    50% {
+        transform: translateY(400px) translateX(725px);
+    }
+
+    55% {
+        transform: translateY(86px) translateX(405px);
+    }
+
+    60% {
+        transform: translateY(-203px) translateX(-676px);
+    }
+
+    65% {
+        transform: translateY(-61px) translateX(-79px);
+    }
+
+    70% {
+        transform: translateY(283px) translateX(239px);
+    }
+
+    75% {
+        transform: translateY(-179px) translateX(-145px);
+    }
+
+    80% {
+        transform: translateY(303px) translateX(-521px);
+    }
+
+    85% {
+        transform: translateY(245px) translateX(622px);
+    }
+
+    90% {
+        transform: translateY(-387px) translateX(-338px);
+    }
+
+    95% {
+        transform: translateY(48px) translateX(308px);
+    }
+
+    100% {
+        transform: translateY(400px) translateX(-725px);
+    }
+}
+
+
+
+@keyframes flyingAnimation3 {
+    0% {
+        transform: translateY(400px) translateX(-725px);
+    }
+
+    5% {
+        transform: translateY(-400px) translateX(725px);
+    }
+
+    10% {
+        transform: translateY(282px) translateX(205px);
+    }
+
+    15% {
+        transform: translateY(-261px) translateX(-554px);
+    }
+
+    20% {
+        transform: translateY(195px) translateX(328px);
+    }
+
+    25% {
+        transform: translateY(-136px) translateX(466px);
+    }
+
+    30% {
+        transform: translateY(345px) translateX(-425px);
+    }
+
+    35% {
+        transform: translateY(-98px) translateX(-648px);
+    }
+
+    40% {
+        transform: translateY(-383px) translateX(245px);
+    }
+
+    45% {
+        transform: translateY(400px) translateX(-725px);
+    }
+
+    50% {
+        transform: translateY(368px) translateX(725px);
+    }
+
+    55% {
+        transform: translateY(-52px) translateX(-280px);
+    }
+
+    60% {
+        transform: translateY(-400px) translateX(725px);
+    }
+
+    65% {
+        transform: translateY(-175px) translateX(-496px);
+    }
+
+    70% {
+        transform: translateY(177px) translateX(646px);
+    }
+
+    75% {
+        transform: translateY(-400px) translateX(-725px);
+    }
+
+    80% {
+        transform: translateY(334px) translateX(511px);
+    }
+
+    85% {
+        transform: translateY(400px) translateX(725px);
+    }
+
+    90% {
+        transform: translateY(-151px) translateX(-346px);
+    }
+
+    95% {
+        transform: translateY(400px) translateX(-725px);
+    }
+
+    100% {
+        transform: translateY(400px) translateX(725px);
+    }
+}
+
+
+@keyframes flyingAnimation4 {
+    0% {
+        transform: translateY(400px) translateX(875px);
+    }
+
+    5% {
+        transform: translateY(223px) translateX(-416px);
+    }
+
+    10% {
+        transform: translateY(-159px) translateX(641px);
+    }
+
+    15% {
+        transform: translateY(-400px) translateX(-262px);
+    }
+
+    20% {
+        transform: translateY(-61px) translateX(875px);
+    }
+
+    25% {
+        transform: translateY(29px) translateX(875px);
+    }
+
+    30% {
+        transform: translateY(400px) translateX(-307px);
+    }
+
+    35% {
+        transform: translateY(-160px) translateX(-550px);
+    }
+
+    40% {
+        transform: translateY(-400px) translateX(204px);
+    }
+
+    45% {
+        transform: translateY(136px) translateX(-550px);
+    }
+
+    50% {
+        transform: translateY(400px) translateX(875px);
+    }
+
+    55% {
+        transform: translateY(195px) translateX(131px);
+    }
+
+    60% {
+        transform: translateY(-400px) translateX(-550px);
+    }
+
+    65% {
+        transform: translateY(-47px) translateX(-570px);
+    }
+
+    70% {
+        transform: translateY(248px) translateX(66px);
+    }
+
+    75% {
+        transform: translateY(-240px) translateX(-28px);
+    }
+
+    80% {
+        transform: translateY(235px) translateX(671px);
+    }
+
+    85% {
+        transform: translateY(400px) translateX(444px);
+    }
+
+    90% {
+        transform: translateY(-400px) translateX(-95px);
+    }
+
+    95% {
+        transform: translateY(320px) translateX(-123px);
+    }
+
+    100% {
+        transform: translateY(70px) translateX(875px);
+    }
+}
+
+@keyframes flyingAnimation5 {
+    0% {
+        transform: translateY(400px) translateX(-725px);
+    }
+
+    5% {
+        transform: translateY(388px) translateX(669px);
+    }
+
+    10% {
+        transform: translateY(-400px) translateX(343px);
+    }
+
+    15% {
+        transform: translateY(235px) translateX(-576px);
+    }
+
+    20% {
+        transform: translateY(300px) translateX(725px);
+    }
+
+    25% {
+        transform: translateY(-153px) translateX(-163px);
+    }
+
+    30% {
+        transform: translateY(320px) translateX(-556px);
+    }
+
+    35% {
+        transform: translateY(-300px) translateX(610px);
+    }
+
+    40% {
+        transform: translateY(100px) translateX(-725px);
+    }
+
+    45% {
+        transform: translateY(291px) translateX(-27px);
+    }
+
+    50% {
+        transform: translateY(-275px) translateX(-600px);
+    }
+
+    55% {
+        transform: translateY(-67px) translateX(-725px);
+    }
+
+    60% {
+        transform: translateY(246px) translateX(-269px);
+    }
+
+    65% {
+        transform: translateY(-104px) translateX(725px);
+    }
+
+    70% {
+        transform: translateY(207px) translateX(182px);
+    }
+
+    75% {
+        transform: translateY(-400px) translateX(-725px);
+    }
+
+    80% {
+        transform: translateY(381px) translateX(725px);
+    }
+
+    85% {
+        transform: translateY(-200px) translateX(-400px);
+    }
+
+    90% {
+        transform: translateY(-214px) translateX(500px);
+    }
+
+    95% {
+        transform: translateY(350px) translateX(-500px);
+    }
+
+    100% {
+        transform: translateY(400px) translateX(725px);
+    }
+}
+
+@keyframes flyingAnimation6 {
+    0% {
+        transform: translateY(0px) translateX(0px);
+    }
+
+    5% {
+        transform: translateY(-400px) translateX(725px);
+    }
+
+    10% {
+        transform: translateY(400px) translateX(-725px);
+    }
+
+    15% {
+        transform: translateY(-277px) translateX(-626px);
+    }
+
+    20% {
+        transform: translateY(133px) translateX(487px);
+    }
+
+    25% {
+        transform: translateY(-68px) translateX(553px);
+    }
+
+    30% {
+        transform: translateY(201px) translateX(-225px);
+    }
+
+    35% {
+        transform: translateY(-134px) translateX(-657px);
+    }
+
+    40% {
+        transform: translateY(-294px) translateX(262px);
+    }
+
+    45% {
+        transform: translateY(22px) translateX(-384px);
+    }
+
+    50% {
+        transform: translateY(400px) translateX(725px);
+    }
+
+    55% {
+        transform: translateY(32px) translateX(100px);
+    }
+
+    60% {
+        transform: translateY(-341px) translateX(-473px);
+    }
+
+    65% {
+        transform: translateY(-204px) translateX(-530px);
+    }
+
+    70% {
+        transform: translateY(155px) translateX(375px);
+    }
+
+    75% {
+        transform: translateY(-332px) translateX(-457px);
+    }
+
+    80% {
+        transform: translateY(244px) translateX(678px);
+    }
+
+    85% {
+        transform: translateY(399px) translateX(108px);
+    }
+
+    90% {
+        transform: translateY(-151px) translateX(-318px);
+    }
+
+    95% {
+        transform: translateY(306px) translateX(-42px);
+    }
+
+    100% {
+        transform: translateY(400px) translateX(-725px);
+    }
+}
+
+
+@keyframes flyingAnimation7 {
+    0% {
+        transform: translateY(0px) translateX(0px);
+    }
+
+    5% {
+        transform: translateY(-400px) translateX(-725px);
+    }
+
+    10% {
+        transform: translateY(400px) translateX(725px);
+    }
+
+    15% {
+        transform: translateY(320px) translateX(-592px);
+    }
+
+    20% {
+        transform: translateY(-189px) translateX(437px);
+    }
+
+    25% {
+        transform: translateY(-269px) translateX(657px);
+    }
+
+    30% {
+        transform: translateY(251px) translateX(-211px);
+    }
+
+    35% {
+        transform: translateY(193px) translateX(-650px);
+    }
+
+    40% {
+        transform: translateY(-163px) translateX(319px);
+    }
+
+    45% {
+        transform: translateY(400px) translateX(-725px);
+    }
+
+    50% {
+        transform: translateY(-400px) translateX(725px);
+    }
+
+    55% {
+        transform: translateY(-50px) translateX(131px);
+    }
+
+    60% {
+        transform: translateY(200px) translateX(-126px);
+    }
+
+    65% {
+        transform: translateY(-36px) translateX(-572px);
+    }
+
+    70% {
+        transform: translateY(250px) translateX(68px);
+    }
+
+    75% {
+        transform: translateY(-390px) translateX(-28px);
+    }
+
+    80% {
+        transform: translateY(597px) translateX(375px);
+    }
+
+    85% {
+        transform: translateY(-85px) translateX(414px);
+    }
+
+    90% {
+        transform: translateY(135px) translateX(-95px);
+    }
+
+    95% {
+        transform: translateY(-123px) translateX(-400px);
+    }
+
+    100% {
+        transform: translateY(400px) translateX(725px);
+    }
+}
