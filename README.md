@@ -75,7 +75,7 @@ https://dbdiagram.io/d/64e90c6902bd1c4a5e6d3f3e
 https://www.figma.com/file/uD5Ql9MYiwsj6XPuNKgp9z/ShutterBug-Capstone?type=design&node-id=0%3A1&mode=design&t=tGzGgnQLe3fFSQTR-1
 
 ## Features
-<p>CRUD - everywhere```</p>
+<p>CRUD - everywhere</p>
 <p>Social Media Posts - posting photos, title, text, author-info, category, publish-date, comments, reactions, flagging posts, tags</p>
 <p>Direct Messaging - all threads display and individual threads to message other users</p>
 <p>Admin Manager - Site Admins can take down flagged posts and alter whether deviant users can use the app and display content</p>
