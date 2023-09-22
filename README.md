@@ -76,23 +76,16 @@ https://www.figma.com/file/uD5Ql9MYiwsj6XPuNKgp9z/ShutterBug-Capstone?type=desig
 
 ## Features
 ```sh
-CRUD - everywhere
-```
+CRUD - everywhere```
 ```sh
-Social Media Posts - posting photos, title, text, author-info, category, publish-date, comments, reactions, flagging posts, tags
-```
+Social Media Posts - posting photos, title, text, author-info, category, publish-date, comments, reactions, flagging posts, tags```
 ```sh
-Direct Messaging - all threads display and individual threads to message other users
-```
+Direct Messaging - all threads display and individual threads to message other users```
 ```sh
-Admin Manager - Site Admins can take down flagged posts and alter whether deviant users can use the app and display content
-```
+Admin Manager - Site Admins can take down flagged posts and alter whether deviant users can use the app and display content```
 ```sh
-Profile - User can view their profile info as well as individual posts
-```
+Profile - User can view their profile info as well as individual posts```
 ```sh
-Dark mode - light and dark mode views on each screen
-```
+Dark mode - light and dark mode views on each screen```
 ```sh
-Darkest mode - interactive click game to defeat Batman's nemesis
-```
+Darkest mode - interactive click game to defeat Batman's nemesis```
