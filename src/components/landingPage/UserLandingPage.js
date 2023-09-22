@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { getCurrentUser } from "../../managers/users.js";
 import { Link, useNavigate } from "react-router-dom";
+import "./staffLandingPage.css";
 
-export const UserLandingPageGreeting = ({token, setToken}) => {
+export const UserLandingPageGreeting = ({ token, setToken }) => {
     const [currentUser, setCurrentUser] = useState([]);
     const navigate = useNavigate();
-    
+
     const getData = async () => {
         try {
             const user = await getCurrentUser();
@@ -21,20 +22,23 @@ export const UserLandingPageGreeting = ({token, setToken}) => {
 
     const greeting = currentUser[0]?.user?.first_name;
 
-    return <> <span className="landing-page-greeting">Hi {greeting}!</span>
-    
-    <p>Where would you like to go?</p>
-    <p><Link to="/posts">Posts</Link></p>
-    <p><Link to="/direct_messages">Direct Messages</Link></p>
-    <p><Link to={`/profile`}>My Profile</Link></p>
-    <button
-                                        className="button is-outlined custom-red-background"
-                                        onClick={() => {
-                                            setToken('');
-                                            navigate('/login');
-                                        }}
-                                    >
-                                        Logout
-                                    </button>
-    </>
+    return (
+        <div className={`landing-page ${token ? "authenticated" : ""}`}>
+            <div className="landing-page-greeting">
+                <h1>Hi {greeting}!</h1>
+                <p>Where would you like to go?</p>
+                <ul className="nav-links">
+                    <li>
+                        <Link to="/posts">Posts</Link>
+                    </li>
+                    <li>
+                        <Link to="/direct_messages">Direct Messages</Link>
+                    </li>
+                    <li>
+                        <Link to={`/profile`}>My Profile</Link>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    );
 };

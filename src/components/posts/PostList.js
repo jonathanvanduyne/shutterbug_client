@@ -69,7 +69,7 @@ export const PostList = () => {
 
     if (filters.userId !== 0) {
       filteredResults = filteredResults.filter(
-        (post) => post?.user?.id === filters.userId
+        (post) => post?.shutterbug_user?.id === filters.userId
       );
     }
 
