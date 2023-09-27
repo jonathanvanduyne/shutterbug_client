@@ -114,9 +114,7 @@
 /* Hover effect for buttons */
 .flying-button:hover {
     background-color: #000;
-    /* Black background on hover */
     color: #fff;
-    /* White text color on hover */
     z-index: 999;
 }
 

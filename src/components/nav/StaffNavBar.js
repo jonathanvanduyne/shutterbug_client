@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { DarkestModeModal } from "./DarkestMode.js";
+import { DarkestModeModal } from "./Darkestmode.js";
 import { DarkMode } from "./DarkMode.js";
 import Logo from "./shutterbug.jpeg";
 import batmanLogo from "./batman-logo.png";
