@@ -33,9 +33,6 @@ pipenv install django autopep8 pylint djangorestframework django-cors-headers py
 
 4. Migrate and seed database
 ```sh
-chmod u+x ./seed_database.sh
-```
-```sh
 ./seed_database.sh
 ```
 
