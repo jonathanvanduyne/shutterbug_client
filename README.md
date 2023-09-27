@@ -44,7 +44,7 @@ python3 manage.py runserver
 ### Client Side
 1. Clone this repository for the client side:
 ```sh
-git@github.com:jonathanvanduyne/shutterbug_client.git
+git clone git@github.com:jonathanvanduyne/shutterbug_client.git
 cd shutterbug_client
 ```
 2. Install dependencies: 
