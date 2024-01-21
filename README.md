@@ -80,3 +80,26 @@ https://www.figma.com/file/uD5Ql9MYiwsj6XPuNKgp9z/ShutterBug-Capstone?type=desig
 <p>Profile - User can view their profile info as well as individual posts</p>
 <p>Dark mode - light and dark mode views on each screen</p>
 <p>Darkest mode - interactive click game to defeat Batman's nemesis</p>
+
+Login--
+<img width="1710" alt="Login" src="https://github.com/jonathanvanduyne/shutterbug_client/assets/126512504/faa2d4c1-f9aa-4128-ae1f-813aad06875d">
+Landing Page--
+<img width="1710" alt="Landing Page" src="https://github.com/jonathanvanduyne/shutterbug_client/assets/126512504/7b700357-f7aa-4b4b-a67b-d91a5060a309">
+Posts--
+<img width="1710" alt="Posts" src="https://github.com/jonathanvanduyne/shutterbug_client/assets/126512504/1ccb50f7-4aab-4059-93be-b851c4d6b028">
+Create Post--
+<img width="1710" alt="Create Post" src="https://github.com/jonathanvanduyne/shutterbug_client/assets/126512504/18739e2e-59f2-42df-9c6b-a4372f47bc16">
+Direct Messages--
+<img width="1710" alt="Direct Messages" src="https://github.com/jonathanvanduyne/shutterbug_client/assets/126512504/63e2d5ae-9227-4793-bf9a-3f60f148375a">
+Direct Message Thread--
+<img width="1710" alt="Direct Message Thread" src="https://github.com/jonathanvanduyne/shutterbug_client/assets/126512504/7fa2834c-9d14-460d-b546-630ca23330e4">
+Admin Page--
+<img width="1710" alt="Admin Page" src="https://github.com/jonathanvanduyne/shutterbug_client/assets/126512504/b03e13fb-e477-46e5-9fd9-9b7128b208e1">
+Admin Flagged Posts--
+<img width="1710" alt="Admin Flagged Posts" src="https://github.com/jonathanvanduyne/shutterbug_client/assets/126512504/9ed67470-1d47-4772-9571-59400de1a1cf">
+Dark Mode--
+<img width="1710" alt="Dark Mode" src="https://github.com/jonathanvanduyne/shutterbug_client/assets/126512504/7d1e2adc-1203-40e3-ac2c-3ffb3601766d">
+Darkest Mode--
+<img width="1710" alt="Darkest Mode" src="https://github.com/jonathanvanduyne/shutterbug_client/assets/126512504/d90adaeb-bc03-4a07-9efb-a3ffd7095545">
+Win Page--
+<img width="1710" alt="Win Page" src="https://github.com/jonathanvanduyne/shutterbug_client/assets/126512504/46fcaddc-c5f2-4539-b4e5-9c7b9f2641b2">
